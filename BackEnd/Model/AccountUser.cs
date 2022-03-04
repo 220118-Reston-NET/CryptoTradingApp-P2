@@ -1,6 +1,6 @@
 namespace Model
 {
-    public class User
+    public class AccountUser
     {
         public int ID { get; set; }
         public string username { get; set; }
