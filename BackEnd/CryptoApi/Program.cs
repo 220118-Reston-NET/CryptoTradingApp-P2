@@ -7,6 +7,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Need a scope once we get repository and DL/BL
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
