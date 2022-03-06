@@ -10,5 +10,6 @@ namespace Model
         public int isBanned { get; set; }
         public int isAdmin { get; set; }
         private byte[] _password;
+        
     }
 }
