@@ -1,4 +1,6 @@
-namespace CryptoTradingBL{
+using Model;
+using CryptoDL;
+namespace CryptoBL{
     public class CryptoBL : ICryptoBL
     {
         private IRepository _repo;
@@ -6,39 +8,34 @@ namespace CryptoTradingBL{
             _repo = p_repo;
         }
         //Start Adding Buisness layer funcitonalities
-        public void NewUser(string p_userName, string p_name, int p_age, byte p_password)
+        public void NewUser(AccountUser p_NewUser)
         {
-            throw new NotImplementedException();
+            return _repo.NewUser(p_NewUser);
         }
 
-        public void Notification(decimal p_alertPrice)
+        public void Notification(decimal p_stopLoss, decimal p_takeProfit)
         {
-            throw new NotImplementedException();
+            foreach (var item in Asset)
+            {
+                if(Asset[item].p_stopLoss = /*Need model for current price*/){
+                    
+                }
+            }
         }
 
-        public void PlaceOrder(string p_cryptoName, decimal p_buyPrice)
+        public void PlaceOrder(Asset p_NewAsset)
         {
-            throw new NotImplementedException();
-        }
-
-        public void StopLossOrder(decimal p_stopLoss)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void TakeProfitOrder(decimal p_takeProfit)
-        {
-            throw new NotImplementedException();
+            return _repo.PlaceOrder(p_NewAsset);
         }
 
         public void UserLogin(string p_userName, string p_password)
         {
-            throw new NotImplementedException();
+            return _repo.UserLogin(p_userName, p_password);
         }
 
         public void ViewWallet()
         {
-            throw new NotImplementedException();
+            return _repo.ViewWallet();
         }
     }
 }
