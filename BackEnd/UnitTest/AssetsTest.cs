@@ -8,12 +8,78 @@ namespace UnitTest;
 public class AssetsTest
 {
     [Fact]
-    public void TestName()
+    public void cryptoNameShouldSetValidData()
     {
-        // Given
+        //Arrange
+        Assets set = new Assets();
+        string validCrypto = "Bitcoin";
     
-        // When
+        //Act
+        set.cryptoName = validCrypto;
     
-        // Then
+        //Assert
+        Assert.NotNull(set.cryptoName);
+        Assert.Equal(validCrypto, set.cryptoName);
+
     }
+
+    [Fact]
+    public void buyPriceShouldSetValidData()
+    {
+        //Arrange
+        Assets set = new Assets();
+        decimal validPrice = 50000;
+    
+        //Act
+        set.buyPrice = validPrice;
+    
+        //Assert
+        Assert.NotNull(set.buyPrice);
+        Assert.Equal(validPrice, set.buyPrice);
+
+    }
+
+    [Fact]
+    public void stopLossShouldSetValidData()
+    {
+        //Arrange
+        Assets set = new Assets();
+        decimal validStop = 40000;
+    
+        //Act
+        set.stoploss = validStop;
+    
+        //Assert
+        Assert.NotNull(set.stoploss);
+        Assert.Equal(validStop, set.stoploss);
+
+    }
+
+    [Fact]
+    public void takeProfitShouldSetValidData()
+    {
+        //Arrange
+        Assets set = new Assets();
+        decimal validProfit = 60000;
+    
+        //Act 
+        set.takeprofit = validProfit;
+    
+        //Assert
+        Assert.NotNull(set.takeprofit);
+        Assert.Equal(validProfit, set.takeprofit);
+
+    }
+
+    //Need Unit Test for DateTime buyDate
+
+    // [Fact]
+    // public void TestName()
+    // {
+    //     // Given
+    
+    //     // When
+    
+    //     // Then
+    // }
 }

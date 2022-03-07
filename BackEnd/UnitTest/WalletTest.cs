@@ -8,12 +8,18 @@ namespace UnitTest;
 public class WalletTest
 {
     [Fact]
-    public void TestName()
+    public void cashShouldSetValidData()
     {
-        // Given
+        //Arrange
+        Wallet wall = new Wallet();
+        decimal validCash = 10000;
     
-        // When
+        //Act
+        wall.cash = validCash;
     
-        // Then
+        //Assert
+        Assert.NotNull(wall.cash);
+        Assert.Equal(validCash, wall.cash);
+        
     }
 }
