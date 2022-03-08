@@ -1,5 +1,5 @@
 namespace Model
-{//Adding to gitignore
+{
     public class AccountUser
     {
         public int ID { get; set; }
