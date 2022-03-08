@@ -1,42 +1,37 @@
 using System;
 using Model;
+using Moq;
+using CryptoDL;
+using CryptoBL;
 using Xunit;
 
 namespace CryptoBLTest;
 
 public class CryptoBLTest{
     [Fact]
-    public void NewUserValueTest(){
-        AccountUser _tNewUser = new AccountUser();
+    public void AddToWalletValueTest(){
+        decimal _validValue = 1.00m;
         int _validID = 1;
-        string _validUserName = "UserName";
-        string _validName = "Name";
-        int _validAge = 18;
-        DateTime _validDateTime = new DateTime(2022,3,8);
-        int _validIsBanned = 0;
-        int _validIsAdmin = 0;
+        Wallet _tWallet = new Wallet(){
+            customerId = _validID,
+            cash = _validValue,
+        };
 
-        _tNewUser.ID = _validID;
-        _tNewUser.username = _validUserName;
-        _tNewUser.name = _validName;
-        _tNewUser.age = _validAge;
-        _tNewUser.dateCreated = _validDateTime;
-        _tNewUser.isBanned = _validIsBanned;
-        _tNewUser.isAdmin = _validIsAdmin;
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        mockRepo.Setup(repo => repo.AddtoWallet(1.00m, 1)).Returns(_tWallet);
+        ICryptoClassBL cryptoBL = new CryptoClassBL(mockRepo.Object);
 
-        Assert.NotNull(_tNewUser.ID);
-        Assert.NotNull(_tNewUser.username);
-        Assert.NotNull(_tNewUser.name);
-        Assert.NotNull(_tNewUser.age);
-        Assert.NotNull(_tNewUser.dateCreated);
-        Assert.NotNull(_tNewUser.isBanned);
-        Assert.NotNull(_tNewUser.isAdmin);
-        Assert.Equal(_validID, _tNewUser.ID);
-        Assert.Equal(_validUserName, _tNewUser.username);
-        Assert.Equal(_validName, _tNewUser.name);
-        Assert.Equal(_validAge, _tNewUser.age);
-        Assert.Equal(_validDateTime, _tNewUser.dateCreated);
-        Assert.Equal(_validIsBanned, _tNewUser.isBanned);
-        Assert.Equal(_validIsAdmin, _tNewUser.isAdmin);
+        Wallet actualWallet = cryptoBL.AddtoWallet(1.00m, 1);
+
+        _tWallet.customerId = _validID;
+        _tWallet.cash = _validValue;
+
+        Assert.Equal(_validValue, actualWallet.cash);
+        Assert.Equal(_validID, actualWallet.customerId);
     }
+    [Fact]
+    public void PlaceOrderValueTest(){
+
+    }
+    
 }

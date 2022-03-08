@@ -24,6 +24,8 @@
   <ItemGroup>
     <ProjectReference Include="..\CryptoBL\CryptoBL.csproj" />
     <ProjectReference Include="..\BackEnd\Model\Model.csproj" />
+    <ProjectReference Include="..\BackEnd\CryptoDL\CryptoDL.csproj" />
+    <ProjectReference Include="..\BackEnd\CryptoBL\CryptoBL.csproj" />
   </ItemGroup>
 
 </Project>
