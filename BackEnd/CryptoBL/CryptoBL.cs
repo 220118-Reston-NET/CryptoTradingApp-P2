@@ -15,12 +15,12 @@ namespace CryptoBL{
 
         public void Notification(decimal p_stopLoss, decimal p_takeProfit)
         {
-            foreach (var item in Asset)
-            {
-                if(Asset[item].p_stopLoss = /*Need model for current price*/){
+            // foreach (var item in Asset)
+            // {
+            //     if(Asset[item].p_stopLoss = /*Need model for current price*/){
                     
-                }
-            }
+            //     }
+            // }
         }
 
         public void PlaceOrder(Asset p_NewAsset)
