@@ -103,29 +103,35 @@ public class AccountUserTest
 
     }
 
-    //Need Unit Test for DateTime dateCreated
+    [Fact]
+    public void dateCreatedShouldSetValidData()
+    {
+        //Arrange
+        AccountUser user = new AccountUser();
+        DateTime date = new DateTime(2022, 8, 3);
+    
+        //Act
+        user.dateCreated = date;
+    
+        //Assert
+        Assert.NotNull(date);
+        Assert.Equal(date, user.dateCreated);
+        
+    }
 
-    // [Fact]
-    // public void DateTimeShouldSetValidData()
-    // {
-    //     //Arrange
-    //     AccountUser user = new AccountUser();
-    //     DateTime date = #3/8/2022#;
+    [Fact]
+    public async void byteShouldSetValidData()
+    {
+        //Arrange
+        AccountUser user = new AccountUser();
+        byte[] validPass = { 0, 3, 5, 7, 7, 8};
     
-    //     // When
+        //Act
+        user._password = validPass;
     
-    //     // Then
-    // }
+        //Assert
+        Assert.NotNull(validPass);
+        Assert.Equal(validPass, user._password);
 
-    //Need Unit Test for byte _password
-
-    // [Fact]
-    // public void TestName()
-    // {
-    //     // Given
-    
-    //     // When
-    
-    //     // Then
-    // }
+    }
 }
