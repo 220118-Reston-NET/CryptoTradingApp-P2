@@ -1,5 +1,4 @@
-namespace Model
-{
+namespace Model{
     public class AccountUser
     {
         public int ID { get; set; }
