@@ -8,6 +8,21 @@ namespace UnitTest;
 public class AssetsTest
 {
     [Fact]
+    public void customerIdShouldSetValidData()
+    {
+        //Arrange
+        Assets set = new Assets();
+        int validId = 2;
+    
+        //Act
+        set.customerId = validId;
+    
+        //Assert
+        Assert.NotNull(set.customerId);
+        Assert.Equal(validId, set.customerId);
+    }
+
+    [Fact]
     public void cryptoNameShouldSetValidData()
     {
         //Arrange
