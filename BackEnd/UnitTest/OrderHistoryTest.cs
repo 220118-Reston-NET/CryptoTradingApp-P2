@@ -8,6 +8,21 @@ namespace UnitTest;
 public class OrderHistoryTest
 {
     [Fact]
+    public void customerIdShouldSetValidData()
+    {
+        //Arrange 
+        OrderHistory order = new OrderHistory();
+        int validID = 4;
+    
+        //Act
+        order.customerId = validID;
+    
+        //Assert
+        Assert.NotNull(order.customerId);
+        Assert.Equal(validID, order.customerId);
+    }
+
+    [Fact]
     public void cryptoNameShouldSetValidData()
     {
         //Arrange

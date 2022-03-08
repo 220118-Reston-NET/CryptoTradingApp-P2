@@ -1,3 +1,4 @@
+using System;
 using Model;
 using Xunit;
 
@@ -7,6 +8,21 @@ namespace UnitTest;
 
 public class AccountUserTest
 {
+    [Fact]
+    public void IdShouldSetValidData()
+    {
+        //Arrange 
+        AccountUser user = new AccountUser();
+        int validID = 1;
+    
+        //Act
+        user.ID = validID;
+    
+        //Assert
+        Assert.NotNull(user.ID);
+        Assert.Equal(validID, user.ID);
+    }
+
     [Fact]
     public void UserNameShouldSetValidData()
     {
@@ -90,9 +106,11 @@ public class AccountUserTest
     //Need Unit Test for DateTime dateCreated
 
     // [Fact]
-    // public void TestName()
+    // public void DateTimeShouldSetValidData()
     // {
-    //     // Given
+    //     //Arrange
+    //     AccountUser user = new AccountUser();
+    //     DateTime date = #3/8/2022#;
     
     //     // When
     
