@@ -1,0 +1,15 @@
+C:\Users\bshiv\Documents\Revature\Project2\CryptoTradingApp-P2\BackEnd\CryptoDL\bin\Debug\net6.0\CryptoDL.deps.json
+C:\Users\bshiv\Documents\Revature\Project2\CryptoTradingApp-P2\BackEnd\CryptoDL\bin\Debug\net6.0\CryptoDL.dll
+C:\Users\bshiv\Documents\Revature\Project2\CryptoTradingApp-P2\BackEnd\CryptoDL\bin\Debug\net6.0\ref\CryptoDL.dll
+C:\Users\bshiv\Documents\Revature\Project2\CryptoTradingApp-P2\BackEnd\CryptoDL\bin\Debug\net6.0\CryptoDL.pdb
+C:\Users\bshiv\Documents\Revature\Project2\CryptoTradingApp-P2\BackEnd\CryptoDL\bin\Debug\net6.0\Model.dll
+C:\Users\bshiv\Documents\Revature\Project2\CryptoTradingApp-P2\BackEnd\CryptoDL\bin\Debug\net6.0\Model.pdb
+C:\Users\bshiv\Documents\Revature\Project2\CryptoTradingApp-P2\BackEnd\CryptoDL\obj\Debug\net6.0\CryptoDL.csproj.AssemblyReference.cache
+C:\Users\bshiv\Documents\Revature\Project2\CryptoTradingApp-P2\BackEnd\CryptoDL\obj\Debug\net6.0\CryptoDL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\bshiv\Documents\Revature\Project2\CryptoTradingApp-P2\BackEnd\CryptoDL\obj\Debug\net6.0\CryptoDL.AssemblyInfoInputs.cache
+C:\Users\bshiv\Documents\Revature\Project2\CryptoTradingApp-P2\BackEnd\CryptoDL\obj\Debug\net6.0\CryptoDL.AssemblyInfo.cs
+C:\Users\bshiv\Documents\Revature\Project2\CryptoTradingApp-P2\BackEnd\CryptoDL\obj\Debug\net6.0\CryptoDL.csproj.CoreCompileInputs.cache
+C:\Users\bshiv\Documents\Revature\Project2\CryptoTradingApp-P2\BackEnd\CryptoDL\obj\Debug\net6.0\CryptoDL.csproj.CopyComplete
+C:\Users\bshiv\Documents\Revature\Project2\CryptoTradingApp-P2\BackEnd\CryptoDL\obj\Debug\net6.0\CryptoDL.dll
+C:\Users\bshiv\Documents\Revature\Project2\CryptoTradingApp-P2\BackEnd\CryptoDL\obj\Debug\net6.0\ref\CryptoDL.dll
+C:\Users\bshiv\Documents\Revature\Project2\CryptoTradingApp-P2\BackEnd\CryptoDL\obj\Debug\net6.0\CryptoDL.pdb
