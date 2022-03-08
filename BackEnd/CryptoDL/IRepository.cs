@@ -17,6 +17,8 @@ public interface IRepository
 
     Assets BuyCrypto(Assets _asset);
 
+    List<Assets> GetAssetsbyCustomer(int _userID);
+
     OrderHistory AddOrderHistory(OrderHistory _orderhis);
 
     Notification AddNotification(Notification _noti);

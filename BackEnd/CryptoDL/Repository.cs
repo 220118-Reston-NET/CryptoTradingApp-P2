@@ -144,6 +144,36 @@ namespace CryptoDL
             return userList;
         }
 
+        public List<Assets> GetAssetsbyCustomer(int _userID)
+        {
+            List<Assets> assetList = new List<Assets>();
+            string SQLQuery = @"SELECT * from Assets where customerId = @userID;";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+            {
+                con.Open();
+
+                SqlCommand command = new SqlCommand(SQLQuery, con);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    assetList.Add(new Assets(){
+                        customerId = reader.GetInt32(0),
+                        cryptoName = reader.GetString(1),
+                        buyPrice = reader.GetDecimal(2),
+                        buyDate = reader.GetDateTime(3),
+                        stoploss = reader.GetDecimal(5),
+                        takeprofit = reader.GetDecimal(6),
+                        coinQuantity = reader.GetDecimal(7)  
+                    });
+                }
+            }
+
+            return assetList;
+        }
+
         public int LoginUser(string username, string password)
         {
             int loginResult = 0;
