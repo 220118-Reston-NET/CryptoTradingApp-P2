@@ -9,6 +9,46 @@ namespace CryptoDL
         {
             _connectionStrings = c_connectionStrings;
         }
+
+        public Notification AddNotification(Notification _noti)
+        {
+            string SQLQuery = @"insert into Notification values(@customerId, @cryptoName, @alertPrice)";
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+            {
+                con.Open();
+
+                SqlCommand command = new SqlCommand(SQLQuery, con);
+                command.Parameters.AddWithValue("@customerId", _noti.customerId);
+                command.Parameters.AddWithValue("@cryptoName", _noti.cryptoName);
+                command.Parameters.AddWithValue("@alertPrice", _noti.alertPrice);
+
+                command.ExecuteNonQuery();
+            }
+            return _noti;
+        }
+
+        public OrderHistory AddOrderHistory(OrderHistory _orderhis)
+        {
+            string SQLQuery = @"insert into OrderHistory values(@customerId, @cryptoName, @buyPrice, @buyDate, @sellPrice, @sellDate, @totalReturn)";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+            {
+                con.Open();
+
+                SqlCommand command = new SqlCommand(SQLQuery, con);
+                command.Parameters.AddWithValue("@customerId", _orderhis.customerId);
+                command.Parameters.AddWithValue("@cryptoName", _orderhis.cryptoName);
+                command.Parameters.AddWithValue("@buyPrice", _orderhis.buyPrice);
+                command.Parameters.AddWithValue("@buyDate", _orderhis.buyDate);
+                command.Parameters.AddWithValue("@sellPrice", _orderhis.sellPrice);
+                command.Parameters.AddWithValue("@sellDate", _orderhis.sellDate);
+                command.Parameters.AddWithValue("@totalReturn", _orderhis.totalReturn);
+
+                command.ExecuteNonQuery();
+            }
+            return _orderhis;
+        }
+
         public Wallet AddtoWallet(decimal _amount, int _userID)
         {
             Wallet _wallet = new Wallet();
@@ -50,6 +90,26 @@ namespace CryptoDL
                 command.ExecuteNonQuery();
             }
             return _user;
+        }
+
+        public Assets BuyCrypto(Assets _asset)
+        {
+            string SQLQuery = @"insert into Assets values(@customerId, @cryptoName, @buyPrice, @buyDate, @stoploss, @takeprofit)";
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+            {
+                con.Open();
+
+                SqlCommand command = new SqlCommand(SQLQuery, con);
+                command.Parameters.AddWithValue("@customerId", _asset.customerId);
+                command.Parameters.AddWithValue("@cryptoName", _asset.cryptoName);
+                command.Parameters.AddWithValue("@buyPrice", _asset.buyPrice);
+                command.Parameters.AddWithValue("@buyDate", _asset.buyDate);
+                command.Parameters.AddWithValue("@stoploss", _asset.stoploss);
+                command.Parameters.AddWithValue("@takeprofit", _asset.takeprofit);
+
+                command.ExecuteNonQuery();
+            }
+            return _asset;
         }
 
         public List<AccountUser> GetAllUsers()
