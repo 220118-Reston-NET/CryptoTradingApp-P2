@@ -8,5 +8,6 @@ namespace Model
         public DateTime buyDate { get; set; }
         public decimal stoploss { get; set; }
         public decimal takeprofit { get; set; }
+        public decimal coinQuantity { get; set; }
     }
 }
