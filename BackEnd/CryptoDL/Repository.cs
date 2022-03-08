@@ -73,19 +73,18 @@ namespace CryptoDL
 
         public AccountUser AddUser(AccountUser _user)
         {
-            string SQLQuery = @"insert into AccountUser values(@username, @name, @age, @dateCreated, @isBanned, @isAdmin)";
-
             using(SqlConnection con = new SqlConnection(_connectionStrings))
             {
                 con.Open();
 
-                SqlCommand command = new SqlCommand(SQLQuery, con);
+                SqlCommand command = new SqlCommand("AddUser", con);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
                 command.Parameters.AddWithValue("@username", _user.username);
+                command.Parameters.AddWithValue("@password", _user._password);
                 command.Parameters.AddWithValue("@name", _user.name);
                 command.Parameters.AddWithValue("@age", _user.age);
                 command.Parameters.AddWithValue("@dateCreated", _user.dateCreated);
-                command.Parameters.AddWithValue("@isBanned", _user.isBanned);
-                command.Parameters.AddWithValue("@isAdmin", _user.isAdmin);
 
                 command.ExecuteNonQuery();
             }
@@ -94,7 +93,7 @@ namespace CryptoDL
 
         public Assets BuyCrypto(Assets _asset)
         {
-            string SQLQuery = @"insert into Assets values(@customerId, @cryptoName, @buyPrice, @buyDate, @stoploss, @takeprofit)";
+            string SQLQuery = @"insert into Assets values(@customerId, @cryptoName, @buyPrice, @buyDate, @stoploss, @takeprofit, @coinQuantity)";
             using(SqlConnection con = new SqlConnection(_connectionStrings))
             {
                 con.Open();
@@ -106,6 +105,7 @@ namespace CryptoDL
                 command.Parameters.AddWithValue("@buyDate", _asset.buyDate);
                 command.Parameters.AddWithValue("@stoploss", _asset.stoploss);
                 command.Parameters.AddWithValue("@takeprofit", _asset.takeprofit);
+                command.Parameters.AddWithValue("coinQuantity", _asset.coinQuantity);
 
                 command.ExecuteNonQuery();
             }
@@ -131,16 +131,34 @@ namespace CryptoDL
                     userList.Add(new AccountUser(){
                         ID = reader.GetInt32(0),
                         username = reader.GetString(1),
-                        name = reader.GetString(2),
-                        age = reader.GetInt32(3),
-                        dateCreated = reader.GetDateTime(4),
-                        isBanned = reader.GetInt32(5),
-                        isAdmin = reader.GetInt32(6)
+                        _password = (byte [])reader.GetValue(2),
+                        name = reader.GetString(4),
+                        age = reader.GetInt32(5),
+                        dateCreated = reader.GetDateTime(6),
+                        isBanned = reader.GetInt32(7),
+                        isAdmin = reader.GetInt32(8)
                     });
                 }
             }
 
             return userList;
+        }
+
+        public int LoginUser(string username, string password)
+        {
+            int loginResult = 0;
+            using(SqlConnection connection = new SqlConnection(_connectionStrings))
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand("UserLogin", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@username", username);
+                command.Parameters.AddWithValue("@password", password);
+                
+                loginResult = Convert.ToInt32(command.ExecuteScalar());
+            }
+            return loginResult;
         }
 
         public Wallet SelectWalletbyCustomer(int _userID)

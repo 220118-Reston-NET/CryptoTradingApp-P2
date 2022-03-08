@@ -5,6 +5,8 @@ public interface IRepository
 
     AccountUser AddUser(AccountUser _user);
 
+    int LoginUser(string username, string password);
+
     List<AccountUser> GetAllUsers();
 
     Wallet SelectWalletbyCustomer(int _userID);
