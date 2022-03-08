@@ -1,3 +1,4 @@
+using System;
 using Model;
 using Xunit;
 
@@ -86,27 +87,35 @@ public class OrderHistoryTest
 
     }
 
-    //Need a Unit Test for DateTime buyDate
+    [Fact]
+    public void buyDateShouldSetValidData()
+    {
+        //Arrange
+        OrderHistory order = new OrderHistory();
+        DateTime date = new DateTime(2022, 8, 3);
+    
+        //Act
+        order.buyDate = date;
+    
+        //Assert
+        Assert.NotNull(date);
+        Assert.Equal(date, order.buyDate);
 
-    // [Fact]
-    // public void TestName()
-    // {
-    //     // Given
-    
-    //     // When
-    
-    //     // Then
-    // }
+    }
 
-    //Need a Unit Test for DateTime sellDate
+    [Fact]
+    public void sellDateShouldSetValidData()
+    {
+        //Arrange
+        OrderHistory order = new OrderHistory();
+        DateTime date = new DateTime(2022, 9, 4);
+    
+        //Act 
+        order.sellDate = date;
+    
+        //Assert
+        Assert.NotNull(date);
+        Assert.Equal(date, order.sellDate);
 
-    // [Fact]
-    // public void TestName()
-    // {
-    //     // Given
-    
-    //     // When
-    
-    //     // Then
-    // }
+    }
 }

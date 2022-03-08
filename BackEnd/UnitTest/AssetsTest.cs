@@ -1,3 +1,4 @@
+using System;
 using Model;
 using Xunit;
 
@@ -86,15 +87,35 @@ public class AssetsTest
 
     }
 
-    //Need Unit Test for DateTime buyDate
+    [Fact]
+    public void DateTimeShouldSetValidData()
+    {
+        //Arrange
+        Assets set = new Assets();
+        DateTime date = new DateTime(2022, 8, 3);
+    
+        //Act
+        set.buyDate = date;
+    
+        //Assert
+        Assert.NotNull(date);
+        Assert.Equal(date, set.buyDate);
 
-    // [Fact]
-    // public void TestName()
-    // {
-    //     // Given
+    }
+
+    [Fact]
+    public void coinQuantityShouldSetValidData()
+    {
+        //Arrange
+        Assets set = new Assets();
+        decimal validCoin = 1000;
     
-    //     // When
+        //Act
+        set.coinQuantity = validCoin;
     
-    //     // Then
-    // }
+        //Assert
+        Assert.NotNull(set.coinQuantity);
+        Assert.Equal(validCoin, set.coinQuantity);
+        
+    }
 }
