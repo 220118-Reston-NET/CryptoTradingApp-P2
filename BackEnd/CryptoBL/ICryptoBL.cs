@@ -9,10 +9,11 @@ namespace CryptoBL{
         //Create New Customer Functionality
         /*This will create a new user in the database with the parameters of:
         username, password, name, age*/
-        public void NewUser(AccountUser p_NewUser);
+        public void AddUser(AccountUser p_NewUser);
         //View Customer Wallet Functionality
         /*Must be a verified user to access the users wallet*/
-        public void ViewWallet();
+        public void AddtoWallet(decimal p_ammount, int p_userID);
+        public void ViewWallet(int p_userID);
         //Set Stop-Loss Order Functionality
         /*
         -A sell-stop order places a limit on a declining price commodity and will sell the commodity if this price is reached.
@@ -39,6 +40,8 @@ namespace CryptoBL{
         This functionality will call upon the Stop-Loss function and Take-Profit function to set the values of those fields.
         In addition this function will pass the verified users ID and Name as well as the Current Date and associated price for the commodity.
         */
-        public void PlaceOrder(Assets p_NewAsset);
+        public void PlaceOrder(Assets p_NewAsset, int p_userID, OrderHistory p_order);
+        public void ViewAssets(int p_userID);
+        public void GetAllUsers();
     }
 }

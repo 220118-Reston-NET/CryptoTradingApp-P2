@@ -7,9 +7,13 @@ namespace CryptoBL{
         public CryptoBL(IRepository p_repo){
             _repo = p_repo;
         }
-        public void NewUser(AccountUser p_NewUser)
+        public AddUser(AccountUser p_NewUser)
         {
-            return _repo.NewUser(p_NewUser);
+            return _repo.AddUser(p_NewUser);
+        }
+        public AddtoWallet(decimal p_amount, int p_userID)
+        {
+            return _repo.AddtoWallet(p_amount, p_userID);
         }
 
         public void Notification(decimal p_stopLoss, decimal p_takeProfit)
@@ -22,19 +26,30 @@ namespace CryptoBL{
             // }
         }
 
-        public void PlaceOrder(Asset p_NewAsset)
+        public PlaceOrder(Assets p_NewAsset, decimal p_amount, int p_userID, OrderHistory p_order)
         {
-            return _repo.PlaceOrder(p_NewAsset);
+            _repo.SubtractfromWallet(p_amount, p_userID);
+            _repo.BuyCrypto(p_NewAsset);
+            return _repo.AddOrderHistory(p_order);
         }
 
-        public void UserLogin(string p_userName, string p_password)
+        public UserLogin(string p_userName, string p_password)
         {
-            return _repo.UserLogin(p_userName, p_password);
+            return _repo.LoginUser(p_userName, p_password);
         }
 
-        public void ViewWallet()
+        public ViewWallet(int p_userID)
         {
-            return _repo.ViewWallet();
+            return _repo.SelectWalletbyCustomer(p_userID);
+        }
+        public ViewAssets(int p_userID)
+        {
+            return _repo.GetAssetsbyCustomer(p_userID);
+        }
+        //GetAllUsers needs to be an admin only feature
+        public GetAllUsers()
+        {
+            return _repo.GetAllUsers();
         }
     }
 }
