@@ -7,7 +7,6 @@ namespace CryptoBL{
         public CryptoBL(IRepository p_repo){
             _repo = p_repo;
         }
-        //Start Adding Buisness layer funcitonalities
         public void NewUser(AccountUser p_NewUser)
         {
             return _repo.NewUser(p_NewUser);
