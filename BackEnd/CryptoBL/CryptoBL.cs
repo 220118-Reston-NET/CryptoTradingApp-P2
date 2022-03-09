@@ -16,20 +16,20 @@ namespace CryptoBL{
             return _repo.AddtoWallet(p_amount, p_userID);
         }
 
-        public void Notification(int p_userID)
-        {
-            CurrentPrice _assetPrice = 
-            List<Assets> _assetList = _repo.GetAssetsbyCustomer(p_userID);
-            foreach (var item in _assetList)
-            {
-                if(item.stoploss = ){
+        // public void Notification(int p_userID)
+        // {
+        //     CurrentPrice _assetPrice = 
+        //     List<Assets> _assetList = _repo.GetAssetsbyCustomer(p_userID);
+        //     foreach (var item in _assetList)
+        //     {
+        //         if(item.stoploss = ){
                     
-                }
-                else if(item.takeprofit =){
+        //         }
+        //         else if(item.takeprofit =){
 
-                }
-            }
-        }
+        //         }
+        //     }
+        // }
 
         public BuyOrderHistory PlaceOrder(Assets p_NewAsset, decimal p_amount, int p_userID, BuyOrderHistory p_order)
         {
