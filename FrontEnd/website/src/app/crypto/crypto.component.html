@@ -1,0 +1,46 @@
+<section class="ml-1">
+    <div class="parent-container d-flex">
+        <div class="container">
+            <div class="card text-black h-100" style="border-radius: 25px;">
+                <div class="card-body p-md-5">
+                    <div class="row justify-content-center">
+                        <div class="col-12 mx-auto">
+                            <table class="table table-borderless cryptoTable">
+                                <tbody id="crypto">
+                                    <tr *ngFor="let c = coin; let i = index" [routerLink]="['/crypto', coin.name]">
+                                        <td><img [src]="c.image" alt="{{ coin.name }}" class="cryptologo"/></td>
+                                        <td>{{coin.name}}</td>
+                                        <td class="text-uppercase">{{c.symbol}}</td>
+                                        <td>{{c.current_price.toLocaleString()}}</td>
+                                        <td [ngClass]="c.price_change_percentage_24h > 0 ? 'cryptoGreen' : 'cryptoRed'">{{c.price_change_24h > 0 ? '+' : ''}}{{c.price_change_24h.toLocaleString()}}</td>
+                                        <td [ngClass]="c.price_change_percentage_24h > 0 ? 'cryptoGreen' : 'cryptoRed'">{{c.price_change_percentage_24h > 0 ? '+' : ''}}{{convertDecimal(c.price_change_percentage_24h)}}%</td>
+                                      </tr>
+                                </tbody>
+                            </table>
+                            <canvas id="chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="card text-black" style="border-radius: 25px;">
+                <div class="card-body p-md-5">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+                            <div class="d-grid gap-2">
+                                <button onclick="submitRegistration()" type="button" class="btn btn-primary btn-lg buy">Buy Market</button>
+                                <button onclick="submitRegistration()" type="button" class="btn btn-primary btn-lg sell">Sell Market</button>
+                            </div>
+                            <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4">Quantity</p>
+                            <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4">Equity</p>
+                            <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4">Avg Cost</p>
+                            <button type="button" class="btn btn-primary btn-sm me-1">Stop Loss</button>
+                            <button type="button" class="btn btn-primary btn-sm">Take Profit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
