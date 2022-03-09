@@ -1,0 +1,44 @@
+<!--cryptocurrency market section start -->
+<div class="container h-100" style="padding-top: 5%;">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-12 col-lg-6 col-xl-5 order-2 order-lg-1">
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">All Cryptocurrencies</p>
+                <input type="text" class="form-control border-1 my-4 text-center rounded-0"
+                autofocus
+                (keyup)="searchCoin()"
+                [(ngModel)]="searchText"/>
+                <table class="table">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">Logo</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Symbol</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Change</th>
+                      <th scope="col">% Change</th>
+                      <th scope="col">Market Cap</th>
+                    </tr>
+                  </thead>
+                  <tbody id="crypto">
+                    <tr *ngFor="let coin of filteredCoins; let i = index" [routerLink]="['/crypto', coin.name]">
+                      <td><img [src]="coin.image" alt="{{ coin.name }}" class="cryptologo"/></td>
+                      <td>{{coin.name}}</td>
+                      <td class="text-uppercase">{{coin.symbol}}</td>
+                      <td>{{coin.current_price.toLocaleString()}}</td>
+                      <td [ngClass]="coin.price_change_percentage_24h > 0 ? 'cryptoGreen' : 'cryptoRed'">{{coin.price_change_24h > 0 ? '+' : ''}}{{coin.price_change_24h.toLocaleString()}}</td>
+                      <td [ngClass]="coin.price_change_percentage_24h > 0 ? 'cryptoGreen' : 'cryptoRed'">{{coin.price_change_percentage_24h > 0 ? '+' : ''}}{{convertDecimal(coin.price_change_percentage_24h)}}%</td>
+                      <td>${{coin.market_cap.toLocaleString()}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   <!--cryptocurrency market section end -->
