@@ -4,7 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 interface MarketCoin {
-  name?:string
+  image?: string;
+  name?: string;
+  current_prirce?: number;
+  price_change_24h?: number;
+  price_change_percentage_24h?: number;
 }
 
 @Component({
@@ -18,7 +22,9 @@ export class CryptoComponent implements OnInit {
   coin:MarketCoin;
 
   constructor(private router:ActivatedRoute, private http: HttpClient) {
-    this.coin = {};
+    this.coin = {
+
+    };
   }
 
   getCoinByName(cryptoName:string|null) : Observable<MarketCoin>
@@ -26,6 +32,10 @@ export class CryptoComponent implements OnInit {
     let cryptoNameString:string = <string>cryptoName;
     cryptoNameString = cryptoNameString.toLowerCase();
     return this.http.get<MarketCoin>('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${cryptoNameString}&order=market_cap_desc&per_page=100&page=1&sparkline=false');
+  }
+
+  convertDecimal(num:number) {
+    return Math.round(num * 100) / 100;
   }
 
   ngOnInit(): void {
