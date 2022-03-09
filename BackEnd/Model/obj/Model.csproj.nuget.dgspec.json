@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {}
+    "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {
+    "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj",
+        "projectUniqueName": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj",
-        "packagesPath": "C:\\Users\\bshiv\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\Model\\obj\\",
+        "projectPath": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj",
+        "packagesPath": "C:\\Users\\bebal\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bshiv\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\bebal\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"

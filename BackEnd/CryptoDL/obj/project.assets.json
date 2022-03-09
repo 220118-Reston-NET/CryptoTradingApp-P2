@@ -470,19 +470,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\bshiv\\.nuget\\packages\\": {}
+    "C:\\Users\\bebal\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj",
+      "projectUniqueName": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj",
       "projectName": "CryptoDL",
-      "projectPath": "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj",
-      "packagesPath": "C:\\Users\\bshiv\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\obj\\",
+      "projectPath": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj",
+      "packagesPath": "C:\\Users\\bebal\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\bshiv\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\bebal\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -494,8 +494,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {
-              "projectPath": "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj"
+            "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {
+              "projectPath": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj"
             }
           }
         }
