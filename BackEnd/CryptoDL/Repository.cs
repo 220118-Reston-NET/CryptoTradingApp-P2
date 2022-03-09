@@ -27,26 +27,47 @@ namespace CryptoDL
             return _noti;
         }
 
-        public OrderHistory AddOrderHistory(OrderHistory _orderhis)
+
+        public BuyOrderHistory AddBuyOrderHistory(BuyOrderHistory _borderhis)
         {
-            string SQLQuery = @"insert into OrderHistory values(@customerId, @cryptoName, @buyPrice, @buyDate, @sellPrice, @sellDate, @totalReturn)";
+            string SQLQuery = @"insert into BuyOrderHistory values(@customerId, @cryptoName, @buyPrice, @buyDate, @quantity, @total)";
 
             using(SqlConnection con = new SqlConnection(_connectionStrings))
             {
                 con.Open();
 
                 SqlCommand command = new SqlCommand(SQLQuery, con);
-                command.Parameters.AddWithValue("@customerId", _orderhis.customerId);
-                command.Parameters.AddWithValue("@cryptoName", _orderhis.cryptoName);
-                command.Parameters.AddWithValue("@buyPrice", _orderhis.buyPrice);
-                command.Parameters.AddWithValue("@buyDate", _orderhis.buyDate);
-                command.Parameters.AddWithValue("@sellPrice", _orderhis.sellPrice);
-                command.Parameters.AddWithValue("@sellDate", _orderhis.sellDate);
-                command.Parameters.AddWithValue("@totalReturn", _orderhis.totalReturn);
+                command.Parameters.AddWithValue("@customerId", _borderhis.customerId);
+                command.Parameters.AddWithValue("@cryptoName", _borderhis.cryptoName);
+                command.Parameters.AddWithValue("@buyPrice", _borderhis.buyPrice);
+                command.Parameters.AddWithValue("@buyDate", _borderhis.buyDate);
+                command.Parameters.AddWithValue("@quantity", _borderhis.quantity);
+                command.Parameters.AddWithValue("@total", _borderhis.total);
 
                 command.ExecuteNonQuery();
             }
-            return _orderhis;
+            return _borderhis;
+        }
+
+        public SellOrderHistory AddSellOrderHistory(SellOrderHistory _sorderhis)
+        {
+            string SQLQuery = @"insert into OrderHistory values(@customerId, @cryptoName, @sellPrice, @sellDate, @quantity, @total)";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+            {
+                con.Open();
+
+                SqlCommand command = new SqlCommand(SQLQuery, con);
+                command.Parameters.AddWithValue("@customerId",_sorderhis.customerId);
+                command.Parameters.AddWithValue("@cryptoName", _sorderhis.cryptoName);
+                command.Parameters.AddWithValue("@sellPrice", _sorderhis.sellPrice);
+                command.Parameters.AddWithValue("@sellDate", _sorderhis.sellDate);
+                command.Parameters.AddWithValue("@quantity", _sorderhis.quantity);
+                command.Parameters.AddWithValue("@total", _sorderhis.total);
+
+                command.ExecuteNonQuery();
+            }
+            return _sorderhis;
         }
 
         public Wallet AddtoWallet(decimal _amount, int _userID)
@@ -105,11 +126,27 @@ namespace CryptoDL
                 command.Parameters.AddWithValue("@buyDate", _asset.buyDate);
                 command.Parameters.AddWithValue("@stoploss", _asset.stoploss);
                 command.Parameters.AddWithValue("@takeprofit", _asset.takeprofit);
-                command.Parameters.AddWithValue("coinQuantity", _asset.coinQuantity);
+                command.Parameters.AddWithValue("@coinQuantity", _asset.coinQuantity);
 
                 command.ExecuteNonQuery();
             }
             return _asset;
+        }
+
+        public void DeleteAssetRow(int _userID, string _cryptoName)
+        {
+            string SQLQuery = @"delete from Assets where customerId = @_userID and cryptoName = @_cryptoName;";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+           {
+               con.Open();
+
+               SqlCommand command = new SqlCommand(SQLQuery, con);
+               command.Parameters.AddWithValue("@_userID", _userID);
+               command.Parameters.AddWithValue("@_cryptoName", _cryptoName);
+
+               command.ExecuteNonQuery();
+           } 
         }
 
         public List<AccountUser> GetAllUsers()
