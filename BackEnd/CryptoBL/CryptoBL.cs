@@ -47,9 +47,9 @@ namespace CryptoBL{
             return _repo.GetAssetsbyCustomer(p_userID);
         }
         //GetAllUsers needs to be an admin only feature
-        // public List<AccountUser> GetAllUsers()
-        // {
-        //     return _repo.GetAllUsers();
-        // }
+        public List<AccountUser> GetAllUsers()
+        {
+            return _repo.GetAllUsers();
+        }
     }
 }

@@ -43,5 +43,6 @@ namespace CryptoBL{
         public BuyOrderHistory PlaceOrder(Assets p_NewAsset, decimal p_amount, int p_userID, BuyOrderHistory p_order);
         public List<Assets> ViewAssets(int p_userID);
         // public List<AccountUser> GetAllUsers();
+        public List<AccountUser> GetAllUsers();
     }
 }
