@@ -9,7 +9,7 @@ namespace CryptoBL{
         //Create New Customer Functionality
         /*This will create a new user in the database with the parameters of:
         username, password, name, age*/
-        // public AccountUser AddUser(AccountUser p_NewUser);
+        public AccountUser AddUser(AccountUser p_NewUser);
         //View Customer Wallet Functionality
         /*Must be a verified user to access the users wallet*/
         public Wallet AddtoWallet(decimal p_ammount, int p_userID);
@@ -34,14 +34,16 @@ namespace CryptoBL{
         /*
         This functionality will notify the user when a commodity has passed the user set stop-loss or take-profit threshold.
         */
-        public void Notification(decimal p_stopLoss, decimal p_takeProfit);
+        //public void Notification(int p_userID);
         //Place Order Functionality
         /*
         This functionality will call upon the Stop-Loss function and Take-Profit function to set the values of those fields.
         In addition this function will pass the verified users ID and Name as well as the Current Date and associated price for the commodity.
         */
-        public OrderHistory PlaceOrder(Assets p_NewAsset, decimal p_amount, int p_userID, OrderHistory p_order);
+        public BuyOrderHistory PlaceOrder(Assets p_NewAsset, decimal p_amount, int p_userID, BuyOrderHistory p_order);
+        public SellOrderHistory SellOrder(decimal p_amount, string p_CryptoName, int p_userID, SellOrderHistory p_SellOrder);
         public List<Assets> ViewAssets(int p_userID);
         // public List<AccountUser> GetAllUsers();
+        public List<AccountUser> GetAllUsers();
     }
 }

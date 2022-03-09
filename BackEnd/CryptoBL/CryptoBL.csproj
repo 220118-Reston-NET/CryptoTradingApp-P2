@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CryptoDL\CryptoDL.csproj" />
+    <ProjectReference Include="..\Model\Model.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
