@@ -7,6 +7,29 @@
     font-family: 'Yanone Kaffeesatz', sans-serif;
     scroll-behavior: smooth;
 }
+
+:host {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+body:not(.dark-mode-preloading) {
+    transition: all 0.3s linear;
+}
+
+body.dark-mode {
+    background-color: #171717;
+    color: #f1f2f6;
+}
+  
+body.light-mode {
+    background-color: #f1f2f6;
+    color: #2f3542;
+}
+
 section {
     background-position: 50% 50%;
     background-repeat: no-repeat;
@@ -18,23 +41,6 @@ section {
     max-width: 1300px;
     padding: 0 80px;
     margin: auto;
-}
-
-.back-to-top {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    display: none;
-    transition: all 3s ease;
-    opacity: 0;
-}
-.back-to-top.show {
-    bottom: 30px;
-    opacity: 1;
-    pointer-events: auto;
-}
-.back-to-top:hover {
-    filter: brightness(90%);
 }
 
 /* Navigation bar section */
@@ -63,20 +69,6 @@ section {
     width: 50%;
 }
 
-/* Account page */
-.text-muted {
-    color: #aeb0b4 !important;
-    font-weight: 300;
-}
-.delete {
-    background-color: rgb(149, 0, 0);
-    border-color: rgb(149, 0, 0);
-}
-.delete:hover {
-    background-color: rgb(105, 0, 0);
-    border-color: rgb(105, 0, 0);
-}
-
 /* Landing page */
 .cryptologo {
     width: 24px;
@@ -87,15 +79,6 @@ section {
 }
 .cryptoRed {
     color: rgb(182, 0, 0) !important;
-}
-
-/* Crypto page */
-.cryptoTable {
-    font-size: 36px;
-}
-.cryptologoLarge {
-    width: 48px;
-    height: 48px;
 }
 
 @media (min-width: 1200px) {
