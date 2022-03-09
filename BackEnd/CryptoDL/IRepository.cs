@@ -19,10 +19,7 @@ public interface IRepository
 
     List<Assets> GetAssetsbyCustomer(int _userID);
 
-    void DeleteAssetRow(int _userID, string _cryptoName);
-
-    BuyOrderHistory AddBuyOrderHistory(BuyOrderHistory _borderhis);
-    SellOrderHistory AddSellOrderHistory(SellOrderHistory _sorderhis);
+    OrderHistory AddOrderHistory(OrderHistory _orderhis);
 
     Notification AddNotification(Notification _noti);
 
