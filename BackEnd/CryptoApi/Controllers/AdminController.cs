@@ -87,10 +87,19 @@ namespace CryptoApi.Controllers
         }
 
         // GET: api/Admin/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("SpecificUser")]
+        public IActionResult GetSpecificUser(int p_userID)
         {
-            return "value";
+            try
+            {
+                Log.Information("Admin successfully got specific user");
+                return Ok(_cryptoBL.GetSpecificUser(p_userID));   
+            }
+            catch (SqlException)
+            {
+                Log.Warning("Admin had issue retrieving specific user");
+                return NotFound();
+            }
         }
 
         // POST: api/Admin
@@ -99,10 +108,21 @@ namespace CryptoApi.Controllers
         {
         }
 
+        //Double check whether this is Put or Post request 
         // PUT: api/Admin/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("BanUser")]
+        public IActionResult BanUser([FromBody] int p_userID)
         {
+            try
+            {
+                Log.Information("Admin successfully banned user");
+                return Ok(_cryptoBL.BanUser(p_userID));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Admin had issue banning user");
+                return Conflict(ex.Message);
+            }
         }
 
         // DELETE: api/Admin/5
