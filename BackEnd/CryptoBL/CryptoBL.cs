@@ -7,31 +7,40 @@ namespace CryptoBL{
         public CryptoClassBL(IRepository p_repo){
             _repo = p_repo;
         }
-        // public AccountUser AddUser(AccountUser p_NewUser)
-        // {
-        //     return _repo.AddUser(p_NewUser);
-        // }
-        
+        public AccountUser AddUser(AccountUser p_NewUser)
+        {
+            return _repo.AddUser(p_NewUser);
+        }
         public Wallet AddtoWallet(decimal p_amount, int p_userID)
         {
             return _repo.AddtoWallet(p_amount, p_userID);
         }
 
-        public void Notification(decimal p_stopLoss, decimal p_takeProfit)
-        {
-            // foreach (var item in Asset)
-            // {
-            //     if(Asset[item].p_stopLoss = /*Need model for current price*/){
+        // public void Notification(int p_userID)
+        // {
+        //     CurrentPrice _assetPrice = 
+        //     List<Assets> _assetList = _repo.GetAssetsbyCustomer(p_userID);
+        //     foreach (var item in _assetList)
+        //     {
+        //         if(item.stoploss = ){
                     
-            //     }
-            // }
-        }
+        //         }
+        //         else if(item.takeprofit =){
 
-        public OrderHistory PlaceOrder(Assets p_NewAsset, decimal p_amount, int p_userID, OrderHistory p_order)
+        //         }
+        //     }
+        // }
+
+        public BuyOrderHistory PlaceOrder(Assets p_NewAsset, decimal p_amount, int p_userID, BuyOrderHistory p_order)
         {
             _repo.SubtractfromWallet(p_amount, p_userID);
             _repo.BuyCrypto(p_NewAsset);
-            return _repo.AddOrderHistory(p_order);
+            return _repo.AddBuyOrderHistory(p_order);
+        }
+        public SellOrderHistory SellOrder(decimal p_amount, string p_CryptoName, int p_userID, SellOrderHistory p_SellOrder){
+            _repo.DeleteAssetRow(p_userID, p_CryptoName);
+            _repo.AddtoWallet(p_amount, p_userID);
+            return _repo.AddSellOrderHistory(p_SellOrder);
         }
 
         public int UserLogin(string p_userName, string p_password)
@@ -48,9 +57,9 @@ namespace CryptoBL{
             return _repo.GetAssetsbyCustomer(p_userID);
         }
         //GetAllUsers needs to be an admin only feature
-        // public List<AccountUser> GetAllUsers()
-        // {
-        //     return _repo.GetAllUsers();
-        // }
+        public List<AccountUser> GetAllUsers()
+        {
+            return _repo.GetAllUsers();
+        }
     }
 }
