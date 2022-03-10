@@ -17,5 +17,10 @@ namespace CryptoBL{
         public SellOrderHistory SellOrder(decimal p_amount, string p_CryptoName, int p_userID, SellOrderHistory p_SellOrder);
         public List<Assets> ViewAssets(int p_userID);
         public List<AccountUser> GetAllUsers();
+        public List<BuyOrderHistory> GetBuyOrderHistoryByCustomer (int p_userID);
+        public List<SellOrderHistory> GetSellOrderHistoryByCustomer (int p_userID);
+        public AccountUser UpdateUsername (int p_userID, string p_userName);
+        public AccountUser UpdateName (int p_userID, string p_name);
+        public AccountUser UpdateAge (int p_userID, int p_age);
     }
 }

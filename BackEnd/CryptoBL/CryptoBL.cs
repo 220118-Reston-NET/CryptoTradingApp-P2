@@ -71,5 +71,30 @@ namespace CryptoBL{
         {
             return _repo.BanUser(p_userID);
         }
+
+        public List<BuyOrderHistory> GetBuyOrderHistoryByCustomer(int p_userID)
+        {
+            return _repo.GetBuyOrderHistoryByCustomer(p_userID);
+        }
+
+        public List<SellOrderHistory> GetSellOrderHistoryByCustomer(int p_userID)
+        {
+            return _repo.GetSellOrderHistoryByCustomer(p_userID);
+        }
+
+        public AccountUser UpdateUsername(int p_userID, string p_userName)
+        {
+            return _repo.UpdateUsername(p_userID, p_userName);
+        }
+
+        public AccountUser UpdateName(int p_userID, string p_name)
+        {
+            return _repo.UpdateName(p_userID, p_name);
+        }
+
+        public AccountUser UpdateAge(int p_userID, int p_age)
+        {
+            return _repo.UpdateAge(p_userID, p_age);
+        }
     }
 }
