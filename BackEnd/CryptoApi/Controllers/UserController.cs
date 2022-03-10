@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using CryptoBL;
 using System.Data.SqlClient;
 using Model;
+using Serilog;
 
 namespace CryptoApi.Controllers
 {
@@ -28,12 +29,12 @@ namespace CryptoApi.Controllers
 
             try
             {
-                //Need to add logging here
+                Log.Information("Added user successfully");
                 return Ok(_cryptoBL.AddUser(p_NewUser));
             }
             catch (SqlException)
             {
-                //Add logging 
+                Log.Warning("Issue with add user function");
                 return NotFound();
             }
         }
@@ -44,13 +45,13 @@ namespace CryptoApi.Controllers
         {
             try
             {
-                //Add logging 
+                Log.Information("User has placed order successfully"); 
                 _cryptoBL.PlaceOrder(p_NewAsset, p_amount, p_userID, p_order);
                 return Created("Order successfully placed!", "");
             }
             catch (System.Exception ex)
             {
-                //Add logging
+                Log.Warning("User had issue placing an order");
                 return Conflict(ex.Message);
             }
         }
@@ -61,11 +62,12 @@ namespace CryptoApi.Controllers
         {
             try
             {
+                Log.Information("User has successfully used Sell Order function");
                 return Created("Sell order created", _cryptoBL.SellOrder(p_amount, p_CryptoName, p_userID, p_SellOrder));
             }
             catch (System.Exception ex)
             {
-                
+                Log.Warning("User had issue with Sell Order Function");
                 return Conflict(ex.Message);
             }
         }
@@ -77,12 +79,12 @@ namespace CryptoApi.Controllers
             //Need Validation for if incorrect username is put in 
             try
             {
-                //Add logging
+                Log.Information("User has logged in successfully");
                 return Ok(_cryptoBL.UserLogin(p_userName, p_password));
             }
             catch (System.Exception)
             {
-                //Add logging
+                Log.Warning("User had issue logging in");
                 return NotFound();
             }
         }
@@ -94,12 +96,12 @@ namespace CryptoApi.Controllers
             //Possibly have validation for this step
             try
             {
-                //Add logging
+                Log.Information("User has successfully added to wallet");
                 return Created("Successfully added to wallet", _cryptoBL.AddtoWallet(p_amount, p_userID));
             }
             catch (System.Exception ex)
             {
-                //Add logging
+                Log.Warning("User had issue adding to wallet");
                 return Conflict(ex.Message);
             }
         }
@@ -110,12 +112,12 @@ namespace CryptoApi.Controllers
         {
             try
             {
-                //Add logging
+                Log.Information("User has successfully viewed wallet");
                 return Ok(_cryptoBL.ViewWallet(p_userID));
             }
             catch (SqlException)
             {
-                //Add logging
+                Log.Warning("User had issue viewing wallet");
                 return NotFound();
             }
         }
@@ -126,12 +128,12 @@ namespace CryptoApi.Controllers
         {
             try
             {
-                //Add logging
+                Log.Information("User has successfully viewed assets");
                 return Ok(_cryptoBL.ViewAssets(p_userID));
             }
             catch (SqlException)
             {
-                //Add logging
+                Log.Warning("User had issue viewing assets");
                 return NotFound();
             }
         }

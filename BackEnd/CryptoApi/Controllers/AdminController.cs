@@ -7,6 +7,7 @@ using CryptoBL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using Serilog;
 
 namespace CryptoApi.Controllers
 {
@@ -27,12 +28,12 @@ namespace CryptoApi.Controllers
         {
             try
             {
-                //Add logging
+                Log.Information("Admin successfully used get all user function");
                 return Ok(_cryptoBL.GetAllUsers);
             }
             catch (SqlException)
             {
-                
+                Log.Warning("Admin had issue using get all user function");
                 return NotFound();
             }
         }
@@ -43,12 +44,12 @@ namespace CryptoApi.Controllers
 
             try
             {
-                //Need to add logging here
+                Log.Information("Admin has successfully added user");
                 return Ok(_cryptoBL.AddUser(p_NewUser));
             }
             catch (SqlException)
             {
-                //Add logging 
+                Log.Warning("Admin had issue adding user");
                 return NotFound();
             }
         }
@@ -59,12 +60,12 @@ namespace CryptoApi.Controllers
         {
             try
             {
-                //Add logging
+                Log.Information("Admin has successfully viewed wallet");
                 return Ok(_cryptoBL.ViewWallet(p_userID));
             }
             catch (SqlException)
             {
-                //Add logging
+                Log.Warning("Admin had issue viewing wallet");
                 return NotFound();
             }
         }
@@ -75,12 +76,12 @@ namespace CryptoApi.Controllers
         {
             try
             {
-                //Add logging
+                Log.Information("Admin has successfully viewed assets");
                 return Ok(_cryptoBL.ViewAssets(p_userID));
             }
             catch (SqlException)
             {
-                //Add logging
+                Log.Warning("Admin had issue viewing assets");
                 return NotFound();
             }
         }

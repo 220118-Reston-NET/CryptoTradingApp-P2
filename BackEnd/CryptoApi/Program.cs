@@ -1,3 +1,4 @@
+using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,6 +11,11 @@ builder.Services.AddSwaggerGen();
 //Need a scope once we get repository and DL/BL
 
 var app = builder.Build();
+
+//Creating and configuring logger
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.File("./logs/user.txt") //Configured logger to save in this file 
+    .CreateLogger();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
