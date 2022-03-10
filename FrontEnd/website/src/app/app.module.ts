@@ -10,6 +10,8 @@ import { AccountComponent } from './account/account.component';
 import { IndexComponent } from './index/index.component';
 import { CryptoComponent } from './crypto/crypto.component';
 
+import { NgChartsModule } from 'ng2-charts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +25,8 @@ import { CryptoComponent } from './crypto/crypto.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgChartsModule,
+    
     RouterModule.forRoot([
       {path: "", component:IndexComponent},
       {path: "account", component:AccountComponent},
