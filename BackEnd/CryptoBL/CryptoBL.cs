@@ -9,6 +9,7 @@ namespace CryptoBL{
         }
         public AccountUser AddUser(AccountUser p_NewUser)
         {
+            _repo.InitializeWallet(p_NewUser.ID);
             return _repo.AddUser(p_NewUser);
         }
         public Wallet AddtoWallet(decimal p_amount, int p_userID)
@@ -60,6 +61,15 @@ namespace CryptoBL{
         public List<AccountUser> GetAllUsers()
         {
             return _repo.GetAllUsers();
+        }
+        public AccountUser GetSpecificUser(int p_userID)
+        {
+            return _repo.GetSpecificUser(p_userID);
+        }
+
+        public AccountUser BanUser(int p_userID)
+        {
+            return _repo.BanUser(p_userID);
         }
     }
 }
