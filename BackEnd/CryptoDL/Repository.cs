@@ -51,7 +51,7 @@ namespace CryptoDL
 
         public SellOrderHistory AddSellOrderHistory(SellOrderHistory _sorderhis)
         {
-            string SQLQuery = @"insert into OrderHistory values(@customerId, @cryptoName, @sellPrice, @sellDate, @quantity, @total)";
+            string SQLQuery = @"insert into SellOrderHistory values(@customerId, @cryptoName, @sellPrice, @sellDate, @quantity, @total)";
 
             using(SqlConnection con = new SqlConnection(_connectionStrings))
             {
@@ -276,6 +276,78 @@ namespace CryptoDL
            } 
 
            _wallet = SelectWalletbyCustomer(_userID);
+           return _wallet;
+        }
+
+        public AccountUser BanUser(int _userID)
+        {
+            AccountUser bannedUser = new AccountUser();
+            string SQLQuery = @"update AccountUser set isBanned = 1 where id = @customerId";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+           {
+               con.Open();
+
+               SqlCommand command = new SqlCommand(SQLQuery, con);
+               command.Parameters.AddWithValue("@customerId", _userID);
+
+               command.ExecuteNonQuery();
+           } 
+
+           bannedUser = GetSpecificUser(_userID);
+           return bannedUser;
+        }
+
+        public AccountUser GetSpecificUser(int _userID)
+        {
+            List<AccountUser> userList = new List<AccountUser>();
+
+            string SQLQuery = @"select * from AccountUser where id = @ID";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+            {
+                con.Open();
+
+                SqlCommand command = new SqlCommand(SQLQuery, con);
+
+                command.Parameters.AddWithValue("@ID", _userID);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    userList.Add(new AccountUser(){
+                        ID = reader.GetInt32(0),
+                        username = reader.GetString(1),
+                        _password = (byte [])reader.GetValue(2),
+                        name = reader.GetString(4),
+                        age = reader.GetInt32(5),
+                        dateCreated = reader.GetDateTime(6),
+                        isBanned = reader.GetInt32(7),
+                        isAdmin = reader.GetInt32(8)
+                    });
+                }
+            }
+
+            return userList[0];
+        }
+
+        public Wallet InitializeWallet(int _userId)
+        {
+            Wallet _wallet = new Wallet();
+            string SQLQuery = @"insert into Wallet values(@customerId, 0)";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+           {
+               con.Open();
+
+               SqlCommand command = new SqlCommand(SQLQuery, con);
+               command.Parameters.AddWithValue("@customerId", _userId);
+
+               command.ExecuteNonQuery();
+           } 
+
+           _wallet = SelectWalletbyCustomer(_userId);
            return _wallet;
         }
     }
