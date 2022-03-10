@@ -26,11 +26,25 @@ public interface IRepository
     List<Assets> GetAssetsbyCustomer(int _userID);
 
     void DeleteAssetRow(int _userID, string _cryptoName);
-
     BuyOrderHistory AddBuyOrderHistory(BuyOrderHistory _borderhis);
+
+    List<BuyOrderHistory> GetBuyOrderHistoryByCustomer(int _userID);
+
     SellOrderHistory AddSellOrderHistory(SellOrderHistory _sorderhis);
 
+    List<SellOrderHistory> GetSellOrderHistoryByCustomer(int _userID);
+
     Notification AddNotification(Notification _noti);
+
+    AccountUser UpdateUsername(int _userID, string _username);
+
+    AccountUser UpdateName(int _userID, string _name);
+
+    AccountUser UpdateAge(int _userID, int _age);
+
+    /* working on this
+    CurrentPrice AddPrice();
+    */
 
 
 }

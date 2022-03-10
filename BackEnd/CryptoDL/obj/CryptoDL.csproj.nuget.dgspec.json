@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj": {}
+    "c:\\Users\\PSXSLHP185\\P2-CryptoTrading App\\Backend\\CryptoDL\\CryptoDL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj": {
+    "c:\\Users\\PSXSLHP185\\P2-CryptoTrading App\\Backend\\CryptoDL\\CryptoDL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj",
+        "projectUniqueName": "c:\\Users\\PSXSLHP185\\P2-CryptoTrading App\\Backend\\CryptoDL\\CryptoDL.csproj",
         "projectName": "CryptoDL",
-        "projectPath": "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj",
-        "packagesPath": "C:\\Users\\bshiv\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\obj\\",
+        "projectPath": "c:\\Users\\PSXSLHP185\\P2-CryptoTrading App\\Backend\\CryptoDL\\CryptoDL.csproj",
+        "packagesPath": "C:\\Users\\PSXSLHP185\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\PSXSLHP185\\P2-CryptoTrading App\\Backend\\CryptoDL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bshiv\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\PSXSLHP185\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -26,8 +26,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj"
+              "c:\\Users\\PSXSLHP185\\P2-CryptoTrading App\\Backend\\Model\\Model.csproj": {
+                "projectPath": "c:\\Users\\PSXSLHP185\\P2-CryptoTrading App\\Backend\\Model\\Model.csproj"
               }
             }
           }
@@ -62,21 +62,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {
+    "c:\\Users\\PSXSLHP185\\P2-CryptoTrading App\\Backend\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj",
+        "projectUniqueName": "c:\\Users\\PSXSLHP185\\P2-CryptoTrading App\\Backend\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj",
-        "packagesPath": "C:\\Users\\bshiv\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bshiv\\Documents\\Revature\\Project2\\CryptoTradingApp-P2\\BackEnd\\Model\\obj\\",
+        "projectPath": "c:\\Users\\PSXSLHP185\\P2-CryptoTrading App\\Backend\\Model\\Model.csproj",
+        "packagesPath": "C:\\Users\\PSXSLHP185\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\PSXSLHP185\\P2-CryptoTrading App\\Backend\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bshiv\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\PSXSLHP185\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -114,7 +114,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
