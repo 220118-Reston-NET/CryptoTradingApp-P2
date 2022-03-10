@@ -172,4 +172,30 @@ public class CryptoBLTest{
 
         Assert.Same(_validSellOrder, _actualSellOrder);
     }
+    [Fact]
+    public void GetSpecificUserValueTest(){
+        int _validID = 1;
+        AccountUser _testUser = new AccountUser(){
+            ID = _validID,
+        };
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        mockRepo.Setup(repo => repo.GetSpecificUser(_validID)).Returns(_testUser);
+        ICryptoClassBL cryptoBL = new CryptoClassBL(mockRepo.Object);
+        AccountUser _actualUser = cryptoBL.GetSpecificUser(_validID);
+
+        Assert.Same(_testUser, _actualUser);
+    }
+    [Fact]
+    public void BanUserValueTest(){
+        int _validID = 1;
+        AccountUser _testUser = new AccountUser(){
+            ID = _validID,
+        };
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        mockRepo.Setup(repo => repo.BanUser(_validID)).Returns(_testUser);
+        ICryptoClassBL cryptoBL = new CryptoClassBL(mockRepo.Object);
+        AccountUser _actualUser = cryptoBL.BanUser(_validID);
+
+        Assert.Same(_testUser, _actualUser);
+    }
 }
