@@ -1,5 +1,7 @@
 using System.Data.SqlClient;
+using System.Net;
 using Model;
+//using System.Web.Script.Serialization;
 namespace CryptoDL
 {
     public class Repository : IRepository
@@ -350,5 +352,139 @@ namespace CryptoDL
            _wallet = SelectWalletbyCustomer(_userId);
            return _wallet;
         }
+
+        public List<BuyOrderHistory> GetBuyOrderHistoryByCustomer(int _userID)
+        {
+            List<BuyOrderHistory> buyOrderList = new List<BuyOrderHistory>();
+
+            string SQLQuery = @"select * from BuyOrderHistory where customerId = @customerId";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+            {
+                con.Open();
+
+                SqlCommand command = new SqlCommand(SQLQuery, con);
+
+                command.Parameters.AddWithValue("@customerId", _userID);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    buyOrderList.Add(new BuyOrderHistory(){
+                        customerId = reader.GetInt32(0),
+                        cryptoName = reader.GetString(1),
+                        buyPrice = reader.GetDecimal(2),
+                        buyDate = reader.GetDateTime(3),
+                        quantity = reader.GetDecimal(4),
+                        total = reader.GetDecimal(5)
+                    });
+                }
+            }
+            return buyOrderList;
+        }
+
+        public List<SellOrderHistory> GetSellOrderHistoryByCustomer(int _userID)
+        {
+            List<SellOrderHistory> sellOrderList = new List<SellOrderHistory>();
+
+            string SQLQuery = @"select * from SellOrderHistory where customerId = @customerId";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+            {
+                con.Open();
+
+                SqlCommand command = new SqlCommand(SQLQuery, con);
+
+                command.Parameters.AddWithValue("@customerId", _userID);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    sellOrderList.Add(new SellOrderHistory(){
+                        customerId = reader.GetInt32(0),
+                        cryptoName = reader.GetString(1),
+                        sellPrice = reader.GetDecimal(2),
+                        sellDate = reader.GetDateTime(3),
+                        quantity = reader.GetDecimal(4),
+                        total = reader.GetDecimal(5)
+                    });
+                }
+            }
+            return sellOrderList;
+        }
+
+        public AccountUser UpdateUsername(int _userID, string _username)
+        {
+            AccountUser _user = new AccountUser();
+            string SQLQuery = @"update AccountUser set userName = @username where id = @userID";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+           {
+               con.Open();
+
+               SqlCommand command = new SqlCommand(SQLQuery, con);
+               command.Parameters.AddWithValue("@userID", _userID);
+               command.Parameters.AddWithValue("@username", _username);
+
+               command.ExecuteNonQuery();
+           } 
+           _user = GetSpecificUser(_userID);
+           return _user;
+        }
+
+        public AccountUser UpdateName(int _userID, string _name)
+        {
+            AccountUser _user = new AccountUser();
+            string SQLQuery = @"update AccountUser set name = @name where id = @userID";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+           {
+               con.Open();
+
+               SqlCommand command = new SqlCommand(SQLQuery, con);
+               command.Parameters.AddWithValue("@userID", _userID);
+               command.Parameters.AddWithValue("@name", _name);
+
+               command.ExecuteNonQuery();
+           } 
+           _user = GetSpecificUser(_userID);
+           return _user;
+        }
+
+        public AccountUser UpdateAge(int _userID, int _age)
+        {
+            AccountUser _user = new AccountUser();
+            string SQLQuery = @"update AccountUser set age = @age where id = @userID";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+           {
+               con.Open();
+
+               SqlCommand command = new SqlCommand(SQLQuery, con);
+               command.Parameters.AddWithValue("@userID", _userID);
+               command.Parameters.AddWithValue("@age", _age);
+
+               command.ExecuteNonQuery();
+           } 
+           _user = GetSpecificUser(_userID);
+           return _user;
+        }
+        /*Working on this
+        public CurrentPrice AddPrice()
+        {
+            string QUERY_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo"
+            Uri queryUri = new Uri(QUERY_URL);
+
+            using (WebClient client = new WebClient())
+            {
+                 // -------------------------------------------------------------------------
+                 // if using .NET Framework (System.Web.Script.Serialization)
+		
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                dynamic json_data = js.Deserialize(client.DownloadString(queryUri), typeof(object));
+            }
+        }*/
     }
 }
