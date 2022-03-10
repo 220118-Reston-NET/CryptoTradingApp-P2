@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using CryptoBL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Model;
 
 namespace CryptoApi.Controllers
 {
@@ -11,11 +14,75 @@ namespace CryptoApi.Controllers
     [ApiController]
     public class AdminController : ControllerBase
     {
-        // GET: api/Admin
-        [HttpGet]
-        public IEnumerable<string> Get()
+
+        private ICryptoClassBL _cryptoBL;
+        public AdminController(ICryptoClassBL p_cryptoBL)
         {
-            return new string[] { "value1", "value2" };
+            _cryptoBL = p_cryptoBL;
+        }
+
+        // GET: api/Admin
+        [HttpGet("GetAllUsers")]
+        public IActionResult GetAllUsers()
+        {
+            try
+            {
+                //Add logging
+                return Ok(_cryptoBL.GetAllUsers);
+            }
+            catch (SqlException)
+            {
+                
+                return NotFound();
+            }
+        }
+
+        [HttpPost("AddUser")]
+        public IActionResult AddUser(AccountUser p_NewUser)
+        {
+
+            try
+            {
+                //Need to add logging here
+                return Ok(_cryptoBL.AddUser(p_NewUser));
+            }
+            catch (SqlException)
+            {
+                //Add logging 
+                return NotFound();
+            }
+        }
+
+        [HttpGet("ViewWallet")]
+
+        public IActionResult ViewWallet(int p_userID)
+        {
+            try
+            {
+                //Add logging
+                return Ok(_cryptoBL.ViewWallet(p_userID));
+            }
+            catch (SqlException)
+            {
+                //Add logging
+                return NotFound();
+            }
+        }
+
+        [HttpGet("ViewAssets")]
+
+        public IActionResult ViewAssets(int p_userID)
+        {
+            try
+            {
+                //Add logging
+                return Ok(_cryptoBL.ViewAssets(p_userID));
+            }
+            catch (SqlException)
+            {
+                //Add logging
+                return NotFound();
+            }
         }
 
         // GET: api/Admin/5
