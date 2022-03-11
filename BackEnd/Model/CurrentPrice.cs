@@ -2,7 +2,6 @@ namespace Model
 {
     public class CurrentPrice
     {
-
         public decimal currentPrice { get; set; }
         public string cryptoName { get; set; }
         public decimal alphaVal { get; set; }
