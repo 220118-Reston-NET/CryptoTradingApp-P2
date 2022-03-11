@@ -170,7 +170,7 @@ namespace CryptoDL
                     userList.Add(new AccountUser(){
                         ID = reader.GetInt32(0),
                         username = reader.GetString(1),
-                        _password = (byte [])reader.GetValue(2),
+                        _password = reader.GetString(2),
                         name = reader.GetString(4),
                         age = reader.GetInt32(5),
                         dateCreated = reader.GetDateTime(6),
@@ -321,7 +321,7 @@ namespace CryptoDL
                     userList.Add(new AccountUser(){
                         ID = reader.GetInt32(0),
                         username = reader.GetString(1),
-                        _password = (byte [])reader.GetValue(2),
+                        _password = reader.GetString(2),
                         name = reader.GetString(4),
                         age = reader.GetInt32(5),
                         dateCreated = reader.GetDateTime(6),
