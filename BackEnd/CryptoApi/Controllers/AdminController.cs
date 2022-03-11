@@ -102,13 +102,22 @@ namespace CryptoApi.Controllers
             }
         }
 
-        // POST: api/Admin
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpGet("BuyOrderHistory")]
+
+        public IActionResult GetBuyOrderHistoryByCustomer(int p_userID)
         {
+            try
+            {
+                Log.Information("Admin successfully viewed buy order history");
+                return Ok(_cryptoBL.GetBuyOrderHistoryByCustomer(p_userID));
+            }
+            catch (SqlException)
+            {
+                Log.Warning("Admin had issue getting buy order history");
+                return NotFound();
+            }
         }
 
-        //Double check whether this is Put or Post request 
         // PUT: api/Admin/5
         [HttpPut("BanUser")]
         public IActionResult BanUser([FromBody] int p_userID)
@@ -121,6 +130,70 @@ namespace CryptoApi.Controllers
             catch (System.Exception ex)
             {
                 Log.Warning("Admin had issue banning user");
+                return Conflict(ex.Message);
+            }
+        }
+
+        [HttpGet("SellOrderHistory")]
+
+        public IActionResult GetSellOrderHistoryByCustomer(int p_userID)
+        {
+            try
+            {
+                Log.Information("Admin successfully viewed sell order history");
+                return Ok(_cryptoBL.GetSellOrderHistoryByCustomer(p_userID));
+            }
+            catch (SqlException)
+            {
+                Log.Warning("Admin had issue getting sell order history");
+                return NotFound();
+            }
+        }
+
+        [HttpPut("UpdateName")]
+
+        public IActionResult UpdateName([FromBody] int p_userID, string p_name)
+        {
+            try
+            {
+                Log.Warning("Admin successfully updated name");
+                return Ok(_cryptoBL.UpdateName(p_userID, p_name));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Admin had issue updating name");
+                return Conflict(ex.Message);
+            }
+        }
+
+        [HttpPut("UpdateUsername")]
+
+        public IActionResult UpdateUsername([FromBody] int p_userID, string p_userName)
+        {
+            try
+            {
+                Log.Information("Admin successfully updated username");
+                return Ok(_cryptoBL.UpdateUsername(p_userID, p_userName));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Admin had issue updating username");
+                return Conflict(ex.Message);
+            }
+        }
+
+        [HttpPut("UpdateAge")]
+
+        public IActionResult UpdateAge([FromBody] int p_userID, int p_age)
+        {
+            try
+            {
+                Log.Information("Admin has successfully updated age");
+                return Ok(_cryptoBL.UpdateAge(p_userID, p_age));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Admin had issue updating age");
                 return Conflict(ex.Message);
             }
         }
