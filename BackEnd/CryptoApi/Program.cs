@@ -1,3 +1,5 @@
+using CryptoBL;
+using CryptoDL;
 using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //Need a scope once we get repository and DL/BL
-
+builder.Services.AddScoped<IRepository>(repo => new Repository(builder.Configuration.GetConnectionString("Reference2DB")));
+builder.Services.AddScoped<ICryptoClassBL, CryptoClassBL>();
 var app = builder.Build();
 
 //Creating and configuring logger

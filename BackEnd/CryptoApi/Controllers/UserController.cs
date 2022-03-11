@@ -41,12 +41,12 @@ namespace CryptoApi.Controllers
 
         // GET: api/User/5
         [HttpPost("PlaceOrder")]
-        public IActionResult PlaceOrder(Assets p_NewAsset, decimal p_amount, int p_userID, BuyOrderHistory p_order)
+        public IActionResult PlaceOrder([FromBody] Tuple<Assets, BuyOrderHistory> p_tuple, decimal p_amount, int p_userID)
         {
             try
             {
                 Log.Information("User has placed order successfully"); 
-                _cryptoBL.PlaceOrder(p_NewAsset, p_amount, p_userID, p_order);
+                _cryptoBL.PlaceOrder(p_tuple.Item1, p_amount, p_userID, p_tuple.Item2);
                 return Created("Order successfully placed!", "");
             }
             catch (System.Exception ex)
