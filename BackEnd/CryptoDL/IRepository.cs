@@ -42,9 +42,9 @@ public interface IRepository
 
     AccountUser UpdateAge(int _userID, int _age);
 
-    /* working on
-    CurrentPrice AddPrice();
-    */
+    List<CryptoVariables> GetAllPrice();
+    List<CryptoVariables> GetPredictedPrices();
+
 
 
 }
