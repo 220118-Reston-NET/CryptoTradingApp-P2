@@ -509,7 +509,8 @@ namespace CryptoDL
 
                foreach (CryptoVariables item in userList)
                {
-                   item.currentPrice *= item.randVal;
+                   item.currentPrice = (item.alphaVal+item.betaVal)*item.sandp500Val*(decimal)item.calculated;
+
                }
             
             return userList;
