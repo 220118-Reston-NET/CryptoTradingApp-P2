@@ -41,12 +41,12 @@ namespace CryptoApi.Controllers
 
         // GET: api/User/5
         [HttpPost("PlaceOrder")]
-        public IActionResult PlaceOrder(Assets p_NewAsset, decimal p_amount, int p_userID, BuyOrderHistory p_order)
+        public IActionResult PlaceOrder([FromBody] Tuple<Assets, BuyOrderHistory> p_tuple, decimal p_amount, int p_userID)
         {
             try
             {
                 Log.Information("User has placed order successfully"); 
-                _cryptoBL.PlaceOrder(p_NewAsset, p_amount, p_userID, p_order);
+                _cryptoBL.PlaceOrder(p_tuple.Item1, p_amount, p_userID, p_tuple.Item2);
                 return Created("Order successfully placed!", "");
             }
             catch (System.Exception ex)
@@ -138,6 +138,86 @@ namespace CryptoApi.Controllers
             }
         }
 
+        [HttpGet("BuyOrderHistory")]
+
+        public IActionResult GetBuyOrderHistoryByCustomer(int p_userID)
+        {
+            try
+            {
+                Log.Information("User successfully viewed buy order history");
+                return Ok(_cryptoBL.GetBuyOrderHistoryByCustomer(p_userID));
+            }
+            catch (SqlException)
+            {
+                Log.Warning("User had issue getting buy order history");
+                return NotFound();
+            }
+        }
+
+        [HttpGet("SellOrderHistory")]
+
+        public IActionResult GetSellOrderHistoryByCustomer(int p_userID)
+        {
+            try
+            {
+                Log.Information("User successfully viewed sell order history");
+                return Ok(_cryptoBL.GetSellOrderHistoryByCustomer(p_userID));
+            }
+            catch (SqlException)
+            {
+                Log.Warning("User had issue getting sell order history");
+                return NotFound();
+            }
+        }
+
+        [HttpPut("UpdateName")]
+
+        public IActionResult UpdateName([FromBody] int p_userID, string p_name)
+        {
+            try
+            {
+                Log.Warning("User successfully updated name");
+                return Ok(_cryptoBL.UpdateName(p_userID, p_name));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("User had issue updating name");
+                return Conflict(ex.Message);
+            }
+        }
+
+        [HttpPut("UpdateUsername")]
+
+        public IActionResult UpdateUsername([FromBody] int p_userID, string p_userName)
+        {
+            try
+            {
+                Log.Information("User successfully updated username");
+                return Ok(_cryptoBL.UpdateUsername(p_userID, p_userName));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("User had issue updating username");
+                return Conflict(ex.Message);
+            }
+        }
+
+        [HttpPut("UpdateAge")]
+
+        public IActionResult UpdateAge([FromBody] int p_userID, int p_age)
+        {
+            try
+            {
+                Log.Information("User has successfully updated age");
+                return Ok(_cryptoBL.UpdateAge(p_userID, p_age));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("User had issue updating age");
+                return Conflict(ex.Message);
+            }
+        }
+        
         // DELETE: api/User/5
         [HttpDelete("{id}")]
         public void Delete(int id)

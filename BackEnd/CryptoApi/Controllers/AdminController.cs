@@ -87,22 +87,115 @@ namespace CryptoApi.Controllers
         }
 
         // GET: api/Admin/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("SpecificUser")]
+        public IActionResult GetSpecificUser(int p_userID)
         {
-            return "value";
+            try
+            {
+                Log.Information("Admin successfully got specific user");
+                return Ok(_cryptoBL.GetSpecificUser(p_userID));   
+            }
+            catch (SqlException)
+            {
+                Log.Warning("Admin had issue retrieving specific user");
+                return NotFound();
+            }
         }
 
-        // POST: api/Admin
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpGet("BuyOrderHistory")]
+
+        public IActionResult GetBuyOrderHistoryByCustomer(int p_userID)
         {
+            try
+            {
+                Log.Information("Admin successfully viewed buy order history");
+                return Ok(_cryptoBL.GetBuyOrderHistoryByCustomer(p_userID));
+            }
+            catch (SqlException)
+            {
+                Log.Warning("Admin had issue getting buy order history");
+                return NotFound();
+            }
         }
 
         // PUT: api/Admin/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("BanUser")]
+        public IActionResult BanUser([FromBody] int p_userID)
         {
+            try
+            {
+                Log.Information("Admin successfully banned user");
+                return Ok(_cryptoBL.BanUser(p_userID));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Admin had issue banning user");
+                return Conflict(ex.Message);
+            }
+        }
+
+        [HttpGet("SellOrderHistory")]
+
+        public IActionResult GetSellOrderHistoryByCustomer(int p_userID)
+        {
+            try
+            {
+                Log.Information("Admin successfully viewed sell order history");
+                return Ok(_cryptoBL.GetSellOrderHistoryByCustomer(p_userID));
+            }
+            catch (SqlException)
+            {
+                Log.Warning("Admin had issue getting sell order history");
+                return NotFound();
+            }
+        }
+
+        [HttpPut("UpdateName")]
+
+        public IActionResult UpdateName([FromBody] int p_userID, string p_name)
+        {
+            try
+            {
+                Log.Warning("Admin successfully updated name");
+                return Ok(_cryptoBL.UpdateName(p_userID, p_name));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Admin had issue updating name");
+                return Conflict(ex.Message);
+            }
+        }
+
+        [HttpPut("UpdateUsername")]
+
+        public IActionResult UpdateUsername([FromBody] int p_userID, string p_userName)
+        {
+            try
+            {
+                Log.Information("Admin successfully updated username");
+                return Ok(_cryptoBL.UpdateUsername(p_userID, p_userName));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Admin had issue updating username");
+                return Conflict(ex.Message);
+            }
+        }
+
+        [HttpPut("UpdateAge")]
+
+        public IActionResult UpdateAge([FromBody] int p_userID, int p_age)
+        {
+            try
+            {
+                Log.Information("Admin has successfully updated age");
+                return Ok(_cryptoBL.UpdateAge(p_userID, p_age));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("Admin had issue updating age");
+                return Conflict(ex.Message);
+            }
         }
 
         // DELETE: api/Admin/5
