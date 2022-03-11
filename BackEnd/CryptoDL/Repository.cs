@@ -471,20 +471,48 @@ namespace CryptoDL
            _user = GetSpecificUser(_userID);
            return _user;
         }
-        /*Working on this
-        public CurrentPrice AddPrice()
-        {
-            string QUERY_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo"
-            Uri queryUri = new Uri(QUERY_URL);
+        
 
-            using (WebClient client = new WebClient())
+        public List<CryptoVariables> GetAllPrice()
+        {
+            List<CryptoVariables> userList = new List<CryptoVariables>();
+
+            string SQLQuery = @"select * from CryptoVariables";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
             {
-                 // -------------------------------------------------------------------------
-                 // if using .NET Framework (System.Web.Script.Serialization)
-		
-                JavaScriptSerializer js = new JavaScriptSerializer();
-                dynamic json_data = js.Deserialize(client.DownloadString(queryUri), typeof(object));
+                con.Open();
+
+                SqlCommand command = new SqlCommand(SQLQuery, con);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    userList.Add(new CryptoVariables(){
+                        cryptoName = reader.GetString(0),
+                        currentPrice = reader.GetDecimal(1),
+                        alphaVal = reader.GetDecimal(2),
+                        betaVal = reader.GetDecimal(3),
+                        sandp500Val = reader.GetDecimal(4),
+                        randVal = reader.GetDecimal(5),
+                        calculated = reader.GetFloat(6)
+                    });
+                }
             }
-        }*/
+            return userList;
+        }
+
+        public List<CryptoVariables> GetPredictedPrices()
+        {
+            List<CryptoVariables> userList = GetAllPrice();
+
+               foreach (CryptoVariables item in userList)
+               {
+                   item.currentPrice *= item.randVal;
+               }
+            
+            return userList;
+        }
     }
 }
