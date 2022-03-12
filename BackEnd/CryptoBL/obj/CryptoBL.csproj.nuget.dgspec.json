@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoBL\\CryptoBL.csproj": {}
+    "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoBL\\CryptoBL.csproj": {}
   },
   "projects": {
-    "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoBL\\CryptoBL.csproj": {
+    "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoBL\\CryptoBL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoBL\\CryptoBL.csproj",
+        "projectUniqueName": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoBL\\CryptoBL.csproj",
         "projectName": "CryptoBL",
-        "projectPath": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoBL\\CryptoBL.csproj",
+        "projectPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoBL\\CryptoBL.csproj",
         "packagesPath": "C:\\Users\\bebal\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoBL\\obj\\",
+        "outputPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoBL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\bebal\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,11 +26,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj": {
-                "projectPath": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj"
+              "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj": {
+                "projectPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj"
               },
-              "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {
-                "projectPath": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj"
+              "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj"
               }
             }
           }
@@ -63,14 +63,14 @@
         }
       }
     },
-    "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj": {
+    "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj",
+        "projectUniqueName": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj",
         "projectName": "CryptoDL",
-        "projectPath": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj",
+        "projectPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj",
         "packagesPath": "C:\\Users\\bebal\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\obj\\",
+        "outputPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\bebal\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -85,8 +85,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {
-                "projectPath": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj"
+              "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj"
               }
             }
           }
@@ -125,14 +125,14 @@
         }
       }
     },
-    "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {
+    "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj",
+        "projectUniqueName": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj",
+        "projectPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj",
         "packagesPath": "C:\\Users\\bebal\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\obj\\",
+        "outputPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\bebal\\AppData\\Roaming\\NuGet\\NuGet.Config"

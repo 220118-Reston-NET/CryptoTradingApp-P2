@@ -11,8 +11,14 @@ namespace CryptoBL{
         }
         public Wallet AddUser(AccountUser p_NewUser)
         {
+<<<<<<< HEAD
             _repo.AddUser(p_NewUser);
             return _repo.InitializeWallet(p_NewUser.ID);
+=======
+             _repo.AddUser(p_NewUser);
+            _repo.InitializeWallet(p_NewUser.ID);
+            return p_NewUser;
+>>>>>>> fbf9aa7b20782657570d0090b802921badce26d6
         }
         public Wallet AddtoWallet(decimal p_amount, int p_userID)
         {
