@@ -29,7 +29,7 @@ namespace CryptoApi.Controllers
             try
             {
                 Log.Information("Admin successfully used get all user function");
-                return Ok(_cryptoBL.GetAllUsers);
+                return Ok(_cryptoBL.GetAllUsers());
             }
             catch (SqlException)
             {

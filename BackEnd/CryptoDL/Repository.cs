@@ -103,8 +103,8 @@ namespace CryptoDL
                 SqlCommand command = new SqlCommand("AddUser", con);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                command.Parameters.AddWithValue("@username", _user.username);
-                command.Parameters.AddWithValue("@password", _user._password);
+                command.Parameters.AddWithValue("@userName", _user.username);
+                command.Parameters.AddWithValue("@userPassword", _user._password);
                 command.Parameters.AddWithValue("@name", _user.name);
                 command.Parameters.AddWithValue("@age", _user.age);
                 command.Parameters.AddWithValue("@dateCreated", _user.dateCreated);
@@ -170,7 +170,9 @@ namespace CryptoDL
                     userList.Add(new AccountUser(){
                         ID = reader.GetInt32(0),
                         username = reader.GetString(1),
-                        _password = reader.GetString(2),
+
+                        //_password = reader.GetValue(2),
+                        
                         name = reader.GetString(4),
                         age = reader.GetInt32(5),
                         dateCreated = reader.GetDateTime(6),
@@ -321,7 +323,9 @@ namespace CryptoDL
                     userList.Add(new AccountUser(){
                         ID = reader.GetInt32(0),
                         username = reader.GetString(1),
-                        _password = reader.GetString(2),
+
+                        //_password = (byte [])reader.GetValue(2),
+
                         name = reader.GetString(4),
                         age = reader.GetInt32(5),
                         dateCreated = reader.GetDateTime(6),

@@ -24,19 +24,19 @@ namespace CryptoApi.Controllers
 
         // GET: api/User
         [HttpPost("AddUser")]
-        public IActionResult AddUser(AccountUser p_NewUser)
+        public IActionResult AddUser([FromBody] AccountUser p_NewUser)
         {
-
-            try
-            {
-                Log.Information("Added user successfully");
-                return Ok(_cryptoBL.AddUser(p_NewUser));
-            }
-            catch (SqlException)
-            {
-                Log.Warning("Issue with add user function");
-                return NotFound();
-            }
+            return Ok(_cryptoBL.AddUser(p_NewUser));
+            // try
+            // {
+            //     Log.Information("Added user successfully");
+                
+            // }
+            // catch (SqlException)
+            // {
+            //     Log.Warning("Issue with add user function");
+            //     return NotFound();
+            // }
         }
 
         // GET: api/User/5
