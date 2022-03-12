@@ -1,5 +1,7 @@
 using Model;
 using CryptoDL;
+using System.Data.SqlClient;
+
 namespace CryptoBL{
     public class CryptoClassBL : ICryptoClassBL
     {
@@ -7,30 +9,49 @@ namespace CryptoBL{
         public CryptoClassBL(IRepository p_repo){
             _repo = p_repo;
         }
-        public AccountUser AddUser(AccountUser p_NewUser)
+        public Wallet AddUser(AccountUser p_NewUser)
         {
-            _repo.InitializeWallet(p_NewUser.ID);
-            return _repo.AddUser(p_NewUser);
+            _repo.AddUser(p_NewUser);
+            return _repo.InitializeWallet(p_NewUser.ID);
         }
         public Wallet AddtoWallet(decimal p_amount, int p_userID)
         {
             return _repo.AddtoWallet(p_amount, p_userID);
         }
 
-        // public void Notification(int p_userID)
-        // {
-        //     CurrentPrice _assetPrice = 
-        //     List<Assets> _assetList = _repo.GetAssetsbyCustomer(p_userID);
-        //     foreach (var item in _assetList)
-        //     {
-        //         if(item.stoploss = ){
-                    
-        //         }
-        //         else if(item.takeprofit =){
-
-        //         }
-        //     }
-        // }
+        public Notification Notification(int p_userID)
+        {
+            Notification _setNoti = new Notification(){
+                customerId = -1,
+                cryptoName = "No Name",
+                alertPrice = 0.00m,
+            };
+            List<CryptoVariables> _futures = CryptoFutures();
+            List<Assets> _userasset = ViewAssets(p_userID);
+            foreach (var item in _userasset)
+            {
+                foreach (var item2 in _futures){
+                    if (item.stoploss == item2.currentPrice){
+                        Notification _notification = new Notification(){
+                            cryptoName = item2.cryptoName,
+                            alertPrice = item2.currentPrice,
+                        };
+                        return _notification;   
+                    }
+                    else if (item.takeprofit == item2.currentPrice){
+                        Notification _notification = new Notification(){
+                            cryptoName = item2.cryptoName,
+                            alertPrice = item2.currentPrice,
+                        };
+                        return _notification; 
+                    }
+                    else{
+                        return _setNoti;
+                    }
+                }
+            }
+            return _setNoti;
+        }
 
         public BuyOrderHistory PlaceOrder(Assets p_NewAsset, decimal p_amount, int p_userID, BuyOrderHistory p_order)
         {
@@ -95,6 +116,11 @@ namespace CryptoBL{
         public AccountUser UpdateAge(int p_userID, int p_age)
         {
             return _repo.UpdateAge(p_userID, p_age);
+        }
+
+        public List<CryptoVariables> CryptoFutures()
+        {
+            return _repo.GetPredictedPrices();
         }
     }
 }
