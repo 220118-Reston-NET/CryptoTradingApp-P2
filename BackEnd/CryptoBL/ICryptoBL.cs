@@ -3,7 +3,7 @@ namespace CryptoBL{
     public interface ICryptoClassBL{
         
         public int UserLogin(string p_userName, string p_password);       
-        public Wallet AddUser(AccountUser p_NewUser);
+        public AccountUser AddUser(AccountUser p_NewUser);
         public AccountUser GetSpecificUser(int p_userID);
         public AccountUser BanUser(int p_userID);
         public Wallet AddtoWallet(decimal p_ammount, int p_userID);

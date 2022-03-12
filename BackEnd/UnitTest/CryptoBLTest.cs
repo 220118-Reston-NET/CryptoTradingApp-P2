@@ -39,9 +39,9 @@ public class CryptoBLTest{
         mockRepo.Setup(repo => repo.InitializeWallet(_validID)).Returns(_testWallet);
 
         ICryptoClassBL cryptoBL = new CryptoClassBL(mockRepo.Object);
-        Wallet _actualWallet = cryptoBL.AddUser(_testUser);
+        AccountUser _actualUser = cryptoBL.AddUser(_testUser);
 
-        Assert.Same(_testWallet, _actualWallet);
+        Assert.Same(_testUser, _actualUser);
     }
     [Fact]
     public void AddToWalletValueTest(){
