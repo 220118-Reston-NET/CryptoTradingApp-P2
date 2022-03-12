@@ -119,19 +119,19 @@ public class AccountUserTest
         
     }
 
-    [Fact]
-    public async void byteShouldSetValidData()
-    {
-        //Arrange
-        AccountUser user = new AccountUser();
-        byte[] validPass = { 0, 3, 5, 7, 7, 8};
+    // [Fact]
+    // public async void byteShouldSetValidData()
+    // {
+    //     //Arrange
+    //     AccountUser user = new AccountUser();
+    //     byte[] validPass = { 0, 3, 5, 7, 7, 8};
     
-        //Act
-        user._password = validPass;
+    //     //Act
+    //     user._password = validPass;
     
-        //Assert
-        Assert.NotNull(validPass);
-        Assert.Equal(validPass, user._password);
+    //     //Assert
+    //     Assert.NotNull(validPass);
+    //     Assert.Equal(validPass, user._password);
 
-    }
+    // }
 }
