@@ -30,6 +30,20 @@ body.light-mode {
     color: #2f3542;
 }
 
+.dark-mode .card {
+    background-color: rgba(0,0,0,0) !important;
+    color: rgb(200, 200, 200) !important;
+    border-color: rgb(200, 200, 200) !important;
+}
+.dark-mode .table {
+    background-color: rgba(0,0,0,0) !important;
+    color: rgb(200, 200, 200) !important;
+}
+.dark-mode .form-control {
+    background-color: rgba(0,0,0,0) ! important;
+    color: rgb(200, 200, 200) !important;
+}
+
 section {
     background-position: 50% 50%;
     background-repeat: no-repeat;
@@ -49,6 +63,10 @@ section {
 }
 .navbar .navbar-nav .nav-link {
     color: #323233!important;
+    font-size: 1.5em;
+}
+.dark-mode .navbar .navbar-nav .nav-link {
+    color: rgb(200, 200, 200) !important;
     font-size: 1.5em;
 }
 .navbar .navbar-nav .nav-link:hover{
@@ -80,6 +98,12 @@ section {
 .cryptoRed {
     color: rgb(182, 0, 0) !important;
 }
+.dark-mode .cryptoGreen {
+    color: rgb(0, 203, 0) !important;
+}
+.dark-mode .cryptoRed {
+    color: rgb(229, 0, 0) !important;
+}
 
 /* Crypto page */
 .sell {
@@ -97,6 +121,22 @@ section {
 .buy:hover {
     background-color: rgb(0, 110, 73) !important;
     border-color: rgb(0, 110, 73) !important;
+}
+.dark-mode .buy {
+    background-color: rgb(0, 203, 0) !important;
+    border-color: rgb(0, 203, 0) !important;
+}
+.dark-mode .sell {
+    background-color: rgb(229, 0, 0) !important;
+    border-color: rgb(229, 0, 0) !important;
+}
+.dark-mode .buy:hover {
+    background-color: rgb(0, 146, 0) !important;
+    border-color: rgb(0, 146, 0) !important;
+}
+.dark-mode .sell:hover {
+    background-color: rgb(163, 0, 0) !important;
+    border-color: rgb(163, 0, 0) !important;
 }
 .cryptoTable {
     font-size: 32px;

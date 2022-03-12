@@ -39,6 +39,7 @@ export class CryptoComponent implements OnInit {
 
   constructor(private router:ActivatedRoute, private service:CryptoService) {
     this.coin = {
+      id: '',
       image: '',
       name: '',
       current_price: 0,
@@ -66,6 +67,101 @@ export class CryptoComponent implements OnInit {
     };
   }
 
+  loadMinuteChart() {
+    this.cryptoName = this.router.snapshot.paramMap.get("cryptoname");
+
+    this.service.loadMinuteChart(this.cryptoName).subscribe((res) => {
+      this.graph = res;
+
+      var time = this.graph.prices.map(x => x[0]);
+      var date: string[] = [];
+      time.forEach(function(t) {
+          var read = new Date(t).toLocaleString();
+          date.push(read);
+      });
+
+      this.lineChartData = {
+        datasets: [
+          {
+            data: this.graph.prices,
+            label: this.coin.name,
+            backgroundColor: 'rgba(148,159,177,0.2)',
+            borderColor: 'rgba(148,159,177,1)',
+            pointBackgroundColor: 'rgba(148,159,177,1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+            fill: 'origin',
+          }
+        ],
+        labels: date
+      };
+    },
+    (err) => console.log(err));
+  }
+
+  loadHourlyChart() {
+    this.service.loadHourlyChart(this.cryptoName).subscribe((res) => {
+      this.graph = res;
+
+      var time = this.graph.prices.map(x => x[0]);
+      var date: string[] = [];
+      time.forEach(function(t) {
+          var read = new Date(t).toLocaleString();
+          date.push(read);
+      });
+
+      this.lineChartData = {
+        datasets: [
+          {
+            data: this.graph.prices,
+            label: this.coin.name,
+            backgroundColor: 'rgba(148,159,177,0.2)',
+            borderColor: 'rgba(148,159,177,1)',
+            pointBackgroundColor: 'rgba(148,159,177,1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+            fill: 'origin',
+          }
+        ],
+        labels: date
+      };
+    },
+    (err) => console.log(err));
+  }
+
+  loadDailyChart() {
+    this.service.loadDailyChart(this.cryptoName).subscribe((res) => {
+      this.graph = res;
+
+      var time = this.graph.prices.map(x => x[0]);
+      var date: string[] = [];
+      time.forEach(function(t) {
+          var read = new Date(t).toLocaleDateString();
+          date.push(read);
+      });
+
+      this.lineChartData = {
+        datasets: [
+          {
+            data: this.graph.prices,
+            label: this.coin.name,
+            backgroundColor: 'rgba(148,159,177,0.2)',
+            borderColor: 'rgba(148,159,177,1)',
+            pointBackgroundColor: 'rgba(148,159,177,1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+            fill: 'origin',
+          }
+        ],
+        labels: date
+      };
+    },
+    (err) => console.log(err));
+  }
+
   convertDecimal(num:number) {
     return Math.round(num * 100) / 100;
   }
@@ -76,14 +172,14 @@ export class CryptoComponent implements OnInit {
       this.coin = res[0];
     },
     (err) => console.log(err));
-    
-    this.service.loadChart(this.cryptoName).subscribe((res) => {
+
+    this.service.loadMinuteChart(this.cryptoName).subscribe((res) => {
       this.graph = res;
 
       var time = this.graph.prices.map(x => x[0]);
       var date: string[] = [];
       time.forEach(function(t) {
-          var read = new Date(t).toLocaleDateString();
+          var read = new Date(t).toLocaleString();
           date.push(read);
       });
 

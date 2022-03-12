@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { TokenStorageService } from '../services/token-storage.service';
+
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -8,9 +10,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AccountComponent implements OnInit {
 
-  constructor(private router:ActivatedRoute) { }
+  currentUser: any;
+
+  constructor(private router:ActivatedRoute, private token: TokenStorageService) {}
 
   ngOnInit(): void {
+    this.currentUser = this.token.getUser();
   }
 
 }

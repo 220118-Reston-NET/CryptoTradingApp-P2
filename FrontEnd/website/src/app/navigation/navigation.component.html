@@ -12,17 +12,28 @@
             <li class="nav-item">
                 <a class="nav-link" href="./notifications.html"><i class="fa-solid fa-bell"></i></a>
             </li>
+            <li class="nav-item" *ngIf="showAdminBoard">
+              <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+            </li>
         </ul>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+          <li class="nav-item">
+            <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a href="/login" class="nav-link" routerLink="login">Login</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav" *ngIf="isLoggedIn">
             <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png" width="40" height="40" class="rounded-circle">
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item">Porfolio Value: </a>
               <a class="dropdown-item" href="#">View Positions</a>
               <a class="dropdown-item" href="#">Edit Profile</a>
-              <a class="dropdown-item" href="#">Log Out</a>
+              <a class="dropdown-item" (click)="logout()">Log Out</a>
             </div>
           </li>   
         </ul>
