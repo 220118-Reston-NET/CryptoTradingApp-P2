@@ -170,7 +170,9 @@ namespace CryptoDL
                     userList.Add(new AccountUser(){
                         ID = reader.GetInt32(0),
                         username = reader.GetString(1),
+
                         //_password = reader.GetValue(2),
+                        
                         name = reader.GetString(4),
                         age = reader.GetInt32(5),
                         dateCreated = reader.GetDateTime(6),
@@ -321,7 +323,9 @@ namespace CryptoDL
                     userList.Add(new AccountUser(){
                         ID = reader.GetInt32(0),
                         username = reader.GetString(1),
+
                         //_password = (byte [])reader.GetValue(2),
+
                         name = reader.GetString(4),
                         age = reader.GetInt32(5),
                         dateCreated = reader.GetDateTime(6),
@@ -509,7 +513,8 @@ namespace CryptoDL
 
                foreach (CryptoVariables item in userList)
                {
-                   item.currentPrice *= item.randVal;
+                   item.currentPrice = (item.alphaVal+item.betaVal)*item.sandp500Val*(decimal)item.calculated;
+
                }
             
             return userList;
