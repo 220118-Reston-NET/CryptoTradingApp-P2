@@ -96,6 +96,7 @@ namespace CryptoDL
 
         public AccountUser AddUser(AccountUser _user)
         {
+            Wallet _wallet = new Wallet();
             using(SqlConnection con = new SqlConnection(_connectionStrings))
             {
                 con.Open();
@@ -110,8 +111,42 @@ namespace CryptoDL
                 command.Parameters.AddWithValue("@dateCreated", _user.dateCreated);
 
                 command.ExecuteNonQuery();
+                 
             }
+            //wallet initialize part
+            List<AccountUser> list = GetAllUsers();
+            _user.ID = list[list.Count - 1].ID;
+            string SQLQuery = @"insert into Wallet values(@customerId, 0)";
+             using(SqlConnection con = new SqlConnection(_connectionStrings))
+           {
+               con.Open();
+
+               SqlCommand command = new SqlCommand(SQLQuery, con);
+               command.Parameters.AddWithValue("@customerId", _user.ID);
+
+               command.ExecuteNonQuery();
+           }
+
             return _user;
+        }
+
+         public Wallet InitializeWallet(int _userId)
+        {
+            Wallet _wallet = new Wallet();
+            string SQLQuery = @"insert into Wallet values(@customerId, 0)";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+           {
+               con.Open();
+
+               SqlCommand command = new SqlCommand(SQLQuery, con);
+               command.Parameters.AddWithValue("@customerId", _userId);
+
+               command.ExecuteNonQuery();
+           } 
+
+           _wallet = SelectWalletbyCustomer(_userId);
+           return _wallet;
         }
 
         public Assets BuyCrypto(Assets _asset)
@@ -338,24 +373,7 @@ namespace CryptoDL
             return userList[0];
         }
 
-        public Wallet InitializeWallet(int _userId)
-        {
-            Wallet _wallet = new Wallet();
-            string SQLQuery = @"insert into Wallet values(@customerId, 0)";
-
-            using(SqlConnection con = new SqlConnection(_connectionStrings))
-           {
-               con.Open();
-
-               SqlCommand command = new SqlCommand(SQLQuery, con);
-               command.Parameters.AddWithValue("@customerId", _userId);
-
-               command.ExecuteNonQuery();
-           } 
-
-           _wallet = SelectWalletbyCustomer(_userId);
-           return _wallet;
-        }
+       
 
         public List<BuyOrderHistory> GetBuyOrderHistoryByCustomer(int _userID)
         {
