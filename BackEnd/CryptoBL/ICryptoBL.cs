@@ -12,7 +12,7 @@ namespace CryptoBL{
         /*
         This functionality will notify the user when a commodity has passed the user set stop-loss or take-profit threshold.
         */
-        //public void Notification(int p_userID);
+        public Notification Notification(int p_userID);
         public BuyOrderHistory PlaceOrder(Assets p_NewAsset, decimal p_amount, int p_userID, BuyOrderHistory p_order);
         public SellOrderHistory SellOrder(decimal p_amount, string p_CryptoName, int p_userID, SellOrderHistory p_SellOrder);
         public List<Assets> ViewAssets(int p_userID);
@@ -22,5 +22,6 @@ namespace CryptoBL{
         public AccountUser UpdateUsername (int p_userID, string p_userName);
         public AccountUser UpdateName (int p_userID, string p_name);
         public AccountUser UpdateAge (int p_userID, int p_age);
+        public List<CryptoVariables> CryptoFutures ();
     }
 }
