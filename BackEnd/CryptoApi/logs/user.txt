@@ -22,3 +22,6 @@
 2022-03-11 16:39:27.982 -05:00 [INF] Admin successfully used get all user function
 2022-03-11 16:40:07.083 -05:00 [INF] Admin has successfully added user
 2022-03-11 16:40:07.178 -05:00 [WRN] Admin had issue adding user
+2022-03-13 12:55:50.318 -07:00 [INF] Admin successfully used get all user function
+2022-03-13 12:58:35.652 -07:00 [INF] Admin successfully used get all user function
+2022-03-13 13:02:03.094 -07:00 [INF] Admin successfully used get all user function
