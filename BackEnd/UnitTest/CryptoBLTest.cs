@@ -20,6 +20,11 @@ public class CryptoBLTest{
         DateTime _validDateTime = new DateTime(2022,3,8);
         int _validIsBanned = 0;
         int _validIsAdmin = 1;
+        decimal _validAmount = 1.00m;
+        Wallet _testWallet = new Wallet(){
+            customerId = _validID,
+            cash = _validAmount,
+        };
         AccountUser _testUser = new AccountUser(){
             ID = _validID,
             username = _validUserName,
@@ -31,12 +36,12 @@ public class CryptoBLTest{
         };
 
         Mock<IRepository> mockRepo = new Mock<IRepository>();
-        mockRepo.Setup(repo => repo.AddUser(_testUser)).Returns(_testUser);
+        mockRepo.Setup(repo => repo.InitializeWallet(_validID)).Returns(_testWallet);
 
         ICryptoClassBL cryptoBL = new CryptoClassBL(mockRepo.Object);
-        AccountUser actualUser = cryptoBL.AddUser(_testUser);
+        AccountUser _actualUser = cryptoBL.AddUser(_testUser);
 
-        Assert.Same(_testUser, actualUser);
+        Assert.Same(_testUser, _actualUser);
     }
     [Fact]
     public void AddToWalletValueTest(){
@@ -53,10 +58,7 @@ public class CryptoBLTest{
 
         Assert.Same(_testWallet, actualWallet);
     }
-    [Fact]
-    public void NotificationValueTest(){
 
-    }
     [Fact]
     public void PlaceOrderValueTest(){
         int _validCustomerID = 1;
