@@ -40,3 +40,5 @@
 2022-03-12 18:46:12.673 -05:00 [INF] Token generated
 2022-03-12 18:47:05.182 -05:00 [INF] Token generated
 2022-03-12 18:47:18.682 -05:00 [INF] Admin successfully used get all user function
+2022-03-13 11:47:29.674 -04:00 [INF] Token generated
+2022-03-13 11:47:29.679 -04:00 [INF] User has logged in successfully

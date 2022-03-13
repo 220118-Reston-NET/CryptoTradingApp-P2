@@ -57,6 +57,11 @@ section {
     margin: auto;
 }
 
+.alert-danger {
+    color: rgb(185, 51, 51) !important;
+    background-color: rgba(0,0,0,0) !important;
+}
+
 /* Navigation bar section */
 .navbar {
     border-bottom: 1px solid rgb(151,151,151);
@@ -85,6 +90,10 @@ section {
 }
 .navbar .nav-item img {
     width: 50%;
+}
+.dark-mode .navbar-toggler {
+    color: rgb(200, 200, 200) !important;
+    border-color: rgb(200, 200, 200) !important;
 }
 
 /* Landing page */
