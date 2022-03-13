@@ -118,10 +118,13 @@ namespace CryptoBL{
         {
             return _repo.UpdateAge(p_userID, p_age);
         }
+<<<<<<< HEAD
+=======
 
         public List<CryptoVariables> CryptoFutures()
         {
             return _repo.GetPredictedPrices();
         }
+>>>>>>> cf160cd1c4b3ac50cafc189d5f401a5221d4838e
     }
 }

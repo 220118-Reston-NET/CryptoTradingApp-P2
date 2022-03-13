@@ -1,0 +1,135 @@
+<!-- Signup form-->
+<section class="ml-1">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                <form name="registration" class="mx-1 mx-md-4"
+                      (ngSubmit)="onSubmit()"
+                      [formGroup]="signup"
+                      >
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fa-regular fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text"
+                      class="form-control"
+                      name="fullname"
+                      formControlName="fullname"
+                      [ngClass]="{ 'is-invalid': submitted && f['fullname'].errors }"/>
+                      <label class="form-label" for="fullname">Your Name</label>
+                      <div class="alert-danger" *ngIf="submitted && f['fullname'].errors">
+                        <div *ngIf="f['fullname'].errors['required']">Name is required</div>
+                        <div *ngIf="f['fullname'].errors['minlength']">
+                          Name must be at least 2 characters
+                        </div>
+                        <div *ngIf="f['fullname'].errors['maxlength']">
+                          Name must be at most 50 characters
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text"
+                      class="form-control"
+                      name="username"
+                      formControlName="username"
+                      [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"/>
+                      <label class="form-label" for="username">Your Username</label>
+                      <div class="alert-danger" *ngIf="submitted && f['username'].errors">
+                        <div *ngIf="f['username'].errors['required']">Username is required</div>
+                        <div *ngIf="f['username'].errors['minlength']">
+                          Username must be at least 3 characters
+                        </div>
+                        <div *ngIf="f['username'].errors['maxlength']">
+                          Username must be at most 20 characters
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fa-solid fa-file fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="number" 
+                      class="form-control signup"
+                      name="age"
+                      formControlName="age"
+                      [ngClass]="{ 'is-invalid': submitted && f['age'].errors }"
+                      />
+                      <label class="form-label" for="age">Your Age</label>
+                      <div class="alert-danger" *ngIf="submitted && f['age'].errors">
+                        <div *ngIf="f['age'].errors['required']">Age is required</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password"
+                      class="form-control"
+                      name="password"
+                      formControlName="password"
+                      [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+                      />
+                      <label class="form-label" for="password">Password</label>
+                      <div class="alert-danger" *ngIf="submitted && f['password'].errors">
+                        <div *ngIf="f['password'].errors['required']">Password is required</div>
+                        <div *ngIf="f['password'].errors['minlength']">
+                          Password must be at least 6 characters
+                        </div>
+                        <div *ngIf="f['password'].errors['maxlength']">
+                          Password must not exceed 40 characters
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password"
+                      class="form-control"
+                      name="repassword"
+                      formControlName="confirmPassword"
+                      [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+                      />
+                      <label class="form-label" for="repassword">Repeat your password</label>
+                      <div class="alert-danger" *ngIf="submitted && f['confirmPassword'].errors">
+                        <div *ngIf="f['confirmPassword'].errors['required']">Repeat your password is required</div>
+                        <div *ngIf="f['confirmPassword'].errors['matching']">
+                          The two passwords do not match
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button class="btn btn-primary btn-lg">Register</button>
+                  </div>
+                  <div class="alert alert-warning" *ngIf="isSignUpFailed">
+                    Signup failed!{{ errorMessage }}
+                  </div>
+                </form>
+                <div class="alert alert-success" *ngIf="isSuccessful">
+                  Your registration is successful!
+                </div>
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex order-1 order-lg-2 justify-content-center">
+                <img src="../assets/images/signup.png" class="img-fluid" alt="Signup image" style="width: 75%;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

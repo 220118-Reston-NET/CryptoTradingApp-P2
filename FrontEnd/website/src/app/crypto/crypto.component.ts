@@ -1,37 +1,165 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { GraphCoin } from '../models/graph.model';
+import { MarketCoin } from '../models/marketcoin.model';
+import { CryptoService } from '../services/crypto.service';
 
-interface MarketCoin {
-  image?: string;
-  name?: string;
-  current_prirce?: number;
-  price_change_24h?: number;
-  price_change_percentage_24h?: number;
-}
+import { ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 
 @Component({
   selector: 'app-crypto',
   templateUrl: './crypto.component.html',
-  styleUrls: ['./crypto.component.css']
+  styleUrls: ['./crypto.component.css'],
 })
 export class CryptoComponent implements OnInit {
 
   cryptoName:string | null = "No Crypto Selected";
-  coin:MarketCoin;
+  coin: MarketCoin;
+  graph: GraphCoin;
 
-  constructor(private router:ActivatedRoute, private http: HttpClient) {
+  public lineChartData: ChartConfiguration['data'];
+
+  public lineChartOptions: ChartConfiguration['options'] = {
+    elements: {
+      line: {
+        tension: 0.5
+      }
+    },
+    scales: {
+      // We use this empty structure as a placeholder for dynamic theming.
+      x: {},
+      'y-axis-0':
+        {
+          position: 'left',
+        }
+    }
+  };
+
+  public lineChartType: ChartType = 'line';
+
+  constructor(private router:ActivatedRoute, private service:CryptoService) {
     this.coin = {
-
+      id: '',
+      image: '',
+      name: '',
+      current_price: 0,
+      price_change_24h: 0,
+      price_change_percentage_24h: 0
+    };
+    this.graph = {
+      prices: []
+    };
+    this.lineChartData = {
+      datasets: [
+        {
+          data: [ 65, 59, 80, 81, 56, 55, 40 ],
+          label: 'Series A',
+          backgroundColor: 'rgba(148,159,177,0.2)',
+          borderColor: 'rgba(148,159,177,1)',
+          pointBackgroundColor: 'rgba(148,159,177,1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+          fill: 'origin',
+        }
+      ],
+      labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July' ]
     };
   }
 
-  getCoinByName(cryptoName:string|null) : Observable<MarketCoin>
-  {
-    let cryptoNameString:string = <string>cryptoName;
-    cryptoNameString = cryptoNameString.toLowerCase();
-    return this.http.get<MarketCoin>('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${cryptoNameString}&order=market_cap_desc&per_page=100&page=1&sparkline=false');
+  loadMinuteChart() {
+    this.cryptoName = this.router.snapshot.paramMap.get("cryptoname");
+
+    this.service.loadMinuteChart(this.cryptoName).subscribe((res) => {
+      this.graph = res;
+
+      var time = this.graph.prices.map(x => x[0]);
+      var date: string[] = [];
+      time.forEach(function(t) {
+          var read = new Date(t).toLocaleString();
+          date.push(read);
+      });
+
+      this.lineChartData = {
+        datasets: [
+          {
+            data: this.graph.prices,
+            label: this.coin.name,
+            backgroundColor: 'rgba(148,159,177,0.2)',
+            borderColor: 'rgba(148,159,177,1)',
+            pointBackgroundColor: 'rgba(148,159,177,1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+            fill: 'origin',
+          }
+        ],
+        labels: date
+      };
+    },
+    (err) => console.log(err));
+  }
+
+  loadHourlyChart() {
+    this.service.loadHourlyChart(this.cryptoName).subscribe((res) => {
+      this.graph = res;
+
+      var time = this.graph.prices.map(x => x[0]);
+      var date: string[] = [];
+      time.forEach(function(t) {
+          var read = new Date(t).toLocaleString();
+          date.push(read);
+      });
+
+      this.lineChartData = {
+        datasets: [
+          {
+            data: this.graph.prices,
+            label: this.coin.name,
+            backgroundColor: 'rgba(148,159,177,0.2)',
+            borderColor: 'rgba(148,159,177,1)',
+            pointBackgroundColor: 'rgba(148,159,177,1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+            fill: 'origin',
+          }
+        ],
+        labels: date
+      };
+    },
+    (err) => console.log(err));
+  }
+
+  loadDailyChart() {
+    this.service.loadDailyChart(this.cryptoName).subscribe((res) => {
+      this.graph = res;
+
+      var time = this.graph.prices.map(x => x[0]);
+      var date: string[] = [];
+      time.forEach(function(t) {
+          var read = new Date(t).toLocaleDateString();
+          date.push(read);
+      });
+
+      this.lineChartData = {
+        datasets: [
+          {
+            data: this.graph.prices,
+            label: this.coin.name,
+            backgroundColor: 'rgba(148,159,177,0.2)',
+            borderColor: 'rgba(148,159,177,1)',
+            pointBackgroundColor: 'rgba(148,159,177,1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+            fill: 'origin',
+          }
+        ],
+        labels: date
+      };
+    },
+    (err) => console.log(err));
   }
 
   convertDecimal(num:number) {
@@ -40,9 +168,38 @@ export class CryptoComponent implements OnInit {
 
   ngOnInit(): void {
     this.cryptoName = this.router.snapshot.paramMap.get("cryptoname");
-    this.getCoinByName(this.cryptoName).subscribe(result => {
-      this.coin = result;
-    });
-  }
+    this.service.getCoinByName(this.cryptoName).subscribe((res) => {
+      this.coin = res[0];
+    },
+    (err) => console.log(err));
 
+    this.service.loadMinuteChart(this.cryptoName).subscribe((res) => {
+      this.graph = res;
+
+      var time = this.graph.prices.map(x => x[0]);
+      var date: string[] = [];
+      time.forEach(function(t) {
+          var read = new Date(t).toLocaleString();
+          date.push(read);
+      });
+
+      this.lineChartData = {
+        datasets: [
+          {
+            data: this.graph.prices,
+            label: this.coin.name,
+            backgroundColor: 'rgba(148,159,177,0.2)',
+            borderColor: 'rgba(148,159,177,1)',
+            pointBackgroundColor: 'rgba(148,159,177,1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+            fill: 'origin',
+          }
+        ],
+        labels: date
+      };
+    },
+    (err) => console.log(err));
+  }
 }

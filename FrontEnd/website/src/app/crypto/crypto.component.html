@@ -6,18 +6,30 @@
                     <div class="row justify-content-center">
                         <div class="col-12 mx-auto">
                             <table class="table table-borderless cryptoTable">
-                                <tbody id="crypto">
-                                    <tr *ngFor="let c = coin; let i = index" [routerLink]="['/crypto', coin.name]">
-                                        <td><img [src]="c.image" alt="{{ coin.name }}" class="cryptologo"/></td>
+                                <tbody>
+                                    <tr>
+                                        <td><img [src]="coin.image" class="cryptologo"/></td>
                                         <td>{{coin.name}}</td>
-                                        <td class="text-uppercase">{{c.symbol}}</td>
-                                        <td>{{c.current_price.toLocaleString()}}</td>
-                                        <td [ngClass]="c.price_change_percentage_24h > 0 ? 'cryptoGreen' : 'cryptoRed'">{{c.price_change_24h > 0 ? '+' : ''}}{{c.price_change_24h.toLocaleString()}}</td>
-                                        <td [ngClass]="c.price_change_percentage_24h > 0 ? 'cryptoGreen' : 'cryptoRed'">{{c.price_change_percentage_24h > 0 ? '+' : ''}}{{convertDecimal(c.price_change_percentage_24h)}}%</td>
-                                      </tr>
+                                        <td>{{coin.current_price.toLocaleString()}}</td>
+                                        <td [ngClass]="coin.price_change_percentage_24h > 0 ? 'cryptoGreen' : 'cryptoRed'">{{coin.price_change_24h > 0 ? '+' : ''}}{{coin.price_change_24h.toLocaleString()}}</td>
+                                        <td [ngClass]="coin.price_change_percentage_24h > 0 ? 'cryptoGreen' : 'cryptoRed'">{{coin.price_change_percentage_24h > 0 ? '+' : ''}}{{convertDecimal(coin.price_change_percentage_24h)}}%</td>
+                                    </tr>
                                 </tbody>
                             </table>
-                            <canvas id="chart"></canvas>
+                            <div class="flex">
+                                <div class="flex-item">
+                                  <div style="display: block;">
+                                    <canvas baseChart class="chart" width="400" height="400"
+                                              [data]="lineChartData"
+                                              [options]="lineChartOptions"
+                                              [type]="lineChartType">
+                                    </canvas>
+                                  </div>
+                                </div>
+                            </div>
+                            <button type="button" (click)="loadMinuteChart()" class="btn btn-primary btn-lg me-2">5 Minute</button>
+                            <button type="button" (click)="loadHourlyChart()" class="btn btn-primary btn-lg me-2">1 Hour</button>
+                            <button type="button" (click)="loadDailyChart()" class="btn btn-primary btn-lg me-2">Daily</button>
                         </div>
                     </div>
                 </div>
@@ -29,8 +41,8 @@
                     <div class="row justify-content-center">
                         <div class="col-12 col-lg-10 col-xl-8 mx-auto">
                             <div class="d-grid gap-2">
-                                <button onclick="submitRegistration()" type="button" class="btn btn-primary btn-lg buy">Buy Market</button>
-                                <button onclick="submitRegistration()" type="button" class="btn btn-primary btn-lg sell">Sell Market</button>
+                                <button type="button" class="btn btn-primary btn-lg buy">Buy Market</button>
+                                <button type="button" class="btn btn-primary btn-lg sell">Sell Market</button>
                             </div>
                             <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4">Quantity</p>
                             <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4">Equity</p>
