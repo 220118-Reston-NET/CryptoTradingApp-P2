@@ -8,6 +8,21 @@ namespace UnitTest;
 public class NotificationTest
 {
     [Fact]
+    public void customerIdShouldSetValidData()
+    {
+        //Arrange
+        Notification noti = new Notification();
+        int validID = 3;
+    
+        //Act
+        noti.customerId = validID;
+    
+        //Assert
+        Assert.NotNull(noti.customerId);
+        Assert.Equal(validID, noti.customerId);
+    }
+
+    [Fact]
     public void cryptoNameShouldSetValidData()
     {
         //Arrange

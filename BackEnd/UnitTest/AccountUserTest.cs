@@ -1,3 +1,4 @@
+using System;
 using Model;
 using Xunit;
 
@@ -7,6 +8,21 @@ namespace UnitTest;
 
 public class AccountUserTest
 {
+    [Fact]
+    public void IdShouldSetValidData()
+    {
+        //Arrange 
+        AccountUser user = new AccountUser();
+        int validID = 1;
+    
+        //Act
+        user.ID = validID;
+    
+        //Assert
+        Assert.NotNull(user.ID);
+        Assert.Equal(validID, user.ID);
+    }
+
     [Fact]
     public void UserNameShouldSetValidData()
     {
@@ -87,27 +103,35 @@ public class AccountUserTest
 
     }
 
-    //Need Unit Test for DateTime dateCreated
+    [Fact]
+    public void dateCreatedShouldSetValidData()
+    {
+        //Arrange
+        AccountUser user = new AccountUser();
+        DateTime date = new DateTime(2022, 8, 3);
+    
+        //Act
+        user.dateCreated = date;
+    
+        //Assert
+        Assert.NotNull(date);
+        Assert.Equal(date, user.dateCreated);
+        
+    }
 
     // [Fact]
-    // public void TestName()
+    // public async void byteShouldSetValidData()
     // {
-    //     // Given
+    //     //Arrange
+    //     AccountUser user = new AccountUser();
+    //     byte[] validPass = { 0, 3, 5, 7, 7, 8};
     
-    //     // When
+    //     //Act
+    //     user._password = validPass;
     
-    //     // Then
-    // }
+    //     //Assert
+    //     Assert.NotNull(validPass);
+    //     Assert.Equal(validPass, user._password);
 
-    //Need Unit Test for byte _password
-
-    // [Fact]
-    // public void TestName()
-    // {
-    //     // Given
-    
-    //     // When
-    
-    //     // Then
     // }
 }

@@ -9,7 +9,7 @@ namespace Model
         public DateTime dateCreated { get; set; }
         public int isBanned { get; set; }
         public int isAdmin { get; set; }
-        private byte[] _password;
+        public string _password { get; set; }
         
     }
 }
