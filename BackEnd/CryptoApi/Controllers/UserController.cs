@@ -8,6 +8,10 @@ using CryptoBL;
 using System.Data.SqlClient;
 using Model;
 using Serilog;
+using Microsoft.AspNetCore.Authorization;
+using Dapper;
+using System.Data;
+using CryptoAPI;
 
 namespace CryptoApi.Controllers
 {
@@ -16,14 +20,42 @@ namespace CryptoApi.Controllers
     public class UserController : ControllerBase
     {
 
+        private readonly IJWTAuthManager _authentication;
         private ICryptoClassBL _cryptoBL;
-        public UserController(ICryptoClassBL p_cryptoBL)
+        public UserController(ICryptoClassBL p_cryptoBL, IJWTAuthManager authentication)
         {
             _cryptoBL = p_cryptoBL;
+            this._authentication = authentication;
+        }
+
+        [HttpPost("Login")]
+        [AllowAnonymous]
+        public IActionResult Login([FromBody]LoginModel user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Parameter is missing");
+            }
+        
+            DynamicParameters dp_param = new DynamicParameters();
+            dp_param.Add("userName", user.username, DbType.String);
+            dp_param.Add("userPassword", user.password, DbType.String);
+            dp_param.Add("retVal", DbType.String, direction: ParameterDirection.Output);
+            var result = _authentication.Execute_Command<AccountUser>("UserLogin",dp_param);
+            if (result.code == 200)
+            {
+                var token = _authentication.GenerateJWT(result.Data);
+                Log.Information(token.message);
+                Log.Information("User has logged in successfully");
+                return Ok(token);
+            }
+            Log.Warning(result.message);
+            return NotFound(result.Data);
         }
 
         // GET: api/User
         [HttpPost("AddUser")]
+        [AllowAnonymous]
         public IActionResult AddUser([FromBody] AccountUser p_NewUser)
         {
             return Ok(_cryptoBL.AddUser(p_NewUser));
@@ -41,6 +73,7 @@ namespace CryptoApi.Controllers
 
         // GET: api/User/5
         [HttpPost("PlaceOrder")]
+        [Authorize(Roles = "0,1")]
         public IActionResult PlaceOrder([FromBody] Tuple<Assets, BuyOrderHistory> p_tuple, decimal p_amount, int p_userID)
         {
             try
@@ -57,6 +90,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPost("SellOrder")]
+        [Authorize(Roles = "0,1")]
 
         public IActionResult SellOrder(decimal p_amount, string p_CryptoName, int p_userID, SellOrderHistory p_SellOrder)
         {
@@ -72,25 +106,9 @@ namespace CryptoApi.Controllers
             }
         }
 
-        // POST: api/User
-        [HttpPost("Login")]
-        public IActionResult UserLogin([FromBody] string p_userName, string p_password)
-        {
-            //Need Validation for if incorrect username is put in 
-            try
-            {
-                Log.Information("User has logged in successfully");
-                return Ok(_cryptoBL.UserLogin(p_userName, p_password));
-            }
-            catch (System.Exception)
-            {
-                Log.Warning("User had issue logging in");
-                return NotFound();
-            }
-        }
-
         // PUT: api/User/5
         [HttpPost("AddToWallet")]
+        [Authorize(Roles = "0,1")]
         public IActionResult AddtoWallet(decimal p_amount, int p_userID)
         {
             //Possibly have validation for this step
@@ -107,6 +125,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpGet("ViewWallet")]
+        [Authorize(Roles = "0,1")]
 
         public IActionResult ViewWallet(int p_userID)
         {
@@ -123,6 +142,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpGet("ViewAssets")]
+        [Authorize(Roles = "0,1")]
 
         public IActionResult ViewAssets(int p_userID)
         {
@@ -139,6 +159,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpGet("BuyOrderHistory")]
+        [Authorize(Roles = "0,1")]
 
         public IActionResult GetBuyOrderHistoryByCustomer(int p_userID)
         {
@@ -155,6 +176,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpGet("SellOrderHistory")]
+        [Authorize(Roles = "0,1")]
 
         public IActionResult GetSellOrderHistoryByCustomer(int p_userID)
         {
@@ -171,6 +193,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPut("UpdateName")]
+        [Authorize(Roles = "0,1")]
 
         public IActionResult UpdateName([FromBody] int p_userID, string p_name)
         {
@@ -187,6 +210,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPut("UpdateUsername")]
+        [Authorize(Roles = "0,1")]
 
         public IActionResult UpdateUsername([FromBody] int p_userID, string p_userName)
         {
@@ -203,6 +227,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPut("UpdateAge")]
+        [Authorize(Roles = "0,1")]
 
         public IActionResult UpdateAge([FromBody] int p_userID, int p_age)
         {
@@ -220,6 +245,7 @@ namespace CryptoApi.Controllers
         
         // DELETE: api/User/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "0,1")]
         public void Delete(int id)
         {
         }
