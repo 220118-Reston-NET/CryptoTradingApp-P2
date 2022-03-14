@@ -21,9 +21,10 @@ namespace CryptoApi.Controllers
 
         // POST: api/User
         [HttpPost("Login")]
-        public IActionResult UserLogin([FromBody] string p_userName, string p_password)
+        public IActionResult UserLogin(string p_userName, string p_password)
         {
             //Need Validation for if incorrect username is put in 
+    
             try
             {
                 Log.Information("User has logged in successfully");
