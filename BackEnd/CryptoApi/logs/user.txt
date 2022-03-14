@@ -46,3 +46,46 @@
 2022-03-13 20:31:28.925 -04:00 [INF] User has logged in successfully
 2022-03-13 20:31:37.193 -04:00 [WRN] Success
 2022-03-14 12:23:30.660 -04:00 [INF] Admin successfully used get all user function
+2022-03-14 12:47:20.014 -04:00 [INF] Admin successfully used get all user function
+2022-03-14 12:50:06.672 -04:00 [INF] User has logged in successfully
+2022-03-14 12:50:06.734 -04:00 [WRN] User had issue logging in
+2022-03-14 12:51:53.987 -04:00 [INF] User has logged in successfully
+2022-03-14 12:51:54.765 -04:00 [WRN] User had issue logging in
+2022-03-14 12:52:19.373 -04:00 [INF] User has logged in successfully
+2022-03-14 12:52:19.432 -04:00 [WRN] User had issue logging in
+2022-03-14 12:52:28.782 -04:00 [INF] User has logged in successfully
+2022-03-14 12:52:28.832 -04:00 [WRN] User had issue logging in
+2022-03-14 12:52:34.423 -04:00 [INF] Admin successfully used get all user function
+2022-03-14 12:53:11.766 -04:00 [INF] User has logged in successfully
+2022-03-14 12:53:11.825 -04:00 [WRN] User had issue logging in
+2022-03-14 12:58:32.086 -04:00 [INF] User has logged in successfully
+2022-03-14 12:58:32.136 -04:00 [WRN] User had issue logging in
+2022-03-14 12:58:47.363 -04:00 [INF] User has logged in successfully
+2022-03-14 12:58:47.413 -04:00 [WRN] User had issue logging in
+2022-03-14 12:59:24.300 -04:00 [INF] User has logged in successfully
+2022-03-14 12:59:24.349 -04:00 [WRN] User had issue logging in
+2022-03-14 12:59:26.422 -04:00 [INF] User has logged in successfully
+2022-03-14 12:59:26.467 -04:00 [WRN] User had issue logging in
+2022-03-14 12:59:27.098 -04:00 [INF] User has logged in successfully
+2022-03-14 12:59:27.145 -04:00 [WRN] User had issue logging in
+2022-03-14 13:14:50.392 -04:00 [INF] User has logged in successfully
+2022-03-14 13:14:50.945 -04:00 [WRN] User had issue logging in
+2022-03-14 14:14:12.618 -04:00 [INF] User has logged in successfully
+2022-03-14 14:14:13.500 -04:00 [WRN] User had issue logging in
+2022-03-14 14:14:24.154 -04:00 [INF] User has logged in successfully
+2022-03-14 14:14:24.211 -04:00 [WRN] User had issue logging in
+2022-03-14 14:16:13.501 -04:00 [INF] User has logged in successfully
+2022-03-14 14:16:14.307 -04:00 [WRN] User had issue logging in
+2022-03-14 14:17:58.362 -04:00 [INF] User has logged in successfully
+2022-03-14 14:18:05.577 -04:00 [INF] User has logged in successfully
+2022-03-14 14:18:08.951 -04:00 [INF] User has logged in successfully
+2022-03-14 14:18:15.536 -04:00 [INF] User has logged in successfully
+2022-03-14 14:18:17.987 -04:00 [INF] User has logged in successfully
+2022-03-14 14:18:22.464 -04:00 [INF] User has logged in successfully
+2022-03-14 14:18:23.366 -04:00 [INF] User has logged in successfully
+2022-03-14 14:18:25.010 -04:00 [INF] User has logged in successfully
+2022-03-14 14:19:57.406 -04:00 [INF] User has logged in successfully
+2022-03-14 14:20:07.145 -04:00 [INF] User has logged in successfully
+2022-03-14 14:20:13.849 -04:00 [INF] User has logged in successfully
+2022-03-14 14:21:01.181 -04:00 [INF] User has logged in successfully
+2022-03-14 17:08:00.662 -04:00 [INF] User has logged in successfully

@@ -1,6 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { AccountUser } from '../models/accountuser.model';
+import { AccountService } from '../services/account.service';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -26,7 +30,7 @@ export class RegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
-  constructor(private authService: AuthService, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private formBuilder: FormBuilder, private service:AccountService) { }
 
   ngOnInit(): void {
     this.signup = this.formBuilder.group(
@@ -66,7 +70,26 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-    const { name, username, age, password } = this.signup.value;
+
+    let user:AccountUser = {
+      id: 0,
+      username: this.signup.get("username")?.value,
+      name: this.signup.get("fullname")?.value,
+      age: this.signup.get("age")?.value,
+      dateCreated: new Date(),
+      isBanned: 0,
+      isAdmin: 0,
+      _password: this.signup.get("password")?.value
+    }
+
+    this.service.addUser(user).subscribe(result => {
+      if(result) {
+        sessionStorage.setItem("username", result.username);
+        this.router.navigate(["/account"]);
+        this.service.isLoggedIn = true;
+      }
+    });
+    /*const { name, username, age, password } = this.signup.value;
     this.authService.register(name, username, age, password).subscribe({
       next: data => {
         console.log(data);
@@ -79,6 +102,7 @@ export class RegisterComponent implements OnInit {
         this.isSignUpFailed = true;
       }
     });
+    */
   }
 
   onReset(): void {

@@ -6,31 +6,31 @@
                 <div class="card-body p-md-5">
                     <div class="row justify-content-center">
                         <div class="col-12 col-lg-10 col-xl-8 mx-auto">
-                            <h2 class="h3 mb-4 page-title">{{ currentUser.username }}'s Settings</h2>
+                            <h2 class="h3 mb-4 page-title">Account Settings</h2>
                             <div class="my-4">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="firstname">Name</label>
-                                        <p>Morgan Stanley</p>
+                                        <p>{{ currentUser.name }}</p>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputAddress5">Age</label>
-                                        <p>23</p>
+                                        <p>{{ currentUser.age }}</p>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="firstname">Username</label>
-                                        <p>ms1</p>
+                                        <p>{{ currentUser.username }}</p>
                                     </div>
                                 </div>
                                 <hr class="my-4" />
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="firstname">Date Account Created</label>
-                                        <p>March 7, 2022</p>
+                                        <p>{{ currentUser.dateCreated }}</p>
                                     </div>
                                 </div>
                             </div>

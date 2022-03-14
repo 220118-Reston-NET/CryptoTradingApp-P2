@@ -8,52 +8,53 @@
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
-                <form class="mx-1 mx-md-4"
-                    *ngIf="!isLoggedIn"
-                    name="form"
-                    (ngSubmit)="f.form.valid && onSubmit()"
-                    #f="ngForm"
-                    novalidate>
+                <form name="login" class="mx-1 mx-md-4"
+                      (ngSubmit)="onSubmit()"
+                      [formGroup]="login"
+                      >
 
-                  <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="text"
-                          class="form-control"
-                          name="username"
-                          [(ngModel)]="form.username"
-                          required
-                          #username="ngModel" />
-                      <label class="form-label" for="username">Username</label>
-                      <div class="alert-danger"
-                        role="alert"
-                        *ngIf="username.errors && f.submitted">
-                        Username is required
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="password"
-                          class="form-control"
-                          name="password"
-                          [(ngModel)]="form.password"
-                          required
-                          minlength="6"
-                          #password="ngModel" />
-                      <label class="form-label" for="password">Password</label>
-                      <div class="alert-danger"
-                        role="alert"
-                        *ngIf="password.errors && f.submitted">
-                        <div *ngIf="password.errors['required']">Password is required</div>
-                        <div *ngIf="password.errors['minlength']">
-                          Password must be at least 6 characters
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="text"
+                        class="form-control"
+                        name="username"
+                        formControlName="username"
+                        [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"/>
+                        <label class="form-label" for="username">Your Username</label>
+                        <div class="alert-danger" *ngIf="submitted && f['username'].errors">
+                          <div *ngIf="f['username'].errors['required']">Username is required</div>
+                          <div *ngIf="f['username'].errors['minlength']">
+                            Username must be at least 3 characters
+                          </div>
+                          <div *ngIf="f['username'].errors['maxlength']">
+                            Username must be at most 20 characters
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="password"
+                        class="form-control"
+                        name="password"
+                        formControlName="password"
+                        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+                        />
+                        <label class="form-label" for="password">Password</label>
+                        <div class="alert-danger" *ngIf="submitted && f['password'].errors">
+                          <div *ngIf="f['password'].errors['required']">Password is required</div>
+                          <div *ngIf="f['password'].errors['minlength']">
+                            Password must be at least 6 characters
+                          </div>
+                          <div *ngIf="f['password'].errors['maxlength']">
+                            Password must not exceed 40 characters
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <button class="btn btn-primary btn-lg">Login</button>
@@ -62,15 +63,12 @@
                     <div
                     class="alert alert-warning"
                       role="alert"
-                      *ngIf="f.submitted && isLoginFailed"
+                      *ngIf="isLoginFailed"
                     >
                       Login failed: {{ errorMessage }}
                     </div>
                   </div>
                 </form>
-                <div class="alert alert-success" *ngIf="isLoggedIn">
-                  Logged in as {{ roles }}.
-                </div>
               </div>
             </div>
           </div>

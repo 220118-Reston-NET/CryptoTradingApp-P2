@@ -13,7 +13,6 @@ import { CryptoComponent } from './crypto/crypto.component';
 import { NgChartsModule } from 'ng2-charts';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -40,7 +39,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
       {path: "login", component:LoginComponent}
     ])
   ],
-  providers: [authInterceptorProviders],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

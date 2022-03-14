@@ -21,7 +21,7 @@ namespace CryptoApi.Controllers
 
         // POST: api/User
         [HttpPost("Login")]
-        public IActionResult UserLogin([FromBody] string p_userName, string p_password)
+        public IActionResult UserLogin(string p_userName, string p_password)
         {
             //Need Validation for if incorrect username is put in 
             try
@@ -29,10 +29,10 @@ namespace CryptoApi.Controllers
                 Log.Information("User has logged in successfully");
                 return Ok(_cryptoBL.UserLogin(p_userName, p_password));
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
                 Log.Warning("User had issue logging in");
-                return NotFound();
+                return StatusCode(422, ex.Message);
             }
         }
 

@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DarkModeService } from 'angular-dark-mode';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-
-import { TokenStorageService } from '../services/token-storage.service';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-navigation',
@@ -12,37 +11,22 @@ import { TokenStorageService } from '../services/token-storage.service';
 })
 export class NavigationComponent implements OnInit {
   darkMode$: Observable<boolean> = this.darkModeService.darkMode$;
-  private roles: string[] = [];
-  isLoggedIn = false;
-  showAdminBoard = false;
-  showModeratorBoard = false;
-  username?: string;
 
-  constructor(private darkModeService: DarkModeService, private router:Router, private tokenStorageService:TokenStorageService) { }
+  constructor(private darkModeService: DarkModeService, private router:Router, public service:AccountService) { }
 
   onToggle(): void {
     this.darkModeService.toggle();
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
-    if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-      this.username = user.username;
-    }
-  }
-
-  goToAccount()
-  {
-    this.router.navigate(["/account"]);
+    if (sessionStorage.length == 1)
+      this.service.isLoggedIn = true;
   }
 
   logout(): void {
-    this.tokenStorageService.signOut();
-    window.location.reload();
+    sessionStorage.removeItem("username");
+    this.router.navigate(["/login"]);
+    this.service.isLoggedIn = false;
   }
 
 }

@@ -257,10 +257,10 @@ namespace CryptoDL
             {
                 connection.Open();
 
-                SqlCommand command = new SqlCommand("UserLogin", connection);
+                SqlCommand command = new SqlCommand("UserrLogin", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@username", username);
-                command.Parameters.AddWithValue("@password", password);
+                command.Parameters.AddWithValue("@userPassword", password);
                 
                 loginResult = Convert.ToInt32(command.ExecuteScalar());
             }
