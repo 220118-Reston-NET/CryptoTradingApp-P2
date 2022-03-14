@@ -99,12 +99,12 @@ public class CryptoBLTest{
     public void UserLoginValueTest(){
         string _validUserName = "Username";
         string _validPassword = "password";
-        int _validLoginResult = 1;
+        AccountUser _validLoginResult = new AccountUser();
 
         Mock<IRepository> mockRepo = new Mock<IRepository>();
         mockRepo.Setup(repo => repo.LoginUser(_validUserName, _validPassword)).Returns(_validLoginResult);
         ICryptoClassBL cryptoBL = new CryptoClassBL(mockRepo.Object);
-        int _loginResult = cryptoBL.UserLogin(_validUserName, _validPassword);
+        AccountUser _loginResult = cryptoBL.UserLogin(_validUserName, _validPassword);
 
         Assert.Equal(_validLoginResult, _loginResult);
     }
