@@ -84,7 +84,7 @@ jobs:
       shell: pwsh
       run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"220118-Reston-NET_CryptoTradingApp-P2" /o:"220118-reston-net" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.coverage.exclusions=**/StoreApi/wwwroot/lib/**,**/**StoreAppDL/*.cs,**/StoreApi/Controllers/*.cs /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.vstest.reportsPath="**/TestResults/*.trx"
-          dotnet build ./CryptoApi -c Release
+          dotnet build ./BackEnd/CryptoApi -c Release
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
       
     # We are creating our publish folder for us to use
@@ -95,7 +95,7 @@ jobs:
     - name: Deploy
       uses: azure/webapps-deploy@v2
       with:
-        app-name: CyrptoTradingApp
+        app-name: CryptoTradingApp
         slot-name: 'Production'
         publish-profile: $${{secrets.AZURE_PUBLISH_PROFILE}}
         package: ./publish
