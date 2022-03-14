@@ -1,35 +1,49 @@
 <!-- navigation bar start-->
 <nav class="navbar navbar-expand-sm navbar-light">
     <img src="../assets/images/nav_logo.png" class="rounded-circle">
-    <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
+    <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <span><i class="fas fa-bars"></i></span>
+    </button>
+    <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0" id="navbar">
         <ul class="navbar-nav text-center">
             <li class="nav-item active">
                 <a class="nav-link" aria-current="page" routerLink="/"><i class="fa-solid fa-chart-column"></i></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" routerLink="/account"><i class="fa-solid fa-address-card"></i></a>
+            <li class="nav-item" *ngIf="!isLoggedIn">
+                <a class="nav-link" aria-current="page" routerLink="/login"><i class="fa-solid fa-address-card"></i></a>
+            </li>
+            <li class="nav-item" *ngIf="isLoggedIn">
+              <a class="nav-link" aria-current="page" routerLink="/account"><i class="fa-solid fa-address-card"></i></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="./notifications.html"><i class="fa-solid fa-bell"></i></a>
             </li>
+            <li class="nav-item" *ngIf="showAdminBoard">
+              <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+            </li>
         </ul>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+          <li class="nav-item">
+            <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a href="/login" class="nav-link" routerLink="login">Login</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav" *ngIf="isLoggedIn">
             <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png" width="40" height="40" class="rounded-circle">
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item">Porfolio Value: </a>
               <a class="dropdown-item" href="#">View Positions</a>
               <a class="dropdown-item" href="#">Edit Profile</a>
-              <a class="dropdown-item" href="#">Log Out</a>
+              <a class="dropdown-item" (click)="logout()">Log Out</a>
             </div>
           </li>   
         </ul>
     </div>
-    <button class="navbar-toggler ml-auto hidden-sm-up float-xs-right" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span><i class="fas fa-bars"></i></span>
-    </button>
     <div class="form-check form-switch">
       <input class="form-check-input"
         type="checkbox" role="switch" id="flexSwitchCheckDefault"

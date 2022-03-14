@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription, timer } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 interface Coin {
+  id: string;
   image: string;
   name: string;
   symbol: string;
@@ -21,7 +24,8 @@ export class IndexComponent implements OnInit {
   api: string =
     'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false';
 
-  coins: Coin[] = []
+  subscription: Subscription = new Subscription;
+  coins: Coin[] = [];
   filteredCoins: Coin[] = [];
   searchText = '';
 
@@ -41,13 +45,13 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http
-      .get<Coin[]>(this.api)
-      .subscribe((res) => {
-        this.coins = res;
-        this.filteredCoins = this.coins;
-        },
-        (err) => console.log(err));
+    this.subscription = timer(0, 10000).pipe(
+      switchMap(() => this.http
+      .get<Coin[]>(this.api))
+    ).subscribe((res) => {
+      this.coins = res;
+      this.filteredCoins = this.coins;
+      },
+      (err) => console.log(err));
   }
-
 }

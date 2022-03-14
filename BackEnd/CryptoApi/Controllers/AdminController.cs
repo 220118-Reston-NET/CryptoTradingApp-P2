@@ -1,14 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
-using CryptoAPI;
 using CryptoBL;
-using Dapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Serilog;
@@ -19,18 +10,14 @@ namespace CryptoApi.Controllers
     [ApiController]
     public class AdminController : ControllerBase
     {
-
-        private readonly IJWTAuthManager _authentication;
         private ICryptoClassBL _cryptoBL;
-        public AdminController(ICryptoClassBL p_cryptoBL, IJWTAuthManager authentication)
+        public AdminController(ICryptoClassBL p_cryptoBL)
         {
             _cryptoBL = p_cryptoBL;
-            _authentication = authentication;
         }
 
         // GET: api/Admin
         [HttpGet("GetAllUsers")]
-        [Authorize(Roles = "1")]
         public IActionResult GetAllUsers()
         {
             try
@@ -46,7 +33,6 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPost("AddUser")]
-        [Authorize(Roles = "1")]
         public IActionResult AddUser(AccountUser p_NewUser)
         {
 
@@ -63,8 +49,6 @@ namespace CryptoApi.Controllers
         }
 
         [HttpGet("ViewWallet")]
-        [Authorize(Roles = "1")]
-
         public IActionResult ViewWallet(int p_userID)
         {
             try
@@ -80,7 +64,6 @@ namespace CryptoApi.Controllers
         }
 
         [HttpGet("ViewAssets")]
-        [Authorize(Roles = "1")]
         public IActionResult ViewAssets(int p_userID)
         {
             try
@@ -112,7 +95,6 @@ namespace CryptoApi.Controllers
         }
 
         [HttpGet("BuyOrderHistory")]
-        [Authorize(Roles = "1")]
         public IActionResult GetBuyOrderHistoryByCustomer(int p_userID)
         {
             try
@@ -129,7 +111,6 @@ namespace CryptoApi.Controllers
 
         // PUT: api/Admin/5
         [HttpPut("BanUser")]
-        [Authorize(Roles = "1")]
         public IActionResult BanUser([FromBody] int p_userID)
         {
             try
@@ -145,7 +126,6 @@ namespace CryptoApi.Controllers
         }
 
         [HttpGet("SellOrderHistory")]
-        [Authorize(Roles = "1")]
         public IActionResult GetSellOrderHistoryByCustomer(int p_userID)
         {
             try
@@ -161,7 +141,6 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPut("UpdateName")]
-        [Authorize(Roles = "1")]
         public IActionResult UpdateName([FromBody] int p_userID, string p_name)
         {
             try
@@ -177,7 +156,6 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPut("UpdateUsername")]
-        [Authorize(Roles = "1")]
         public IActionResult UpdateUsername([FromBody] int p_userID, string p_userName)
         {
             try
@@ -193,7 +171,6 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPut("UpdateAge")]
-        [Authorize(Roles = "1")]
         public IActionResult UpdateAge([FromBody] int p_userID, int p_age)
         {
             try
@@ -210,7 +187,6 @@ namespace CryptoApi.Controllers
 
         // DELETE: api/Admin/5
         [HttpDelete("{id}")]
-        [Authorize(Roles = "1")]
         public void Delete(int id)
         {
         }

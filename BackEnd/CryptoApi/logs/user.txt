@@ -22,7 +22,28 @@
 2022-03-11 16:39:27.982 -05:00 [INF] Admin successfully used get all user function
 2022-03-11 16:40:07.083 -05:00 [INF] Admin has successfully added user
 2022-03-11 16:40:07.178 -05:00 [WRN] Admin had issue adding user
-2022-03-13 12:55:50.318 -07:00 [INF] Admin successfully used get all user function
-2022-03-13 12:58:35.652 -07:00 [INF] Admin successfully used get all user function
-2022-03-13 13:02:03.094 -07:00 [INF] Admin successfully used get all user function
-2022-03-13 13:50:05.870 -07:00 [INF] Admin successfully used get all user function
+2022-03-12 16:39:52.114 -05:00 [INF] Admin successfully used get all user function
+2022-03-12 17:02:40.326 -05:00 [INF] Admin successfully used get all user function
+2022-03-12 17:10:07.458 -05:00 [INF] Admin successfully used get all user function
+2022-03-12 17:11:52.607 -05:00 [INF] User has successfully viewed wallet
+2022-03-12 17:12:02.539 -05:00 [INF] User has successfully viewed wallet
+2022-03-12 17:12:03.444 -05:00 [INF] User has successfully viewed wallet
+2022-03-12 17:12:11.945 -05:00 [INF] User has successfully viewed assets
+2022-03-12 17:12:12.009 -05:00 [WRN] User had issue viewing assets
+2022-03-12 17:16:28.980 -05:00 [INF] Admin successfully used get all user function
+2022-03-12 17:17:30.202 -05:00 [INF] Admin has successfully added user
+2022-03-12 17:17:53.002 -05:00 [WRN] Could not find stored procedure 'LoginUser'.
+2022-03-12 17:19:20.815 -05:00 [WRN] Could not find stored procedure 'LoginUser'.
+2022-03-12 17:20:52.528 -05:00 [WRN] Procedure or function UserLogin has too many arguments specified.
+2022-03-12 17:26:47.301 -05:00 [WRN] Procedure or function UserLogin has too many arguments specified.
+2022-03-12 17:30:09.203 -05:00 [WRN] Procedure or function 'UserLogin' expects parameter '@userPassword', which was not supplied.
+2022-03-12 18:46:12.673 -05:00 [INF] Token generated
+2022-03-12 18:47:05.182 -05:00 [INF] Token generated
+2022-03-12 18:47:18.682 -05:00 [INF] Admin successfully used get all user function
+2022-03-13 11:47:29.674 -04:00 [INF] Token generated
+2022-03-13 11:47:29.679 -04:00 [INF] User has logged in successfully
+2022-03-13 20:31:28.920 -04:00 [INF] Token generated
+2022-03-13 20:31:28.925 -04:00 [INF] User has logged in successfully
+2022-03-13 20:31:37.193 -04:00 [WRN] Success
+2022-03-14 12:23:30.660 -04:00 [INF] Admin successfully used get all user function
+2022-03-14 12:55:42.850 -07:00 [INF] Admin successfully used get all user function

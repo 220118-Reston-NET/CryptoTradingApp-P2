@@ -259,8 +259,8 @@ namespace CryptoDL
 
                 SqlCommand command = new SqlCommand("UserLogin", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@username", username);
-                command.Parameters.AddWithValue("@password", password);
+                command.Parameters.AddWithValue("@userName", username);
+                command.Parameters.AddWithValue("@userPassword", password);
                 
                 loginResult = Convert.ToInt32(command.ExecuteScalar());
             }
