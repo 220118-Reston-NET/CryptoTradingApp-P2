@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoBL\\CryptoBL.csproj": {}
+    "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/CryptoBL/CryptoBL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoBL\\CryptoBL.csproj": {
+    "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/CryptoBL/CryptoBL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoBL\\CryptoBL.csproj",
+        "projectUniqueName": "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/CryptoBL/CryptoBL.csproj",
         "projectName": "CryptoBL",
-        "projectPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoBL\\CryptoBL.csproj",
-        "packagesPath": "C:\\Users\\bebal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoBL\\obj\\",
+        "projectPath": "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/CryptoBL/CryptoBL.csproj",
+        "packagesPath": "/Users/carlosaviles/.nuget/packages/",
+        "outputPath": "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/CryptoBL/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bebal\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/carlosaviles/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -26,11 +26,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj": {
-                "projectPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj"
+              "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/CryptoDL/CryptoDL.csproj": {
+                "projectPath": "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/CryptoDL/CryptoDL.csproj"
               },
-              "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj"
+              "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/Model/Model.csproj": {
+                "projectPath": "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/Model/Model.csproj"
               }
             }
           }
@@ -59,21 +59,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj": {
+    "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/CryptoDL/CryptoDL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj",
+        "projectUniqueName": "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/CryptoDL/CryptoDL.csproj",
         "projectName": "CryptoDL",
-        "projectPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\CryptoDL.csproj",
-        "packagesPath": "C:\\Users\\bebal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\CryptoDL\\obj\\",
+        "projectPath": "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/CryptoDL/CryptoDL.csproj",
+        "packagesPath": "/Users/carlosaviles/.nuget/packages/",
+        "outputPath": "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/CryptoDL/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bebal\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/carlosaviles/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -85,8 +85,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj"
+              "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/Model/Model.csproj": {
+                "projectPath": "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/Model/Model.csproj"
               }
             }
           }
@@ -121,21 +121,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj": {
+    "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/Model/Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj",
+        "projectUniqueName": "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/Model/Model.csproj",
         "projectName": "Model",
-        "projectPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\Model.csproj",
-        "packagesPath": "C:\\Users\\bebal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bebal\\Documents\\CryptoTradingApp-P2\\BackEnd\\Model\\obj\\",
+        "projectPath": "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/Model/Model.csproj",
+        "packagesPath": "/Users/carlosaviles/.nuget/packages/",
+        "outputPath": "/Users/carlosaviles/Documents/Revature/Project2/CryptoTradingApp-P2/BackEnd/Model/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bebal\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/carlosaviles/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -173,7 +173,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
         }
       }
     }
