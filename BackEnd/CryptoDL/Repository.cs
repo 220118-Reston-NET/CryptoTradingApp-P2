@@ -250,21 +250,46 @@ namespace CryptoDL
             return assetList;
         }
 
-        public int LoginUser(string username, string password)
+        public AccountUser LoginUser(string username, string password)
         {
+            AccountUser _user = new AccountUser();
+            List<AccountUser> userlist = new List<AccountUser>();
+            int id=0;
             int loginResult = 0;
             using(SqlConnection connection = new SqlConnection(_connectionStrings))
             {
                 connection.Open();
 
-                SqlCommand command = new SqlCommand("UserLogin", connection);
+                SqlCommand command = new SqlCommand("UserrLogin", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@userName", username);
                 command.Parameters.AddWithValue("@userPassword", password);
+                //command.Parameters.AddWithValue("@retVal", loginResult);
                 
+                //SqlDataReader reader = command.ExecuteReader();
+                
+
                 loginResult = Convert.ToInt32(command.ExecuteScalar());
             }
-            return loginResult;
+            if(loginResult==1)
+            {
+                userlist = GetAllUsers();
+                foreach (AccountUser item in userlist)
+                {
+                    if(item.username==username)
+                    {
+                        id=item.ID;
+
+                    }
+                }
+                if(id!=0)
+                {
+                    _user=GetSpecificUser(id);
+                }
+
+                return _user;
+            }
+            return _user;
         }
 
         public Wallet SelectWalletbyCustomer(int _userID)

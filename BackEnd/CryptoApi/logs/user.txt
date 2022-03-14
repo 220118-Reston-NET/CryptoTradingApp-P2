@@ -47,3 +47,14 @@
 2022-03-13 20:31:37.193 -04:00 [WRN] Success
 2022-03-14 12:23:30.660 -04:00 [INF] Admin successfully used get all user function
 2022-03-14 12:55:42.850 -07:00 [INF] Admin successfully used get all user function
+2022-03-14 13:04:05.303 -07:00 [INF] User has logged in successfully
+2022-03-14 13:04:05.772 -07:00 [WRN] User had issue logging in
+2022-03-14 13:07:41.842 -07:00 [INF] User has logged in successfully
+2022-03-14 13:07:41.860 -07:00 [WRN] User had issue logging in
+2022-03-14 13:25:46.085 -07:00 [INF] User has logged in successfully
+2022-03-14 13:25:46.558 -07:00 [WRN] User had issue logging in
+2022-03-14 13:41:56.123 -07:00 [INF] User has logged in successfully
+2022-03-14 13:41:56.623 -07:00 [WRN] User had issue logging in
+2022-03-14 13:52:54.321 -07:00 [INF] User has logged in successfully
+2022-03-14 13:52:54.843 -07:00 [WRN] User had issue logging in
+2022-03-14 14:39:15.269 -07:00 [INF] Admin successfully used get all user function

@@ -66,7 +66,7 @@ namespace CryptoBL{
             return _repo.AddSellOrderHistory(p_SellOrder);
         }
 
-        public int UserLogin(string p_userName, string p_password)
+        public AccountUser UserLogin(string p_userName, string p_password)
         {
             return _repo.LoginUser(p_userName, p_password);
         }
