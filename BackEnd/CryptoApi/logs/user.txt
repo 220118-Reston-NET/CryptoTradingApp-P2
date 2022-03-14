@@ -25,3 +25,4 @@
 2022-03-13 12:55:50.318 -07:00 [INF] Admin successfully used get all user function
 2022-03-13 12:58:35.652 -07:00 [INF] Admin successfully used get all user function
 2022-03-13 13:02:03.094 -07:00 [INF] Admin successfully used get all user function
+2022-03-13 13:50:05.870 -07:00 [INF] Admin successfully used get all user function
