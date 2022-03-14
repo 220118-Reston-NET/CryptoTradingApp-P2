@@ -19,8 +19,8 @@ namespace CryptoApi.Controllers
             _cryptoBL = p_cryptoBL;
         }
 
-        // POST: api/User
-        [HttpPost("Login")]
+        // Get: api/User
+        [HttpGet("Login")]
         public IActionResult UserLogin(string p_userName, string p_password)
         {
             //Need Validation for if incorrect username is put in 
