@@ -53,7 +53,7 @@ namespace CryptoBL{
             return _setNoti;
         }
 
-        public BuyOrderHistory PlaceOrder(Assets p_NewAsset, BuyOrderHistory p_order, decimal p_coinQuantity, decimal p_amount, int p_userID, string p_cryptoName)
+        public BuyOrderHistory PlaceOrder(Assets p_NewAsset, BuyOrderHistory p_order, decimal p_cryptoPrice, decimal p_amount, int p_userID, string p_cryptoName)
         {
             try{
                 _repo.SubtractfromWallet(p_amount, p_userID);
