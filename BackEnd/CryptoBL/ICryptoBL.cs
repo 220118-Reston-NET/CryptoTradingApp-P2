@@ -22,5 +22,7 @@ namespace CryptoBL{
         public AccountUser UpdateName (int p_userID, string p_name);
         public AccountUser UpdateAge (int p_userID, int p_age);
         public List<CryptoVariables> CryptoFutures ();
+        public Assets UpdateTakeProfit(int p_userID, decimal p_amount);
+        public Assets UpdateStopLoss(int p_userID, decimal p_amount);
     }
 }
