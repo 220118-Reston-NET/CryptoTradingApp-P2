@@ -147,5 +147,8 @@ namespace CryptoBL{
         {
             return _repo.SetStopLoss(p_userID, p_amount, p_cryptoName);
         }
+        public void DeleteUser(int p_userID){
+            _repo.DeleteUser(p_userID);
+        }
     }
 }
