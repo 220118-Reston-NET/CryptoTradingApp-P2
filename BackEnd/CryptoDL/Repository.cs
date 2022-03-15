@@ -233,6 +233,8 @@ namespace CryptoDL
 
                 SqlCommand command = new SqlCommand(SQLQuery, con);
 
+                command.Parameters.AddWithValue("@userID", _userID);
+
                 SqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
@@ -242,9 +244,9 @@ namespace CryptoDL
                         cryptoName = reader.GetString(1),
                         buyPrice = reader.GetDecimal(2),
                         buyDate = reader.GetDateTime(3),
-                        stoploss = reader.GetDecimal(5),
-                        takeprofit = reader.GetDecimal(6),
-                        coinQuantity = reader.GetDecimal(7)  
+                        stoploss = reader.GetDecimal(4),
+                        takeprofit = reader.GetDecimal(5),
+                        coinQuantity = reader.GetDecimal(6)  
                     });
                 }
             }
