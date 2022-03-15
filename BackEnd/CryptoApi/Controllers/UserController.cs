@@ -19,20 +19,21 @@ namespace CryptoApi.Controllers
             _cryptoBL = p_cryptoBL;
         }
 
-        // POST: api/User
-        [HttpPost("Login")]
+        // Get: api/User
+        [HttpGet("Login")]
         public IActionResult UserLogin(string p_userName, string p_password)
         {
             //Need Validation for if incorrect username is put in 
+    
             try
             {
                 Log.Information("User has logged in successfully");
                 return Ok(_cryptoBL.UserLogin(p_userName, p_password));
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 Log.Warning("User had issue logging in");
-                return StatusCode(422, ex.Message);
+                return NotFound();
             }
         }
 
@@ -168,7 +169,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPut("UpdateName")]
-        public IActionResult UpdateName([FromBody] int p_userID, string p_name)
+        public IActionResult UpdateName(int p_userID, string p_name)
         {
             try
             {
@@ -183,7 +184,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPut("UpdateUsername")]
-        public IActionResult UpdateUsername([FromBody] int p_userID, string p_userName)
+        public IActionResult UpdateUsername(int p_userID, string p_userName)
         {
             try
             {
@@ -199,7 +200,7 @@ namespace CryptoApi.Controllers
 
         [HttpPut("UpdateAge")]
 
-        public IActionResult UpdateAge([FromBody] int p_userID, int p_age)
+        public IActionResult UpdateAge(int p_userID, int p_age)
         {
             try
             {

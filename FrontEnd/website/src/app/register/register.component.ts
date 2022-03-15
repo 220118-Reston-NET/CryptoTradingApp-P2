@@ -27,7 +27,6 @@ export class RegisterComponent implements OnInit {
     age: null,
     password: null
   };
-  isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
   constructor(private router: Router, private formBuilder: FormBuilder, private service:AccountService) { }
@@ -88,6 +87,10 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(["/account"]);
         this.service.isLoggedIn = true;
       }
+    },
+    (err) => {
+      this.isSignUpFailed = true;
+      this.errorMessage = ' Username already exists!';
     });
     /*const { name, username, age, password } = this.signup.value;
     this.authService.register(name, username, age, password).subscribe({

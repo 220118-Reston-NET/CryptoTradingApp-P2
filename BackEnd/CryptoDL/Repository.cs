@@ -1,5 +1,7 @@
 using System.Data.SqlClient;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using Model;
 //using System.Web.Script.Serialization;
 namespace CryptoDL
@@ -116,7 +118,7 @@ namespace CryptoDL
             //wallet initialize part
             List<AccountUser> list = GetAllUsers();
             _user.ID = list[list.Count - 1].ID;
-            string SQLQuery = @"insert into Wallet values(@customerId, 0)";
+            string SQLQuery = @"insert into Wallet values(@customerId, 10000)";
              using(SqlConnection con = new SqlConnection(_connectionStrings))
            {
                con.Open();
@@ -133,7 +135,7 @@ namespace CryptoDL
          public Wallet InitializeWallet(int _userId)
         {
             Wallet _wallet = new Wallet();
-            string SQLQuery = @"insert into Wallet values(@customerId, 0)";
+            string SQLQuery = @"insert into Wallet values(@customerId, 100000)";
 
             using(SqlConnection con = new SqlConnection(_connectionStrings))
            {
@@ -206,7 +208,7 @@ namespace CryptoDL
                         ID = reader.GetInt32(0),
                         username = reader.GetString(1),
 
-                        //_password = reader.GetValue(2),
+                       // _password = SHA1HashValue(reader.GetString(2)).ToString(),
                         
                         name = reader.GetString(4),
                         age = reader.GetInt32(5),
@@ -250,8 +252,11 @@ namespace CryptoDL
             return assetList;
         }
 
-        public int LoginUser(string username, string password)
+        public AccountUser LoginUser(string username, string password)
         {
+            AccountUser _user = new AccountUser();
+            List<AccountUser> userlist = new List<AccountUser>();
+            int id=0;
             int loginResult = 0;
             using(SqlConnection connection = new SqlConnection(_connectionStrings))
             {
@@ -259,12 +264,34 @@ namespace CryptoDL
 
                 SqlCommand command = new SqlCommand("UserrLogin", connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@username", username);
+                command.Parameters.AddWithValue("@userName", username);
                 command.Parameters.AddWithValue("@userPassword", password);
+                //command.Parameters.AddWithValue("@retVal", loginResult);
                 
+                //SqlDataReader reader = command.ExecuteReader();
+                
+
                 loginResult = Convert.ToInt32(command.ExecuteScalar());
             }
-            return loginResult;
+            if(loginResult==1)
+            {
+                userlist = GetAllUsers();
+                foreach (AccountUser item in userlist)
+                {
+                    if(item.username==username)
+                    {
+                        id=item.ID;
+
+                    }
+                }
+                if(id!=0)
+                {
+                    _user=GetSpecificUser(id);
+                }
+
+                return _user;
+            }
+            return _user;
         }
 
         public Wallet SelectWalletbyCustomer(int _userID)

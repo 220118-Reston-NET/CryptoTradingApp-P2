@@ -18,24 +18,22 @@
             <li class="nav-item">
                 <a class="nav-link" href="./notifications.html"><i class="fa-solid fa-bell"></i></a>
             </li>
-        </ul>
-        <ul class="navbar-nav ml-auto" *ngIf="!this.service.isLoggedIn">
-          <li class="nav-item">
-            <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
-          </li>
-          <li class="nav-item">
-            <a href="/login" class="nav-link" routerLink="login">Login</a>
-          </li>
+            <li class="nav-item" *ngIf="!this.service.isLoggedIn">
+              <a href="/register" class="nav-link" routerLink="register"><i class="fas fa-user-plus"></i></a>
+            </li>
+            <li class="nav-item" *ngIf="!this.service.isLoggedIn">
+              <a href="/login" class="nav-link" routerLink="login"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+            </li>
         </ul>
         <ul class="navbar-nav" *ngIf="this.service.isLoggedIn">
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png" width="40" height="40" class="rounded-circle">
+              <i class="fa-solid fa-user-graduate"></i>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item">Porfolio Value: </a>
+              <a class="dropdown-item">Porfolio Value: ${{ this.currentCash.toLocaleString() }}</a>
               <a class="dropdown-item" href="#">View Positions</a>
-              <a class="dropdown-item" href="#">Edit Profile</a>
+              <a class="dropdown-item" routerLink="/account">Edit Profile</a>
               <a class="dropdown-item" (click)="logout()">Log Out</a>
             </div>
           </li>   

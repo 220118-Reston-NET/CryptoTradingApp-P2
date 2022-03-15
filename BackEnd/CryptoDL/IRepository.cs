@@ -5,7 +5,7 @@ public interface IRepository
 
     AccountUser AddUser(AccountUser _user);
 
-    int LoginUser(string username, string password);
+    AccountUser LoginUser(string username, string password);
 
     Wallet InitializeWallet(int _userId);
 

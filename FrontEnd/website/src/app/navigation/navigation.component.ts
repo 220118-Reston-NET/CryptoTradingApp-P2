@@ -10,7 +10,11 @@ import { AccountService } from '../services/account.service';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
+
   darkMode$: Observable<boolean> = this.darkModeService.darkMode$;
+  currentUser: any;
+  currentCash: any;
+  listOfUsers: any = [];
 
   constructor(private darkModeService: DarkModeService, private router:Router, public service:AccountService) { }
 
@@ -19,8 +23,21 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (sessionStorage.length == 1)
+    if (sessionStorage.length == 1) {
       this.service.isLoggedIn = true;
+      const username = sessionStorage.getItem("username");
+      this.service.getAllUsers().subscribe(result => {
+      this.listOfUsers = result;
+      this.listOfUsers.forEach((user: any) => {
+        if(user.username == username) {
+          this.currentUser = user;
+          this.service.getWallet(this.currentUser).subscribe(res => {
+            this.currentCash = res.cash;
+          });
+        }
+      });
+    });
+    }
   }
 
   logout(): void {
