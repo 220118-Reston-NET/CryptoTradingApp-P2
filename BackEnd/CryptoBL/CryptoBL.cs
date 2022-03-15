@@ -65,9 +65,11 @@ namespace CryptoBL{
                         _repo.BuyExistingCrypto(p_userID, p_amount, p_cryptoName, DateTime.Now);
                         return _repo.AddBuyOrderHistory(p_order);
                     }
-                    _repo.SubtractfromWallet(p_amount, p_userID);
-                    _repo.BuyCrypto(p_NewAsset);
-                    return _repo.AddBuyOrderHistory(p_order);
+                    else{
+                        _repo.SubtractfromWallet(p_amount, p_userID);
+                        _repo.BuyCrypto(p_NewAsset);
+                        return _repo.AddBuyOrderHistory(p_order);
+                    }
                 }
                 return null;
             }
