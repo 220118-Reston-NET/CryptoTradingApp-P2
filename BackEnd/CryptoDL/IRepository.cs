@@ -23,6 +23,12 @@ public interface IRepository
 
     Assets BuyCrypto(Assets _asset);
 
+    Assets SetStopLoss(int _userID, decimal _stoploss, string _cryptoName);
+
+    Assets SetTakeProfit(int _userID, decimal _takeprofit, string _cryptoName);
+
+    Assets BuyExistingCrypto(int _userID, decimal _amount, string _cryptoName, DateTime _date);
+
     List<Assets> GetAssetsbyCustomer(int _userID);
 
     void DeleteAssetRow(int _userID, string _cryptoName);

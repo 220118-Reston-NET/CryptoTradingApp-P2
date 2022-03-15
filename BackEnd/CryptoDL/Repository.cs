@@ -564,5 +564,92 @@ namespace CryptoDL
             
             return userList;
         }
+
+        public Assets SetStopLoss(int _userID, decimal _stoploss, string _cryptoName)
+        {
+             Assets _asset = new Assets();
+             List<Assets> assetlist = new List<Assets>();
+            string SQLQuery = @"update Assets set stoploss = @stoploss where customerId = @customerId and cryptoName = @cryptoName";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+           {
+               con.Open();
+
+               SqlCommand command = new SqlCommand(SQLQuery, con);
+               command.Parameters.AddWithValue("@customerId", _userID);
+               command.Parameters.AddWithValue("@stoploss", _stoploss);
+               command.Parameters.AddWithValue("@cryptoName", _cryptoName);
+
+               command.ExecuteNonQuery();
+           } 
+
+           assetlist = GetAssetsbyCustomer(_userID);
+           foreach (Assets item in assetlist)
+           {
+               if(item.cryptoName==_cryptoName)
+               {
+                   _asset = item;
+               }
+           }
+           return _asset;
+        }
+
+        public Assets SetTakeProfit(int _userID, decimal _takeprofit, string _cryptoName)
+        {
+            Assets _asset = new Assets();
+             List<Assets> assetlist = new List<Assets>();
+            string SQLQuery = @"update Assets set takeprofit = @takeprofit where customerId = @customerId and cryptoName = @cryptoName";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+           {
+               con.Open();
+
+               SqlCommand command = new SqlCommand(SQLQuery, con);
+               command.Parameters.AddWithValue("@customerId", _userID);
+               command.Parameters.AddWithValue("@takeprofit", _takeprofit);
+               command.Parameters.AddWithValue("@cryptoName", _cryptoName);
+
+               command.ExecuteNonQuery();
+           } 
+
+           assetlist = GetAssetsbyCustomer(_userID);
+           foreach (Assets item in assetlist)
+           {
+               if(item.cryptoName==_cryptoName)
+               {
+                   _asset = item;
+               }
+           }
+           return _asset;
+        }
+
+       /* public Assets BuyExistingCrypto(int _userID, decimal _amount, string _cryptoName, DateTime _date)
+        {
+            Assets _asset = new Assets();
+             List<Assets> assetlist = new List<Assets>();
+            string SQLQuery = @"update Assets set buyPrice = @buyPrice where customerId = @customerId and cryptoName = @cryptoName";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+           {
+               con.Open();
+
+               SqlCommand command = new SqlCommand(SQLQuery, con);
+               command.Parameters.AddWithValue("@customerId", _userID);
+               command.Parameters.AddWithValue("@takeprofit", _takeprofit);
+               command.Parameters.AddWithValue("@cryptoName", _cryptoName);
+
+               command.ExecuteNonQuery();
+           } 
+
+           assetlist = GetAssetsbyCustomer(_userID);
+           foreach (Assets item in assetlist)
+           {
+               if(item.cryptoName==_cryptoName)
+               {
+                   _asset = item;
+               }
+           }
+           return _asset;
+        }*/
     }
 }
