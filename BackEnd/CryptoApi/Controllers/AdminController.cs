@@ -66,15 +66,16 @@ namespace CryptoApi.Controllers
         [HttpGet("ViewAssets")]
         public IActionResult ViewAssets(int p_userID)
         {
+            
             try
             {
                 Log.Information("Admin has successfully viewed assets");
                 return Ok(_cryptoBL.ViewAssets(p_userID));
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
                 Log.Warning("Admin had issue viewing assets");
-                return NotFound();
+                return StatusCode(242, ex.Message);
             }
         }
 

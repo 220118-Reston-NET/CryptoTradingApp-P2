@@ -67,6 +67,17 @@
 2022-03-14 22:24:30.662 -07:00 [INF] User has placed order successfully
 2022-03-14 22:24:30.693 -07:00 [WRN] User had issue placing an order
 2022-03-14 22:36:32.319 -07:00 [INF] User has placed order successfully
+<<<<<<< HEAD
 2022-03-15 16:08:04.805 -04:00 [INF] Admin has successfully viewed assets
 2022-03-15 16:09:01.800 -04:00 [INF] Admin has successfully viewed assets
 2022-03-15 16:32:51.435 -04:00 [INF] Admin has successfully viewed assets
+=======
+2022-03-15 15:07:28.092 -07:00 [INF] User has placed order successfully
+2022-03-15 15:07:28.913 -07:00 [WRN] User had issue placing an order
+2022-03-15 15:26:48.011 -07:00 [INF] User has placed order successfully
+2022-03-15 16:10:01.783 -07:00 [INF] Admin has successfully viewed assets
+2022-03-15 16:10:02.016 -07:00 [WRN] Admin had issue viewing assets
+2022-03-15 16:13:50.196 -07:00 [INF] Admin has successfully viewed assets
+2022-03-15 16:13:50.682 -07:00 [WRN] Admin had issue viewing assets
+2022-03-15 16:18:31.992 -07:00 [INF] Admin has successfully viewed assets
+>>>>>>> 102885c31afad3baae9d4683ffb55fbb806ca451
