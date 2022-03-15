@@ -116,7 +116,7 @@ namespace CryptoDL
             //wallet initialize part
             List<AccountUser> list = GetAllUsers();
             _user.ID = list[list.Count - 1].ID;
-            string SQLQuery = @"insert into Wallet values(@customerId, 0)";
+            string SQLQuery = @"insert into Wallet values(@customerId, 10000)";
              using(SqlConnection con = new SqlConnection(_connectionStrings))
            {
                con.Open();
@@ -133,7 +133,7 @@ namespace CryptoDL
          public Wallet InitializeWallet(int _userId)
         {
             Wallet _wallet = new Wallet();
-            string SQLQuery = @"insert into Wallet values(@customerId, 0)";
+            string SQLQuery = @"insert into Wallet values(@customerId, 10000)";
 
             using(SqlConnection con = new SqlConnection(_connectionStrings))
            {
