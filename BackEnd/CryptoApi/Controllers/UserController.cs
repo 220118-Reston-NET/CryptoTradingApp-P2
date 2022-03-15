@@ -169,7 +169,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPut("UpdateName")]
-        public IActionResult UpdateName(int p_userID, string p_name)
+        public IActionResult UpdateName([FromBody] int p_userID, string p_name)
         {
             try
             {
@@ -184,7 +184,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPut("UpdateUsername")]
-        public IActionResult UpdateUsername(int p_userID, string p_userName)
+        public IActionResult UpdateUsername([FromBody] int p_userID, string p_userName)
         {
             try
             {
@@ -200,7 +200,7 @@ namespace CryptoApi.Controllers
 
         [HttpPut("UpdateAge")]
 
-        public IActionResult UpdateAge(int p_userID, int p_age)
+        public IActionResult UpdateAge([FromBody] int p_userID, int p_age)
         {
             try
             {

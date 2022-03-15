@@ -135,7 +135,7 @@ namespace CryptoDL
          public Wallet InitializeWallet(int _userId)
         {
             Wallet _wallet = new Wallet();
-            string SQLQuery = @"insert into Wallet values(@customerId, 100000)";
+            string SQLQuery = @"insert into Wallet values(@customerId, 10000)";
 
             using(SqlConnection con = new SqlConnection(_connectionStrings))
            {
