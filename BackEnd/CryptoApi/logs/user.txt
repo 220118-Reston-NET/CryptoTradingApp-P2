@@ -81,3 +81,4 @@
 2022-03-15 16:13:50.682 -07:00 [WRN] Admin had issue viewing assets
 2022-03-15 16:18:31.992 -07:00 [INF] Admin has successfully viewed assets
 >>>>>>> 102885c31afad3baae9d4683ffb55fbb806ca451
+2022-03-15 16:44:36.261 -04:00 [INF] User has successfully viewed assets
