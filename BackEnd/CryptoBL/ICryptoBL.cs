@@ -1,7 +1,6 @@
 using Model;
 namespace CryptoBL{
-    public interface ICryptoClassBL{
-        
+    public interface ICryptoClassBL{   
         public AccountUser UserLogin(string p_userName, string p_password);       
         public AccountUser AddUser(AccountUser p_NewUser);
         public AccountUser GetSpecificUser(int p_userID);

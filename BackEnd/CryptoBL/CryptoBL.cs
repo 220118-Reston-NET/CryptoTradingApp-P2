@@ -9,11 +9,13 @@ namespace CryptoBL{
         public CryptoClassBL(IRepository p_repo){
             _repo = p_repo;
         }
+
         public AccountUser AddUser(AccountUser p_NewUser)
         {
              _repo.AddUser(p_NewUser);
             return p_NewUser;
         }
+        
         public Wallet AddtoWallet(decimal p_amount, int p_userID)
         {
             return _repo.AddtoWallet(p_amount, p_userID);
