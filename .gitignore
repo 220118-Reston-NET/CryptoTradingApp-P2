@@ -4,3 +4,8 @@ obj
 appsettings.json
 publish
 StockPrices.py
+stockprices.json
+dist
+stockPrices.spec
+build
+BackEnd/__pycache__/StockPrices.cpython-39.pyc
