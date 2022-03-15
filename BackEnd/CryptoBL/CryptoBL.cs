@@ -140,14 +140,14 @@ namespace CryptoBL{
             return _repo.GetPredictedPrices();
         }
 
-        public Assets UpdateTakeProfit(int p_userID, decimal p_amount)
+        public Assets UpdateTakeProfit(int p_userID, decimal p_amount, string p_cryptoName)
         {
-            throw new NotImplementedException();
+            return _repo.SetTakeProfit(p_userID, p_amount, p_cryptoName);
         }
 
-        public Assets UpdateStopLoss(int p_userID, decimal p_amount)
+        public Assets UpdateStopLoss(int p_userID, decimal p_amount, string p_cryptoName)
         {
-            throw new NotImplementedException();
+            return _repo.SetStopLoss(p_userID, p_amount, p_cryptoName);
         }
         public DateTime UpdateBuyDate(){
             throw new NotImplementedException();
