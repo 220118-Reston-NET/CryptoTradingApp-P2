@@ -91,7 +91,7 @@ public class CryptoBLTest{
         Mock<IRepository> mockRepo = new Mock<IRepository>();
         mockRepo.Setup(repo => repo.AddBuyOrderHistory(_testBuyOrder)).Returns(_testBuyOrder);
         ICryptoClassBL cryptoBL = new CryptoClassBL(mockRepo.Object);
-        BuyOrderHistory _actualBuyOrder = cryptoBL.PlaceOrder(_testAssets, _validCash, _validCustomerID, _testBuyOrder);
+        BuyOrderHistory _actualBuyOrder = cryptoBL.PlaceOrder(_testAssets, _testBuyOrder, _validBuyPrice, _validBuyPrice, _validCustomerID, _validCryptoName);
 
         Assert.Same(_testBuyOrder, _actualBuyOrder);
     }
@@ -170,7 +170,7 @@ public class CryptoBLTest{
         Mock<IRepository> mockRepo = new Mock<IRepository>();
         mockRepo.Setup(repo => repo.AddSellOrderHistory(_validSellOrder)).Returns(_validSellOrder);
         ICryptoClassBL cryptoBL = new CryptoClassBL(mockRepo.Object);
-        SellOrderHistory _actualSellOrder = cryptoBL.SellOrder(_validAmount, _validCryptoName, _validID, _validSellOrder);
+        SellOrderHistory _actualSellOrder = cryptoBL.SellOrder(_validAmount, _validCryptoName, _validID, _validSellOrder, _validAmount);
 
         Assert.Same(_validSellOrder, _actualSellOrder);
     }
