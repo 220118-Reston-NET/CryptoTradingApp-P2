@@ -623,11 +623,11 @@ namespace CryptoDL
            return _asset;
         }
 
-       /* public Assets BuyExistingCrypto(int _userID, decimal _amount, string _cryptoName, DateTime _date)
+        public Assets BuyExistingCrypto(int _userID, decimal _amount, string _cryptoName, DateTime _date)
         {
             Assets _asset = new Assets();
              List<Assets> assetlist = new List<Assets>();
-            string SQLQuery = @"update Assets set buyPrice = @buyPrice where customerId = @customerId and cryptoName = @cryptoName";
+            string SQLQuery = @"update Assets set buyPrice = @buyPrice, buyDate = @buyDate where customerId = @customerId and cryptoName = @cryptoName";
 
             using(SqlConnection con = new SqlConnection(_connectionStrings))
            {
@@ -635,7 +635,8 @@ namespace CryptoDL
 
                SqlCommand command = new SqlCommand(SQLQuery, con);
                command.Parameters.AddWithValue("@customerId", _userID);
-               command.Parameters.AddWithValue("@takeprofit", _takeprofit);
+               command.Parameters.AddWithValue("@buyPrice", _amount);
+               command.Parameters.AddWithValue("@buyDate", _date);
                command.Parameters.AddWithValue("@cryptoName", _cryptoName);
 
                command.ExecuteNonQuery();
@@ -650,6 +651,6 @@ namespace CryptoDL
                }
            }
            return _asset;
-        }*/
+        }
     }
 }
