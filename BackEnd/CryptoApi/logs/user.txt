@@ -74,3 +74,4 @@
 2022-03-15 16:10:02.016 -07:00 [WRN] Admin had issue viewing assets
 2022-03-15 16:13:50.196 -07:00 [INF] Admin has successfully viewed assets
 2022-03-15 16:13:50.682 -07:00 [WRN] Admin had issue viewing assets
+2022-03-15 16:18:31.992 -07:00 [INF] Admin has successfully viewed assets

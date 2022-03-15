@@ -58,7 +58,7 @@ namespace CryptoApi.Controllers
         [HttpPost("PlaceOrder")]
         public IActionResult PlaceOrder(int p_userID, decimal p_amount, string _cryptoName, decimal _cryptoprice)
         {
-            decimal _coinQuantity = p_amount/_cryptoprice;
+            decimal _coinQuantity = Math.Round(p_amount/_cryptoprice, 4);
             Assets _newAsset = new Assets()
             {
                 customerId = p_userID,
