@@ -64,7 +64,7 @@ namespace CryptoBL{
                 return null;
             }
         }
-        public SellOrderHistory SellOrder(decimal p_amount, string p_CryptoName, int p_userID, SellOrderHistory p_SellOrder){
+        public SellOrderHistory SellOrder(decimal p_amount, string p_CryptoName, int p_userID, SellOrderHistory p_SellOrder, decimal p_cryptoPrice){
             _repo.DeleteAssetRow(p_userID, p_CryptoName);
             _repo.AddtoWallet(p_amount, p_userID);
             return _repo.AddSellOrderHistory(p_SellOrder);
