@@ -27,9 +27,6 @@
                                   </div>
                                 </div>
                             </div>
-                            <button type="button" (click)="loadMinuteChart()" class="btn btn-primary btn-lg me-2">5 Minute</button>
-                            <button type="button" (click)="loadHourlyChart()" class="btn btn-primary btn-lg me-2">1 Hour</button>
-                            <button type="button" (click)="loadDailyChart()" class="btn btn-primary btn-lg me-2">Daily</button>
                         </div>
                     </div>
                 </div>
@@ -44,11 +41,11 @@
                                 <button type="button" class="btn btn-primary btn-lg buy">Buy Market</button>
                                 <button type="button" class="btn btn-primary btn-lg sell">Sell Market</button>
                             </div>
-                            <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4">Quantity</p>
-                            <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4">Equity</p>
-                            <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4">Avg Cost</p>
-                            <button type="button" class="btn btn-primary btn-sm me-1">Stop Loss</button>
-                            <button type="button" class="btn btn-primary btn-sm">Take Profit</button>
+                            <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4" *ngIf="this.account.isLoggedIn">Quantity</p>
+                            <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4" *ngIf="this.account.isLoggedIn">Equity</p>
+                            <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4" *ngIf="this.account.isLoggedIn">Avg Cost</p>
+                            <button type="button" class="btn btn-primary btn-sm me-1" *ngIf="this.account.isLoggedIn">Stop Loss</button>
+                            <button type="button" class="btn btn-primary btn-sm" *ngIf="this.account.isLoggedIn">Take Profit</button>
                         </div>
                     </div>
                 </div>
