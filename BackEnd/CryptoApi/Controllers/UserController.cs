@@ -56,12 +56,35 @@ namespace CryptoApi.Controllers
 
         // GET: api/User/5
         [HttpPost("PlaceOrder")]
-        public IActionResult PlaceOrder([FromBody] Tuple<Assets, BuyOrderHistory> p_tuple, decimal p_amount, int p_userID)
+        public IActionResult PlaceOrder(int p_userID, decimal p_amount, string _cryptoName, decimal _cryptoprice)
         {
+            decimal _coinQuantity = p_amount/_cryptoprice;
+            Assets _newAsset = new Assets()
+            {
+                customerId = p_userID,
+                cryptoName = _cryptoName,
+                buyPrice = p_amount,
+                buyDate = DateTime.Now,
+                stoploss = 0,
+                takeprofit = 0,
+                coinQuantity = _coinQuantity
+            };
+            BuyOrderHistory _newbhis = new BuyOrderHistory()
+            {
+                customerId = p_userID,
+                cryptoName = _cryptoName,
+                buyPrice = p_amount,
+                buyDate =_newAsset.buyDate,
+                quantity = _coinQuantity,
+                total = p_amount
+            };
+
+
+
             try
             {
                 Log.Information("User has placed order successfully"); 
-                _cryptoBL.PlaceOrder(p_tuple.Item1, p_amount, p_userID, p_tuple.Item2);
+                _cryptoBL.PlaceOrder(_newAsset, p_amount, p_userID, _newbhis);
                 return Created("Order successfully placed!", "");
             }
             catch (System.Exception ex)

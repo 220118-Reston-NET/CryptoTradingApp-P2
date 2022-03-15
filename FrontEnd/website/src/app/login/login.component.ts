@@ -1,44 +1,66 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { TokenStorageService } from '../services/token-storage.service';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AccountService } from '../services/account.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  form: any = {
-    username: null,
-    password: null
-  };
-  isLoggedIn = false;
+
+  login: FormGroup = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl('')
+  });
+  submitted = false;
   isLoginFailed = false;
-  errorMessage = '';
-  roles: string[] = [];
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  errorMessage = "";
+
+  constructor(private router: Router, private formBuilder: FormBuilder, private service:AccountService) { }
+
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
-    }
+    this.login = this.formBuilder.group(
+      {
+        username: [
+          '',
+          [
+            Validators.required
+          ]
+        ],
+        password: [
+          '',
+          [
+            Validators.required
+          ]
+        ]
+      }
+    );
   }
+
   onSubmit(): void {
-    const { username, password } = this.form;
-    this.authService.login(username, password).subscribe({
-      next: data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data);
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        //this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
-      },
-      error: err => {
-        this.errorMessage = err.error.message;
+    this.submitted = true;
+    const username = this.login.get("username")?.value;
+    const password = this.login.get("password")?.value;
+
+    this.service.loginUser(username, password).subscribe(result => {
+      console.log(result.id +" "+ result.username);
+      if(result.id == 0) {
         this.isLoginFailed = true;
+        this.errorMessage = "Incorrect login details";
+      } else {
+        sessionStorage.setItem("username", result.username);
+        this.router.navigate(["/account"]);
+        this.service.isLoggedIn = true;
       }
     });
   }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.login.controls;
+  }
+
   reloadPage(): void {
     window.location.reload();
   }
