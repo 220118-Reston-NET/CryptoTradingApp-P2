@@ -95,12 +95,22 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPost("SellOrder")]
-        public IActionResult SellOrder(decimal p_amount, string p_CryptoName, int p_userID, SellOrderHistory p_SellOrder)
+        public IActionResult SellOrder(decimal p_amount, string p_CryptoName, int p_userID, decimal p_sellPrice)
         {
+            decimal _quantity = p_amount/p_sellPrice;
+            SellOrderHistory _newHistory = new SellOrderHistory()
+            {
+                customerId = p_userID,
+                cryptoName = p_CryptoName,
+                sellPrice = p_sellPrice,
+                sellDate = DateTime.Now,
+                quantity = _quantity,
+                total = p_amount
+            };
             try
             {
                 Log.Information("User has successfully used Sell Order function");
-                return Created("Sell order created", _cryptoBL.SellOrder(p_amount, p_CryptoName, p_userID, p_SellOrder));
+                return Created("Sell order created", _cryptoBL.SellOrder(p_amount, p_CryptoName, p_userID, _newHistory));
             }
             catch (System.Exception ex)
             {
