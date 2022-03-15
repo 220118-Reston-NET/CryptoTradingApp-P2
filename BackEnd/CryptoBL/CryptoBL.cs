@@ -62,7 +62,7 @@ namespace CryptoBL{
                 {
                     if(item.cryptoName == p_cryptoName){
                         _repo.SubtractfromWallet(p_amount, p_userID);
-                        _repo.BuyExistingCrypto(p_userID, p_amount, p_cryptoName, DateTime.Now);
+                        _repo.BuyExistingCrypto(p_userID, p_amount, p_cryptoName, DateTime.Now, p_NewAsset.coinQuantity);
                         return _repo.AddBuyOrderHistory(p_order);
                     }
                 }
