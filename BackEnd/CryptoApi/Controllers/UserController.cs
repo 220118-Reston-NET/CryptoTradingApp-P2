@@ -246,6 +246,38 @@ namespace CryptoApi.Controllers
                 return Conflict(ex.Message);
             }
         }
+
+        [HttpPut("UpdateProfit")]
+
+        public IActionResult UpdateTakeProfit(int p_userID, decimal p_amount, string p_cryptoName)
+        {
+            try
+            {
+                Log.Information("User has successfully updated take profit");
+                return Ok(_cryptoBL.UpdateTakeProfit(p_userID, p_amount, p_cryptoName));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("User had issue updating take profit");
+                return Conflict(ex.Message);
+            }
+        }
+
+        [HttpPut("UpdateStopLoss")]
+
+        public IActionResult UpdateStopLoss(int p_userID, decimal p_amount, string p_cryptoName)
+        {
+            try
+            {
+                Log.Information("User has successfully updated stop loss");
+                return Ok(_cryptoBL.UpdateStopLoss(p_userID, p_amount, p_cryptoName));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("User had issue updating stop loss");
+                return Conflict(ex.Message);
+            }
+        }
         
         // DELETE: api/User/5
         [HttpDelete("{id}")]
