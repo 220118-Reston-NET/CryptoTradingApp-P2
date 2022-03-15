@@ -32,6 +32,8 @@ public interface IRepository
     List<Assets> GetAssetsbyCustomer(int _userID);
 
     void DeleteAssetRow(int _userID, string _cryptoName);
+
+    void DeleteUser(int _userID);
     BuyOrderHistory AddBuyOrderHistory(BuyOrderHistory _borderhis);
 
     List<BuyOrderHistory> GetBuyOrderHistoryByCustomer(int _userID);
