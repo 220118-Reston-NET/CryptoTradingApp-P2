@@ -1,5 +1,7 @@
 using System.Data.SqlClient;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using Model;
 //using System.Web.Script.Serialization;
 namespace CryptoDL
@@ -206,7 +208,7 @@ namespace CryptoDL
                         ID = reader.GetInt32(0),
                         username = reader.GetString(1),
 
-                        //_password = reader.GetValue(2),
+                       // _password = SHA1HashValue(reader.GetString(2)).ToString(),
                         
                         name = reader.GetString(4),
                         age = reader.GetInt32(5),

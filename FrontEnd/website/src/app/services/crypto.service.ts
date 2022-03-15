@@ -24,19 +24,5 @@ export class CryptoService{
     cryptoNameString = cryptoNameString.toLowerCase();
     return this.http.get<GraphCoin>(`https://api.coingecko.com/api/v3/coins/${cryptoNameString}/market_chart?vs_currency=usd&days=365&interval=daily`);
   }
-  
-  loadMinuteChart(cryptoName:string|null) : Observable<GraphCoin>
-  {
-    let cryptoNameString:string = <string>cryptoName;
-    cryptoNameString = cryptoNameString.toLowerCase();
-    return this.http.get<GraphCoin>(`https://api.coingecko.com/api/v3/coins/${cryptoNameString}/market_chart?vs_currency=usd&days=5&interval=5m`);
-  }
-
-  loadHourlyChart(cryptoName:string|null) : Observable<GraphCoin>
-  {
-    let cryptoNameString:string = <string>cryptoName;
-    cryptoNameString = cryptoNameString.toLowerCase();
-    return this.http.get<GraphCoin>(`https://api.coingecko.com/api/v3/coins/${cryptoNameString}/market_chart?vs_currency=usd&days=30&interval=hourly`);
-  }
 
 }
