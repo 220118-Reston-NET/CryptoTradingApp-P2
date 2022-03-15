@@ -27,7 +27,7 @@ public interface IRepository
 
     Assets SetTakeProfit(int _userID, decimal _takeprofit, string _cryptoName);
 
-    Assets BuyExistingCrypto(int _userID, decimal _amount, string _cryptoName, DateTime _date);
+    //Assets BuyExistingCrypto(int _userID, decimal _amount, string _cryptoName, DateTime _date);
 
     List<Assets> GetAssetsbyCustomer(int _userID);
 
