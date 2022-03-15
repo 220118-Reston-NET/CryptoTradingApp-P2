@@ -84,7 +84,7 @@ namespace CryptoApi.Controllers
             try
             {
                 Log.Information("User has placed order successfully"); 
-                _cryptoBL.PlaceOrder(_newAsset, p_amount, p_userID, _newbhis);
+                _cryptoBL.PlaceOrder(_newAsset, _newbhis, _cryptoprice, p_amount, p_userID, _cryptoName);
                 return Created("Order successfully placed!", "");
             }
             catch (System.Exception ex)
@@ -95,7 +95,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPost("SellOrder")]
-        public IActionResult SellOrder(decimal p_amount, string p_CryptoName, int p_userID, decimal p_sellPrice)
+        public IActionResult SellOrder(decimal p_amount, string p_CryptoName, int p_userID, decimal p_sellPrice, decimal p_cryptoPrice)
         {
             decimal _quantity = p_amount/p_sellPrice;
             SellOrderHistory _newHistory = new SellOrderHistory()
@@ -110,7 +110,7 @@ namespace CryptoApi.Controllers
             try
             {
                 Log.Information("User has successfully used Sell Order function");
-                return Created("Sell order created", _cryptoBL.SellOrder(p_amount, p_CryptoName, p_userID, _newHistory));
+                return Created("Sell order created", _cryptoBL.SellOrder(p_amount, p_CryptoName, p_userID, _newHistory, p_cryptoPrice));
             }
             catch (System.Exception ex)
             {
