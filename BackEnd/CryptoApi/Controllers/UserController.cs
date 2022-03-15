@@ -74,7 +74,7 @@ namespace CryptoApi.Controllers
                 customerId = p_userID,
                 cryptoName = _cryptoName,
                 buyPrice = _cryptoprice,
-                buyDate =_newAsset.buyDate,
+                buyDate = DateTime.Now,
                 quantity = _coinQuantity,
                 total = p_amount
             };
