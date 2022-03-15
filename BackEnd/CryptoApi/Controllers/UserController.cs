@@ -84,10 +84,13 @@ namespace CryptoApi.Controllers
             try
             {
                 Log.Information("User has placed order successfully"); 
-                _cryptoBL.PlaceOrder(_newAsset, _newbhis, _cryptoprice, p_amount, p_userID, _cryptoName);
+                if ( _cryptoBL.PlaceOrder(_newAsset, _newbhis, _cryptoprice, p_amount, p_userID, _cryptoName) == null)
+                {
+                     return Conflict("Insufficient funds");
+                }
                 return Created("Order successfully placed!", "");
             }
-            catch (System.Exception ex)
+            catch (SqlException ex)
             {
                 Log.Warning("User had issue placing an order");
                 return Conflict(ex.Message);
