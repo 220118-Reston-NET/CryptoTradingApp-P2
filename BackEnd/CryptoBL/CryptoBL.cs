@@ -9,11 +9,13 @@ namespace CryptoBL{
         public CryptoClassBL(IRepository p_repo){
             _repo = p_repo;
         }
+
         public AccountUser AddUser(AccountUser p_NewUser)
         {
              _repo.AddUser(p_NewUser);
             return p_NewUser;
         }
+        
         public Wallet AddtoWallet(decimal p_amount, int p_userID)
         {
             return _repo.AddtoWallet(p_amount, p_userID);
@@ -56,9 +58,19 @@ namespace CryptoBL{
         public BuyOrderHistory PlaceOrder(Assets p_NewAsset, BuyOrderHistory p_order, decimal p_cryptoPrice, decimal p_amount, int p_userID, string p_cryptoName)
         {
             try{
-                _repo.SubtractfromWallet(p_amount, p_userID);
-                _repo.BuyCrypto(p_NewAsset);
-                return _repo.AddBuyOrderHistory(p_order);
+                foreach (var item in ViewAssets(p_userID))
+                {
+                    if(item.cryptoName == p_cryptoName){
+                        return _repo.AddBuyOrderHistory(p_order);
+                    }
+                    else{
+                    _repo.SubtractfromWallet(p_amount, p_userID);
+                    _repo.BuyCrypto(p_NewAsset);
+                    return _repo.AddBuyOrderHistory(p_order);
+                    }
+                return null;
+                }
+                return null;
             }
             catch(SqlException){
                 return null;
@@ -127,5 +139,19 @@ namespace CryptoBL{
         {
             return _repo.GetPredictedPrices();
         }
+
+        public Assets UpdateTakeProfit(int p_userID, decimal p_amount, string p_cryptoName)
+        {
+            return _repo.SetTakeProfit(p_userID, p_amount, p_cryptoName);
+        }
+
+        public Assets UpdateStopLoss(int p_userID, decimal p_amount, string p_cryptoName)
+        {
+            return _repo.SetStopLoss(p_userID, p_amount, p_cryptoName);
+        }
+        public DateTime UpdateBuyDate(){
+            throw new NotImplementedException();
+        }
+    
     }
 }
