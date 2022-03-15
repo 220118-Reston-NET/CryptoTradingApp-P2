@@ -55,9 +55,14 @@ namespace CryptoBL{
 
         public BuyOrderHistory PlaceOrder(Assets p_NewAsset, BuyOrderHistory p_order, decimal p_coinQuantity, decimal p_amount, int p_userID, string p_cryptoName)
         {
-            _repo.SubtractfromWallet(p_amount, p_userID);
-            _repo.BuyCrypto(p_NewAsset);
-            return _repo.AddBuyOrderHistory(p_order);
+            try{
+                _repo.SubtractfromWallet(p_amount, p_userID);
+                _repo.BuyCrypto(p_NewAsset);
+                return _repo.AddBuyOrderHistory(p_order);
+            }
+            catch(SqlException){
+                return null;
+            }
         }
         public SellOrderHistory SellOrder(decimal p_amount, string p_CryptoName, int p_userID, SellOrderHistory p_SellOrder){
             _repo.DeleteAssetRow(p_userID, p_CryptoName);
