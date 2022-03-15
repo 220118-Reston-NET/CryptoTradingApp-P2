@@ -95,14 +95,14 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPost("SellOrder")]
-        public IActionResult SellOrder(decimal p_amount, string p_CryptoName, int p_userID, decimal p_sellPrice, decimal p_cryptoPrice)
+        public IActionResult SellOrder(decimal p_amount, string p_CryptoName, int p_userID, decimal p_cryptoPrice)
         {
-            decimal _quantity = p_amount/p_sellPrice;
+            decimal _quantity = p_amount/p_cryptoPrice;
             SellOrderHistory _newHistory = new SellOrderHistory()
             {
                 customerId = p_userID,
                 cryptoName = p_CryptoName,
-                sellPrice = p_sellPrice,
+                sellPrice = p_cryptoPrice,
                 sellDate = DateTime.Now,
                 quantity = _quantity,
                 total = p_amount
