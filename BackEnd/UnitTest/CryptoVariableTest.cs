@@ -53,6 +53,70 @@ public class CryptoVariablesTest
         //Assert
         Assert.NotNull(crypto.alphaVal);
         Assert.Equal(validAlpha, crypto.alphaVal);
+
+    }
+
+    [Fact]
+    public void betaShouldSetValidData()
+    {
+        //Arrange
+        CryptoVariables crypto = new CryptoVariables();
+        decimal validBeta = 200;
+    
+        //Act
+        crypto.betaVal = validBeta;
+    
+        //Assert
+        Assert.NotNull(crypto.betaVal);
+        Assert.Equal(validBeta, crypto.betaVal);
+
+    }
+
+    [Fact]
+    public void sandShouldSetValidData()
+    {
+        //Arrange
+        CryptoVariables crypto = new CryptoVariables();
+        decimal validSand = 300;
+    
+        //Act
+        crypto.sandp500Val = validSand;
+    
+        //Assert 
+        Assert.NotNull(crypto.sandp500Val);
+        Assert.Equal(validSand, crypto.sandp500Val);
+
+    }
+
+    [Fact]
+    public void randShouldSetValidData()
+    {
+        //Arrange
+        CryptoVariables crypto = new CryptoVariables();
+        decimal validRand = 500;
+    
+        //Act
+        crypto.randVal = validRand;
+    
+        //Assert 
+        Assert.NotNull(crypto.randVal);
+        Assert.Equal(validRand, crypto.randVal);
+
+    }
+
+    [Fact]
+    public void calculatedShoudSetValidData()
+    {
+        //Arrange 
+        CryptoVariables crypto = new CryptoVariables();
+        float validCalc = 55;
+    
+        //Act
+        crypto.calculated = validCalc;
+    
+        //Assert
+        Assert.NotNull(crypto.calculated);
+        Assert.Equal(validCalc, crypto.calculated);
         
     }
 }
