@@ -283,9 +283,20 @@ namespace CryptoApi.Controllers
         }
         
         // DELETE: api/User/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("DeleteUser")]
+        public IActionResult DeleteUser(int p_userID)
         {
+            try
+            {
+                Log.Information("Successfully deleted user");
+                _cryptoBL.DeleteUser(p_userID);
+                return Ok("You have successfully deleted user");
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("User had issue using delete function");
+                return Conflict(ex.Message);
+            }
         }
     }
 }

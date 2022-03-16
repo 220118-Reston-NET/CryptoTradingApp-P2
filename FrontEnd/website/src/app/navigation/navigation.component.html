@@ -1,6 +1,6 @@
 <!-- navigation bar start-->
 <nav class="navbar navbar-expand-sm navbar-light">
-    <img src="../assets/images/nav_logo.png" class="rounded-circle">
+    <img src="../assets/images/nav_logo.png" class="rounded-circle" routerLink="/home">
     <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-expanded="false" aria-controls="navbar">
       <span><i class="fas fa-bars"></i></span>
     </button>
@@ -32,7 +32,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item">Porfolio Value: ${{ this.currentCash.toLocaleString() }}</a>
-              <a class="dropdown-item" href="#">View Positions</a>
+              <a class="dropdown-item" routerLink="/account">View Positions</a>
               <a class="dropdown-item" routerLink="/account">Edit Profile</a>
               <a class="dropdown-item" (click)="logout()">Log Out</a>
             </div>

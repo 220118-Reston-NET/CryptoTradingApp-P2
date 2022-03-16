@@ -1,6 +1,7 @@
 using Model;
 using CryptoDL;
 using System.Data.SqlClient;
+using System.Text.Json;
 
 namespace CryptoBL{
     public class CryptoClassBL : ICryptoClassBL
@@ -23,11 +24,10 @@ namespace CryptoBL{
 
         public Notification Notification(int p_userID)
         {
-            Notification _setNoti = new Notification(){
-                customerId = -1,
-                cryptoName = "No Name",
-                alertPrice = 0.00m,
-            };
+            string _filename = "../stockprices.json";
+            string jsonString = File.ReadAllText(_filename);
+            Notification _setNoti = JsonSerializer.Deserialize<Notification>(jsonString);
+            _setNoti.customerId = p_userID;
             List<CryptoVariables> _futures = CryptoFutures();
             List<Assets> _userasset = ViewAssets(p_userID);
             foreach (var item in _userasset)
@@ -146,6 +146,9 @@ namespace CryptoBL{
         public Assets UpdateStopLoss(int p_userID, decimal p_amount, string p_cryptoName)
         {
             return _repo.SetStopLoss(p_userID, p_amount, p_cryptoName);
+        }
+        public void DeleteUser(int p_userID){
+            _repo.DeleteUser(p_userID);
         }
     }
 }
