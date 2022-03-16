@@ -63,7 +63,7 @@ namespace CryptoApi.Controllers
             {
                 customerId = p_userID,
                 cryptoName = _cryptoName,
-                buyPrice = _cryptoprice,
+                buyPrice = p_amount,
                 buyDate = DateTime.Now,
                 stoploss = 0,
                 takeprofit = 0,
