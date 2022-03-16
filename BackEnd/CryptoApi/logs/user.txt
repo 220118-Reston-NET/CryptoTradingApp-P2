@@ -80,3 +80,10 @@
 2022-03-15 16:38:22.785 -07:00 [INF] User has placed order successfully
 2022-03-15 17:12:53.553 -07:00 [INF] User has placed order successfully
 2022-03-15 17:13:59.270 -07:00 [INF] User has placed order successfully
+2022-03-15 17:46:58.196 -07:00 [INF] User has placed order successfully
+2022-03-15 17:46:58.841 -07:00 [WRN] User had issue placing an order
+2022-03-15 17:50:35.160 -07:00 [INF] Admin has successfully added user
+2022-03-15 17:50:53.549 -07:00 [INF] User has placed order successfully
+2022-03-15 17:51:18.463 -07:00 [INF] User has placed order successfully
+2022-03-15 17:51:52.952 -07:00 [INF] User has placed order successfully
+2022-03-15 17:53:47.735 -07:00 [INF] User has placed order successfully
