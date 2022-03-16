@@ -44,14 +44,14 @@ export class AccountService {
     return this.http.post<AccountUser>("http://cryptotradingapp.azurewebsites.net/api/User/SellOrder?p_amount="+amount+"&p_CryptoName="+cryptoName+"&p_userID="+user.id+"&p_cryptoPrice="+ cryptoPrice, user);
   }
 
-  stopLoss(user:AccountUser, cryptoName: string, cryptoPrice:number)
+  stopLoss(user:AccountUser, cryptoName: string, amount:number)
   {
-    return this.http.post<AccountUser>("http://cryptotradingapp.azurewebsites.net/api/User/SellOrder?p_userID="+user.id+"&_cryptoName="+cryptoName+"&_cryptoprice="+ cryptoPrice, user);
+    return this.http.post<AccountUser>("http://cryptotradingapp.azurewebsites.net/api/User/UpdateStopLoss?p_userID="+user.id+"&p_amount="+amount+"&p_cryptoName="+ cryptoName, user);
   }
 
-  takeProfit(user:AccountUser, cryptoName: string, cryptoPrice:number)
+  takeProfit(user:AccountUser, cryptoName: string, amount:number)
   {
-    return this.http.post<AccountUser>("http://cryptotradingapp.azurewebsites.net/api/User/SellOrder?p_userID="+user.id+"&_cryptoName="+cryptoName+"&_cryptoprice="+ cryptoPrice, user);
+    return this.http.post<AccountUser>("http://cryptotradingapp.azurewebsites.net/api/User/UpdateProfit?p_userID="+user.id+"&p_amount="+amount+"&p_cryptoName="+ cryptoName, user);
   }
 
   buyOrderHistory(user:AccountUser)
@@ -67,6 +67,16 @@ export class AccountService {
   getAssets(user:AccountUser)
   {
     return this.http.get<Assets[]>("http://cryptotradingapp.azurewebsites.net/api/Admin/ViewAssets?p_userID="+user.id);
+  }
+
+  updateUsername(user:AccountUser, newUsername: string)
+  {
+    return this.http.put<AccountUser>("http://cryptotradingapp.azurewebsites.net/api/User/UpdateUsername?p_userID="+user.id+"&p_userName="+newUsername, user);
+  }
+
+  deleteAccount(user: AccountUser)
+  {
+    return this.http.delete("http://cryptotradingapp.azurewebsites.net/api/User/DeleteUser?p_userID="+ user.id);
   }
 
 }

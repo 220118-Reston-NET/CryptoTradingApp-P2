@@ -46,7 +46,7 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle("Cryptocurrencies | CryptTrade");
+    this.titleService.setTitle("Cryptocurrencies | CryptoTrader");
     this.subscription = timer(0, 10000).pipe(
       switchMap(() => this.http
       .get<Coin[]>(this.api))

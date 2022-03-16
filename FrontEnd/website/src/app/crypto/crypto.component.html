@@ -37,15 +37,19 @@
                 <div class="card-body p-md-5">
                     <div class="row justify-content-center">
                         <div class="col-12 col-lg-10 col-xl-8 mx-auto">
-                            <div class="d-grid gap-2">
+                            <div class="d-grid gap-2" *ngIf="this.account.isLoggedIn">
                                 <button type="button" class="btn btn-primary btn-lg buy" (click)="attemptPurchase()">Buy Market</button>
-                                <button type="button" class="btn btn-primary btn-lg sell" (click)="attemptSell()">Sell Market</button>
+                                <button type="button" class="btn btn-primary btn-lg sell" (click)="sendOrder('sell')">Sell Market</button>
                             </div>
+                            <div class="d-grid gap-2" *ngIf="!this.account.isLoggedIn">
+                              <button type="button" class="btn btn-primary btn-lg buy" (click)="goToLogin()">Buy Market</button>
+                              <button type="button" class="btn btn-primary btn-lg sell" (click)="goToLogin()">Sell Market</button>
+                          </div>
                             <form [formGroup]="purchasing" *ngIf="attemptingToPurchase">
                                 <div class="form-row">
                                     <div class="d-flex flex-row align-items-center mb-4">
                                       <div class="form-outline flex-fill mb-0">
-                                        <input type="text"
+                                        <input type="number"
                                         class="form-control"
                                         name="amount"
                                         formControlName="amount"
@@ -59,35 +63,49 @@
                                     <p>Estimated price: ${{coin.current_price.toLocaleString()}}</p>
                                     <p>You have ${{currentCash.toLocaleString()}} available</p>
                                 </div>
-                                <button type="submit" class="btn btn-primary" (click)="sendOrder('buy')">Submit Order</button>
+                                <button type="submit" class="btn btn-primary me-1" (click)="sendOrder('buy')">Submit Order</button>
                                 <button type="submit" class="btn btn-primary" (click)="cancelPurchase()">Cancel Order</button>
                                 <div class="form-group">
                                     <div
-                                    class="alert alert-warning"
+                                    class="alert alert-danger"
                                       role="alert"
                                       *ngIf="isBuyingSuccess">
                                       Successfully bought crypto!
                                     </div>
                                     <div
-                                    class="alert alert-warning"
+                                    class="alert alert-danger"
                                       role="alert"
                                       *ngIf="isBuyingFailed">
                                       Purchase failed!
                                     </div>
                                   </div>
                             </form>
-                            <form [formGroup]="selling" *ngIf="attemptingToSell">
+                            <div class="form-group">
+                              <div
+                              class="alert alert-danger"
+                                role="alert"
+                                *ngIf="isSellingSuccess">
+                                Successfully sold crypto!
+                              </div>
+                              <div
+                              class="alert alert-danger"
+                                role="alert"
+                                *ngIf="isSellingFailed">
+                                Selling failed!
+                              </div>
+                            </div>
+                            <!--<form [formGroup]="selling" *ngIf="attemptingToSell">
                                 <div class="form-row">
                                     <div class="d-flex flex-row align-items-center mb-4">
                                       <div class="form-outline flex-fill mb-0">
-                                        <input type="text"
+                                        <input type="number"
                                         class="form-control"
                                         name="amount"
                                         formControlName="amount"
-                                        [ngClass]="{ 'is-invalid': f['amount'].errors }"/>
+                                        [ngClass]="{ 'is-invalid': n['amount'].errors }"/>
                                         <label class="form-label" for="amount">Amount in <b>USD</b></label>
-                                        <div class="alert-danger" *ngIf="f['amount'].errors">
-                                          <div *ngIf="f['amount'].errors['required']">Amount is required</div>
+                                        <div class="alert-danger" *ngIf="n['amount'].errors">
+                                          <div *ngIf="n['amount'].errors['required']">Amount is required</div>
                                         </div>
                                       </div>
                                     </div>
@@ -98,24 +116,28 @@
                                 <button type="submit" class="btn btn-primary" (click)="cancelPurchase()">Cancel Order</button>
                                 <div class="form-group">
                                     <div
-                                    class="alert alert-warning"
+                                    class="alert alert-danger"
                                       role="alert"
                                       *ngIf="isSellingSuccess">
                                       Successfully sold crypto!
                                     </div>
                                     <div
-                                    class="alert alert-warning"
+                                    class="alert alert-danger"
                                       role="alert"
                                       *ngIf="isSellingFailed">
                                       Selling failed!
                                     </div>
                                   </div>
-                            </form>
-                            <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4" *ngIf="this.account.isLoggedIn">Quantity</p>
-                            <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4" *ngIf="this.account.isLoggedIn">Equity</p>
-                            <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4" *ngIf="this.account.isLoggedIn">Avg Cost</p>
-                            <button type="button" class="btn btn-primary btn-sm me-1" *ngIf="this.account.isLoggedIn">Stop Loss</button>
-                            <button type="button" class="btn btn-primary btn-sm" *ngIf="this.account.isLoggedIn">Take Profit</button>
+                            </form>-->
+                            <div *ngIf="this.hasAsset">
+                              <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4" *ngIf="this.account.isLoggedIn">Quantity</p>
+                              <p class="text-center mb-5" *ngIf="this.account.isLoggedIn">{{currentAsset.coinQuantity}}</p>
+                              <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4" *ngIf="this.account.isLoggedIn">Avg Cost</p>
+                              <p class="text-center mb-5" *ngIf="this.account.isLoggedIn">{{currentAsset.buyPrice}}</p>
+        
+                              <button type="button" class="btn btn-primary btn-sm me-1" *ngIf="this.account.isLoggedIn">Stop Loss</button>
+                              <button type="button" class="btn btn-primary btn-sm" *ngIf="this.account.isLoggedIn">Take Profit</button>
+                            </div>
                         </div>
                     </div>
                 </div>

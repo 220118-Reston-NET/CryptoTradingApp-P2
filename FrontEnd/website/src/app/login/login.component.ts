@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private titleService: Title, private formBuilder: FormBuilder, private service:AccountService) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle("Login | CryptTrade");
+    this.titleService.setTitle("Login | CryptoTrader");
     this.login = this.formBuilder.group(
       {
         username: [

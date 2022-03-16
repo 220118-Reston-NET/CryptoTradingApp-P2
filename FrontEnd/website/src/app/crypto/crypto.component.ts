@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GraphCoin } from '../models/graph.model';
 import { MarketCoin } from '../models/marketcoin.model';
 import { CryptoService } from '../services/crypto.service';
@@ -24,6 +24,8 @@ export class CryptoComponent implements OnInit {
   currentUser: any;
   listOfUsers: any = [];
   currentCash: any;
+  currentAsset: any;
+  hasAsset = false;
 
   attemptingToPurchase = false;
   purchasing: FormGroup = new FormGroup({
@@ -33,10 +35,10 @@ export class CryptoComponent implements OnInit {
   selling: FormGroup = new FormGroup({
     amount: new FormControl('')
   });
-isBuyingSuccess = false;
-isBuyingFailed = false;
-isSellingSuccess = false;
-isSellingFailed = false;
+  isBuyingSuccess = false;
+  isBuyingFailed = false;
+  isSellingSuccess = false;
+  isSellingFailed = false;
 
   public lineChartData: ChartConfiguration['data'];
 
@@ -58,7 +60,7 @@ isSellingFailed = false;
 
   public lineChartType: ChartType = 'line';
 
-  constructor(private router:ActivatedRoute, private service:CryptoService, private formBuilder: FormBuilder, public account:AccountService, private titleService: Title) {
+  constructor(private router:ActivatedRoute, private route:Router, private service:CryptoService, private formBuilder: FormBuilder, public account:AccountService, private titleService: Title) {
     this.coin = {
       id: '',
       image: '',
@@ -93,11 +95,16 @@ isSellingFailed = false;
   }
 
   attemptPurchase(): void {
+    this.cancelPurchase();
     this.attemptingToPurchase = true;
   }
 
   get f(): { [key: string]: AbstractControl } {
     return this.purchasing.controls;
+  }
+
+  get n(): { [key: string]: AbstractControl } {
+    return this.selling.controls;
   }
 
   sendOrder(type:string): void {
@@ -111,24 +118,30 @@ isSellingFailed = false;
             this.account.getWallet(this.currentUser).subscribe(res => {
               this.currentCash = res.cash;
             });
+            this.updateAssets();
         },
         (err) => this.isBuyingFailed = true);
       }
     } else if(type == "sell") {
-      const amount = this.purchasing.get("amount")?.value;
-      console.log(amount);
-      this.account.sellMarket(this.currentUser, amount, this.coin.id, this.coin.current_price).subscribe(result=>
-        {
-          this.isSellingSuccess = true;
-          this.account.getWallet(this.currentUser).subscribe(res => {
-            this.currentCash = res.cash;
-          });
-      },
-      (err) => this.isSellingFailed = true);
+      this.cancelPurchase();
+      this.attemptingToSell = true;
+      this.hasAsset = false;
+      if(this.attemptingToSell) {
+        //const amount = this.selling.get("amount")?.value;
+        this.account.sellMarket(this.currentUser, 0, this.coin.id, this.coin.current_price).subscribe(result=>
+          {
+            this.isSellingSuccess = true;
+            this.account.getWallet(this.currentUser).subscribe(res => {
+              this.currentCash = res.cash;
+            });
+        },
+        (err) => this.isSellingFailed = true);
+      }
     }
   }
 
   attemptSell(): void {
+    this.cancelPurchase();
     this.attemptingToSell = true;
   }
 
@@ -138,6 +151,34 @@ isSellingFailed = false;
     this.isBuyingSuccess = false;
     this.isSellingSuccess = false;
     this.isBuyingFailed = false;
+    this.isSellingFailed = false;
+  }
+
+  updateAssets(): void {
+    if (sessionStorage.length == 1) {
+      this.account.isLoggedIn = true;
+      const username = sessionStorage.getItem("username");
+      this.account.getAllUsers().subscribe(result => {
+        this.listOfUsers = result;
+        this.listOfUsers.forEach((user: any) => {
+          if(user.username == username) {
+            this.currentUser = user;
+            this.account.getWallet(this.currentUser).subscribe(res => {
+              this.currentCash = res.cash;
+            });
+            this.account.getAssets(this.currentUser).subscribe(res => {
+              var list = res;
+              list.forEach(r => {
+                if (r.cryptoName == this.coin.id) {
+                  this.currentAsset = r;
+                  this.hasAsset = true;
+                }
+              });
+            });
+          }
+        });
+      });
+    }
   }
 
   ngOnInit(): void {
@@ -161,28 +202,13 @@ isSellingFailed = false;
         ]
       }
     );
-    if (sessionStorage.length == 1) {
-      this.account.isLoggedIn = true;
-      const username = sessionStorage.getItem("username");
-      this.account.getAllUsers().subscribe(result => {
-      this.listOfUsers = result;
-      this.listOfUsers.forEach((user: any) => {
-        if(user.username == username) {
-          this.currentUser = user;
-          this.account.getWallet(this.currentUser).subscribe(res => {
-            this.currentCash = res.cash;
-          });
-        }
-      });
-    });
-    }
 
     this.cryptoName = this.router.snapshot.paramMap.get("cryptoname");
     this.subscription = timer(0, 10000).pipe(
       switchMap(() =>
-    this.service.getCoinByName(this.cryptoName))).subscribe((res) => {
+      this.service.getCoinByName(this.cryptoName))).subscribe((res) => {
       this.coin = res[0];
-      this.titleService.setTitle(this.coin.name +" | CryptTrade");
+      this.titleService.setTitle(this.coin.name +" | CryptoTrader");
     },
     (err) => console.log(err));
 
@@ -216,5 +242,11 @@ isSellingFailed = false;
       };
     },
     (err) => console.log(err));
+
+    this.updateAssets();
+  }
+
+  goToLogin(): void {
+    this.route.navigate(['/login']);
   }
 }
