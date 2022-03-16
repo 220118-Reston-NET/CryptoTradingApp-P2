@@ -82,7 +82,7 @@
                                                 <div class="alert-danger" *ngIf="submitted && f['oldPassword'].errors">
                                                     <div *ngIf="f['oldPassword'].errors['required']">Password is required</div>
                                                     <div *ngIf="f['oldPassword'].errors['minlength']">
-                                                      Password must be at least 8 characters
+                                                      Password must be at least 6 characters
                                                     </div>
                                                     <div *ngIf="f['oldPassword'].errors['maxlength']">
                                                       Password must not exceed 40 characters
@@ -100,7 +100,7 @@
                                                 <div class="alert-danger" *ngIf="submitted && f['newPassword'].errors">
                                                     <div *ngIf="f['newPassword'].errors['required']">Password is required</div>
                                                     <div *ngIf="f['newPassword'].errors['minlength']">
-                                                      Password must be at least 8 characters
+                                                      Password must be at least 6 characters
                                                     </div>
                                                     <div *ngIf="f['newPassword'].errors['maxlength']">
                                                       Password must not exceed 40 characters
@@ -126,17 +126,17 @@
                                             <p class="mb-2">Password requirements</p>
                                             <p class="small text-muted mb-2">To create a new password, you have to meet all of the following requirements:</p>
                                             <ul class="small text-muted pl-4 mb-0">
-                                                <li>Minimum 8 characters</li>
+                                                <li>Minimum 6 characters</li>
                                                 <li>Maximum 40 characters</li>
                                                 <li>At least one special character</li>
                                                 <li>At least one number</li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary me-1" (click)="doChanges()">Save Changes</button>
+                                    <button class="btn btn-primary gold me-1" (click)="doChanges()">Save Changes</button>
                                     <button class="btn btn-primary delete" (click)="doDelete()">Delete Account</button>
                                     <div class="alert alert-danger" *ngIf="isChangesFailed">
-                                        Could not save requested changes. {{errorMessage}}
+                                        Could not execute requested changes. {{errorMessage}}
                                     </div>
                                     <div class="alert alert-success" *ngIf="isChangesSuccess">
                                         {{successMessage}}
@@ -240,7 +240,7 @@
                                 <td>${{coin.total.toLocaleString()}}</td>
                                 <td>${{coin.sellPrice.toLocaleString()}}</td>
                                 <td>{{coin.quantity}}</td>
-                                <td>Buy</td>
+                                <td>Sell</td>
                               </tr>
                         </tbody>
                       </table>

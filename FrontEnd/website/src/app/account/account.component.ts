@@ -93,10 +93,15 @@ export class AccountComponent implements OnInit {
   }
 
   doChanges(): void {
+    this.isDeleting = false;
     this.isChanging = true;
+    this.submitted = false;
+    this.isChangesFailed = false;
+    this.isChangesSuccess = false;
   }
 
   doDelete(): void {
+    this.isChanging = false;
     this.isDeleting = true;
   }
 
@@ -137,6 +142,24 @@ export class AccountComponent implements OnInit {
             }
           });
         }
+
+        if (newPassword.length > 5 && confirmPassword.length > 5) {
+          this.service.loginUser(this.currentUser.username, oldPassword).subscribe(result => {
+            if(result.id == 0) {
+              this.isChangesFailed = true;
+              this.errorMessage = "Incorrect login details...";
+            } else {
+              this.service.updatePassword(this.currentUser, newPassword).subscribe(res => {
+                this.isChangesSuccess = true;
+                this.successMessage = "Successfully changed password!";
+              },
+              (err) => {
+                this.isChangesFailed = true;
+                this.errorMessage ="Could not save password!";
+              });
+            }
+          });
+        }
       } else if(this.isDeleting) {
         this.service.loginUser(this.currentUser.username, oldPassword).subscribe(result => {
           if(result.id == 0) {
@@ -149,8 +172,6 @@ export class AccountComponent implements OnInit {
               this.route.navigate(['/']);
             },
             (err) => {
-              //this.isChangesFailed = true;
-              //this.errorMessage ="Someone already owns this username!";
               sessionStorage.removeItem("username");
               this.service.isLoggedIn = false;
               this.route.navigate(['/']);

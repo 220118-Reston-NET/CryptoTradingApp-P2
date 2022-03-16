@@ -63,8 +63,8 @@
                                     <p>Estimated price: ${{coin.current_price.toLocaleString()}}</p>
                                     <p>You have ${{currentCash.toLocaleString()}} available</p>
                                 </div>
-                                <button type="submit" class="btn btn-primary me-1" (click)="sendOrder('buy')">Submit Order</button>
-                                <button type="submit" class="btn btn-primary" (click)="cancelPurchase()">Cancel Order</button>
+                                <button type="submit" class="btn btn-primary gold me-1" (click)="sendOrder('buy')">Submit Order</button>
+                                <button type="submit" class="btn btn-primary delete" (click)="cancelPurchase()">Cancel Order</button>
                                 <div class="form-group">
                                     <div
                                     class="alert alert-danger"
@@ -135,8 +135,8 @@
                               <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4" *ngIf="this.account.isLoggedIn">Avg Cost</p>
                               <p class="text-center mb-5" *ngIf="this.account.isLoggedIn">{{currentAsset.buyPrice}}</p>
         
-                              <button type="button" class="btn btn-primary btn-sm me-1" *ngIf="this.account.isLoggedIn">Stop Loss</button>
-                              <button type="button" class="btn btn-primary btn-sm" *ngIf="this.account.isLoggedIn">Take Profit</button>
+                              <button type="button" class="btn btn-primary btn-sm delete me-1" *ngIf="this.account.isLoggedIn">Stop Loss</button>
+                              <button type="button" class="btn btn-primary btn-sm gold" *ngIf="this.account.isLoggedIn">Take Profit</button>
                             </div>
                         </div>
                     </div>
