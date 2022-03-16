@@ -7,6 +7,8 @@ import { CryptoService } from '../services/crypto.service';
 import { ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import { AccountService } from '../services/account.service';
 import { Subscription, switchMap, timer } from 'rxjs';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-crypto',
@@ -19,6 +21,22 @@ export class CryptoComponent implements OnInit {
   cryptoName:string | null = "No Crypto Selected";
   coin: MarketCoin;
   graph: GraphCoin;
+  currentUser: any;
+  listOfUsers: any = [];
+  currentCash: any;
+
+  attemptingToPurchase = false;
+  purchasing: FormGroup = new FormGroup({
+    amount: new FormControl('')
+  });
+  attemptingToSell = false;
+  selling: FormGroup = new FormGroup({
+    amount: new FormControl('')
+  });
+isBuyingSuccess = false;
+isBuyingFailed = false;
+isSellingSuccess = false;
+isSellingFailed = false;
 
   public lineChartData: ChartConfiguration['data'];
 
@@ -40,7 +58,7 @@ export class CryptoComponent implements OnInit {
 
   public lineChartType: ChartType = 'line';
 
-  constructor(private router:ActivatedRoute, private service:CryptoService, public account:AccountService) {
+  constructor(private router:ActivatedRoute, private service:CryptoService, private formBuilder: FormBuilder, public account:AccountService, private titleService: Title) {
     this.coin = {
       id: '',
       image: '',
@@ -74,12 +92,97 @@ export class CryptoComponent implements OnInit {
     return Math.round(num * 100) / 100;
   }
 
+  attemptPurchase(): void {
+    this.attemptingToPurchase = true;
+  }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.purchasing.controls;
+  }
+
+  sendOrder(type:string): void {
+    if(type == "buy") {
+      if(this.attemptingToPurchase) {
+        const amount = this.purchasing.get("amount")?.value;
+        console.log(amount);
+        this.account.buyMarket(this.currentUser, amount, this.coin.id, this.coin.current_price).subscribe(result=>
+          {
+            this.isBuyingSuccess = true;
+            this.account.getWallet(this.currentUser).subscribe(res => {
+              this.currentCash = res.cash;
+            });
+        },
+        (err) => this.isBuyingFailed = true);
+      }
+    } else if(type == "sell") {
+      const amount = this.purchasing.get("amount")?.value;
+      console.log(amount);
+      this.account.sellMarket(this.currentUser, amount, this.coin.id, this.coin.current_price).subscribe(result=>
+        {
+          this.isSellingSuccess = true;
+          this.account.getWallet(this.currentUser).subscribe(res => {
+            this.currentCash = res.cash;
+          });
+      },
+      (err) => this.isSellingFailed = true);
+    }
+  }
+
+  attemptSell(): void {
+    this.attemptingToSell = true;
+  }
+
+  cancelPurchase(): void {
+    this.attemptingToPurchase = false;
+    this.attemptingToSell = false;
+    this.isBuyingSuccess = false;
+    this.isSellingSuccess = false;
+    this.isBuyingFailed = false;
+  }
+
   ngOnInit(): void {
+    this.purchasing = this.formBuilder.group(
+      {
+        amount: [
+          '',
+          [
+            Validators.required
+          ]
+        ]
+      }
+    );
+    this.selling = this.formBuilder.group(
+      {
+        amount: [
+          '',
+          [
+            Validators.required
+          ]
+        ]
+      }
+    );
+    if (sessionStorage.length == 1) {
+      this.account.isLoggedIn = true;
+      const username = sessionStorage.getItem("username");
+      this.account.getAllUsers().subscribe(result => {
+      this.listOfUsers = result;
+      this.listOfUsers.forEach((user: any) => {
+        if(user.username == username) {
+          this.currentUser = user;
+          this.account.getWallet(this.currentUser).subscribe(res => {
+            this.currentCash = res.cash;
+          });
+        }
+      });
+    });
+    }
+
     this.cryptoName = this.router.snapshot.paramMap.get("cryptoname");
     this.subscription = timer(0, 10000).pipe(
       switchMap(() =>
     this.service.getCoinByName(this.cryptoName))).subscribe((res) => {
       this.coin = res[0];
+      this.titleService.setTitle(this.coin.name +" | CryptTrade");
     },
     (err) => console.log(err));
 
@@ -91,7 +194,7 @@ export class CryptoComponent implements OnInit {
       var time = this.graph.prices.map(x => x[0]);
       var date: string[] = [];
       time.forEach(function(t) {
-          var read = new Date(t).toLocaleString();
+          var read = new Date(t).toDateString();
           date.push(read);
       });
 

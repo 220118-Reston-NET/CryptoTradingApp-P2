@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
 
@@ -18,9 +19,10 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = "";
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private service:AccountService) { }
+  constructor(private router: Router, private titleService: Title, private formBuilder: FormBuilder, private service:AccountService) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle("Login | CryptTrade");
     this.login = this.formBuilder.group(
       {
         username: [
@@ -45,7 +47,6 @@ export class LoginComponent implements OnInit {
     const password = this.login.get("password")?.value;
 
     this.service.loginUser(username, password).subscribe(result => {
-      console.log(result.id +" "+ result.username);
       if(result.id == 0) {
         this.isLoginFailed = true;
         this.errorMessage = "Incorrect login details";

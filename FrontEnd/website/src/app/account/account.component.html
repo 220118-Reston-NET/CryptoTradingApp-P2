@@ -92,41 +92,97 @@
     </div>
 </section>
 
-<!-- Order history section -->
-<section class="ml-1" id="orderhistory">
+<!-- User position section -->
+<section class="ml-1" id="positions" *ngIf="currentUser; else loggedOut">
     <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="card text-black w-100" style="border-radius: 25px;">
                 <div class="card-body p-md-5">
-                    <h2 class="h3 mb-4 page-title">Order History</h2>
+                    <h2 class="h3 mb-4 page-title">Crypto Assets</h2>
+                    <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Cryptocurrency</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Market Price</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let coin of positions">
+                                <td>{{coin.cryptoName}}</td>
+                                <td>{{coin.coinQuantity}}</td>
+                                <td>${{coin.buyPrice.toLocaleString()}}</td>
+                              </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Buy order history section -->
+<section class="ml-1" id="buyorderhistory" *ngIf="currentUser; else loggedOut">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="card text-black w-100" style="border-radius: 25px;">
+                <div class="card-body p-md-5">
+                    <h2 class="h3 mb-4 page-title">Buy Order History</h2>
                     <table class="table">
                         <thead class="thead-dark">
                           <tr>
                             <th scope="col">Date</th>
                             <th scope="col">Cryptocurrency</th>
+                            <th scope="col">USD Spent</th>
                             <th scope="col">Market Price</th>
+                            <th scope="col">Quantity</th>
                             <th scope="col">Transaction Type</th>
                           </tr>
                         </thead>
                         <tbody>
+                            <tr *ngFor="let coin of buyOrders">
+                                <td>{{coin.buyDate}}</td>
+                                <td>{{coin.cryptoName}}</td>
+                                <td>${{coin.total.toLocaleString()}}</td>
+                                <td>${{coin.buyPrice.toLocaleString()}}</td>
+                                <td>{{coin.quantity}}</td>
+                                <td>Buy</td>
+                              </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sell order history section -->
+<section class="ml-1" id="sellorderhistory" *ngIf="currentUser; else loggedOut">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="card text-black w-100" style="border-radius: 25px;">
+                <div class="card-body p-md-5">
+                    <h2 class="h3 mb-4 page-title">Sell Order History</h2>
+                    <table class="table">
+                        <thead class="thead-dark">
                           <tr>
-                            <th scope="row">March 4, 2022</th>
-                            <td>BTC</td>
-                            <td>$39,999.99</td>
-                            <td>Buy</td>
+                            <th scope="col">Date</th>
+                            <th scope="col">Cryptocurrency</th>
+                            <th scope="col">USD Spent</th>
+                            <th scope="col">Market Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Transaction Type</th>
                           </tr>
-                          <tr>
-                            <th scope="row">March 4, 2022</th>
-                            <td>BTC</td>
-                            <td>$39,999.99</td>
-                            <td>Sell</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">March 4, 2022</th>
-                            <td>DOGE</td>
-                            <td>$0.1269</td>
-                            <td>Buy</td>
-                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let coin of sellOrders">
+                                <td>{{coin.sellDate}}</td>
+                                <td>{{coin.cryptoName}}</td>
+                                <td>${{coin.total.toLocaleString()}}</td>
+                                <td>${{coin.sellPrice.toLocaleString()}}</td>
+                                <td>{{coin.quantity}}</td>
+                                <td>Buy</td>
+                              </tr>
                         </tbody>
                       </table>
                 </div>

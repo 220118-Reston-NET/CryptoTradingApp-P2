@@ -13,6 +13,7 @@ import { CryptoComponent } from './crypto/crypto.component';
 import { NgChartsModule } from 'ng2-charts';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { RegisterComponent } from './register/register.component';
     IndexComponent,
     CryptoComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { RegisterComponent } from './register/register.component';
       {path: "account", component:AccountComponent},
       {path: "crypto/:cryptoname", component: CryptoComponent},
       {path: "register", component:RegisterComponent},
-      {path: "login", component:LoginComponent}
+      {path: "login", component:LoginComponent},
+      {path: "home", component:HomeComponent}
     ])
   ],
   providers: [],
