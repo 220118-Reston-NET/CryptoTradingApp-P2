@@ -90,22 +90,8 @@ export class RegisterComponent implements OnInit {
     },
     (err) => {
       this.isSignUpFailed = true;
-      this.errorMessage = ' Username already exists!';
+      this.errorMessage = err.message;
     });
-    /*const { name, username, age, password } = this.signup.value;
-    this.authService.register(name, username, age, password).subscribe({
-      next: data => {
-        console.log(data);
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
-      },
-      error: err => {
-        this.errorMessage = err.error.message;
-        console.log(err.error.message);
-        this.isSignUpFailed = true;
-      }
-    });
-    */
   }
 
   onReset(): void {

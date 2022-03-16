@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AccountUser } from '../models/accountuser.model';
+import { Assets } from '../models/assets.model';
+import { BuyOrderHistory } from '../models/buyorderhistory.model';
+import { SellOrderHistory } from '../models/sellorderhistory.model';
 import { Wallet } from '../models/wallet.model';
 
 @Injectable({
@@ -29,6 +32,41 @@ export class AccountService {
   getWallet(user:AccountUser)
   {
     return this.http.get<Wallet>("http://cryptotradingapp.azurewebsites.net/api/User/ViewWallet?p_userID="+user.id);
+  }
+
+  buyMarket(user:AccountUser, amount:number, cryptoName: string, cryptoPrice:number)
+  {
+    return this.http.post<AccountUser>("http://cryptotradingapp.azurewebsites.net/api/User/PlaceOrder?p_userID="+user.id+"&p_amount="+amount+"&_cryptoName="+cryptoName+"&_cryptoprice="+ cryptoPrice, user);
+  }
+
+  sellMarket(user:AccountUser, amount:number, cryptoName: string, cryptoPrice:number)
+  {
+    return this.http.post<AccountUser>("http://cryptotradingapp.azurewebsites.net/api/User/SellOrder?p_amount="+amount+"&p_CryptoName="+cryptoName+"&p_userID="+user.id+"&p_cryptoPrice="+ cryptoPrice, user);
+  }
+
+  stopLoss(user:AccountUser, cryptoName: string, cryptoPrice:number)
+  {
+    return this.http.post<AccountUser>("http://cryptotradingapp.azurewebsites.net/api/User/SellOrder?p_userID="+user.id+"&_cryptoName="+cryptoName+"&_cryptoprice="+ cryptoPrice, user);
+  }
+
+  takeProfit(user:AccountUser, cryptoName: string, cryptoPrice:number)
+  {
+    return this.http.post<AccountUser>("http://cryptotradingapp.azurewebsites.net/api/User/SellOrder?p_userID="+user.id+"&_cryptoName="+cryptoName+"&_cryptoprice="+ cryptoPrice, user);
+  }
+
+  buyOrderHistory(user:AccountUser)
+  {
+    return this.http.get<BuyOrderHistory[]>("http://cryptotradingapp.azurewebsites.net/api/Admin/BuyOrderHistory?p_userID="+user.id);
+  }
+
+  sellOrderHistory(user:AccountUser)
+  {
+    return this.http.get<SellOrderHistory[]>("http://cryptotradingapp.azurewebsites.net/api/Admin/SellOrderHistory?p_userID="+user.id);
+  }
+
+  getAssets(user:AccountUser)
+  {
+    return this.http.get<Assets[]>("http://cryptotradingapp.azurewebsites.net/api/Admin/ViewAssets?p_userID="+user.id);
   }
 
 }
