@@ -75,3 +75,8 @@
 2022-03-15 16:13:50.196 -07:00 [INF] Admin has successfully viewed assets
 2022-03-15 16:13:50.682 -07:00 [WRN] Admin had issue viewing assets
 2022-03-15 16:18:31.992 -07:00 [INF] Admin has successfully viewed assets
+2022-03-15 16:37:24.004 -07:00 [INF] User has placed order successfully
+2022-03-15 16:37:51.049 -07:00 [INF] User has placed order successfully
+2022-03-15 16:38:22.785 -07:00 [INF] User has placed order successfully
+2022-03-15 17:12:53.553 -07:00 [INF] User has placed order successfully
+2022-03-15 17:13:59.270 -07:00 [INF] User has placed order successfully

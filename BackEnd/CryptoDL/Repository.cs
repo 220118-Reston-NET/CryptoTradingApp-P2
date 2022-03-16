@@ -153,7 +153,7 @@ namespace CryptoDL
 
         public Assets BuyCrypto(Assets _asset)
         {
-            string SQLQuery = @"insert into Assets values(@customerId, @cryptoName, @buyPrice, @buyDate, @stoploss, @takeprofit, @coinQuantity)";
+            string SQLQuery = @"insert into Assets values(@customerId, @cryptoName, @buyPrice, @buyDate, @stoploss, @takeprofit, @coinQuantity, @buyCount + 1)";
             using(SqlConnection con = new SqlConnection(_connectionStrings))
             {
                 con.Open();
@@ -166,6 +166,7 @@ namespace CryptoDL
                 command.Parameters.AddWithValue("@stoploss", _asset.stoploss);
                 command.Parameters.AddWithValue("@takeprofit", _asset.takeprofit);
                 command.Parameters.AddWithValue("@coinQuantity", _asset.coinQuantity);
+                command.Parameters.AddWithValue("@buyCount", _asset.buyCount);
 
                 command.ExecuteNonQuery();
             }
@@ -629,7 +630,7 @@ namespace CryptoDL
         {
             Assets _asset = new Assets();
              List<Assets> assetlist = new List<Assets>();
-            string SQLQuery = @"update Assets set buyPrice = @buyPrice, buyDate = @buyDate, coinQuantity = coinQuantity + @coinQuantity where customerId = @customerId and cryptoName = @cryptoName";
+            string SQLQuery = @"update Assets set buyPrice = (buyPrice + @buyPrice)/buyCount, buyDate = @buyDate, coinQuantity = coinQuantity + @coinQuantity, buyCount = buyCount + 1 where customerId = @customerId and cryptoName = @cryptoName";
 
             using(SqlConnection con = new SqlConnection(_connectionStrings))
            {
