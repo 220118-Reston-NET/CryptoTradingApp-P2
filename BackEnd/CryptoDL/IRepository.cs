@@ -50,6 +50,8 @@ public interface IRepository
 
     AccountUser UpdateAge(int _userID, int _age);
 
+    AccountUser UpdatePassword(string _userName, string _newPassword);
+
     List<CryptoVariables> GetAllPrice();
     List<CryptoVariables> GetPredictedPrices();
 

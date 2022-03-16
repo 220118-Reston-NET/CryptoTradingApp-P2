@@ -671,5 +671,29 @@ namespace CryptoDL
                command.ExecuteNonQuery();
            } 
         }
+
+        public AccountUser UpdatePassword(string _userName, string _newPassword)
+        {
+            AccountUser _user = new AccountUser();
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+            {
+                con.Open();
+
+                SqlCommand command = new SqlCommand("ChangePassword", con);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@userName", _userName);
+                command.Parameters.AddWithValue("@newPassword", _newPassword);
+
+                command.ExecuteNonQuery();
+                 
+            }
+            //return user part
+            List<AccountUser> list = GetAllUsers();
+            _user.ID = list[list.Count - 1].ID;
+
+            _user = GetSpecificUser(_user.ID);
+            return _user;
+        }
     }
 }
