@@ -24,5 +24,6 @@ namespace CryptoBL{
         public List<CryptoVariables> CryptoFutures ();
         public Assets UpdateTakeProfit(int p_userID, decimal p_amount, string p_cryptoName);
         public Assets UpdateStopLoss(int p_userID, decimal p_amount, string p_cryptoName);
+        public void DeleteUser(int p_userID);
     }
 }
