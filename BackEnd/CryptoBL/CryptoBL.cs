@@ -1,6 +1,7 @@
 using Model;
 using CryptoDL;
 using System.Data.SqlClient;
+using System.Text.Json;
 
 namespace CryptoBL{
     public class CryptoClassBL : ICryptoClassBL
@@ -9,11 +10,13 @@ namespace CryptoBL{
         public CryptoClassBL(IRepository p_repo){
             _repo = p_repo;
         }
+
         public AccountUser AddUser(AccountUser p_NewUser)
         {
              _repo.AddUser(p_NewUser);
             return p_NewUser;
         }
+        
         public Wallet AddtoWallet(decimal p_amount, int p_userID)
         {
             return _repo.AddtoWallet(p_amount, p_userID);
@@ -21,29 +24,24 @@ namespace CryptoBL{
 
         public Notification Notification(int p_userID)
         {
-            Notification _setNoti = new Notification(){
-                customerId = -1,
-                cryptoName = "No Name",
-                alertPrice = 0.00m,
-            };
+            string _filename = "A:/Project2/Remove Authentication/CryptoTradingApp-P2/BackEnd/stockprices.json";
+            string jsonString = File.ReadAllText(_filename);
+            Notification _setNoti = JsonSerializer.Deserialize<Notification>(jsonString);
+            _setNoti.customerId = p_userID;
             List<CryptoVariables> _futures = CryptoFutures();
             List<Assets> _userasset = ViewAssets(p_userID);
             foreach (var item in _userasset)
             {
                 foreach (var item2 in _futures){
                     if (item.stoploss == item2.currentPrice){
-                        Notification _notification = new Notification(){
-                            cryptoName = item2.cryptoName,
-                            alertPrice = item2.currentPrice,
-                        };
-                        return _notification;   
+                        _setNoti.cryptoName = item2.cryptoName;
+                        _setNoti.alertPrice = item2.currentPrice;
+                        return _setNoti;   
                     }
                     else if (item.takeprofit == item2.currentPrice){
-                        Notification _notification = new Notification(){
-                            cryptoName = item2.cryptoName,
-                            alertPrice = item2.currentPrice,
-                        };
-                        return _notification; 
+                        _setNoti.cryptoName = item2.cryptoName;
+                        _setNoti.alertPrice = item2.currentPrice;
+                        return _setNoti;
                     }
                     else{
                         return _setNoti;
@@ -53,13 +51,26 @@ namespace CryptoBL{
             return _setNoti;
         }
 
-        public BuyOrderHistory PlaceOrder(Assets p_NewAsset, decimal p_amount, int p_userID, BuyOrderHistory p_order)
+        public BuyOrderHistory PlaceOrder(Assets p_NewAsset, BuyOrderHistory p_order, decimal p_cryptoPrice, decimal p_amount, int p_userID, string p_cryptoName)
         {
-            _repo.SubtractfromWallet(p_amount, p_userID);
-            _repo.BuyCrypto(p_NewAsset);
-            return _repo.AddBuyOrderHistory(p_order);
+            try{
+                foreach (var item in ViewAssets(p_userID))
+                {
+                    if(item.cryptoName == p_cryptoName){
+                        _repo.SubtractfromWallet(p_amount, p_userID);
+                        _repo.BuyExistingCrypto(p_userID, p_amount, p_cryptoName, DateTime.Now, p_NewAsset.coinQuantity);
+                        return _repo.AddBuyOrderHistory(p_order);
+                    }
+                }
+                _repo.SubtractfromWallet(p_amount, p_userID);
+                _repo.BuyCrypto(p_NewAsset);
+                return _repo.AddBuyOrderHistory(p_order);
+            }
+            catch(SqlException){
+                return null;
+            }
         }
-        public SellOrderHistory SellOrder(decimal p_amount, string p_CryptoName, int p_userID, SellOrderHistory p_SellOrder){
+        public SellOrderHistory SellOrder(decimal p_amount, string p_CryptoName, int p_userID, SellOrderHistory p_SellOrder, decimal p_cryptoPrice){
             _repo.DeleteAssetRow(p_userID, p_CryptoName);
             _repo.AddtoWallet(p_amount, p_userID);
             return _repo.AddSellOrderHistory(p_SellOrder);
@@ -121,6 +132,24 @@ namespace CryptoBL{
         public List<CryptoVariables> CryptoFutures()
         {
             return _repo.GetPredictedPrices();
+        }
+
+        public Assets UpdateTakeProfit(int p_userID, decimal p_amount, string p_cryptoName)
+        {
+            return _repo.SetTakeProfit(p_userID, p_amount, p_cryptoName);
+        }
+
+        public Assets UpdateStopLoss(int p_userID, decimal p_amount, string p_cryptoName)
+        {
+            return _repo.SetStopLoss(p_userID, p_amount, p_cryptoName);
+        }
+        public void DeleteUser(int p_userID){
+            _repo.DeleteUser(p_userID);
+        }
+
+        public AccountUser UpdatePassword(string p_userName, string p_password)
+        {
+            return _repo.UpdatePassword(p_userName, p_password);
         }
     }
 }

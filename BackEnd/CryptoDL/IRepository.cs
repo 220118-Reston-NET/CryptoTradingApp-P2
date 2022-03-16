@@ -23,9 +23,17 @@ public interface IRepository
 
     Assets BuyCrypto(Assets _asset);
 
+    Assets SetStopLoss(int _userID, decimal _stoploss, string _cryptoName);
+
+    Assets SetTakeProfit(int _userID, decimal _takeprofit, string _cryptoName);
+
+    Assets BuyExistingCrypto(int _userID, decimal _amount, string _cryptoName, DateTime _date, decimal _cryptoQuantity);
+
     List<Assets> GetAssetsbyCustomer(int _userID);
 
     void DeleteAssetRow(int _userID, string _cryptoName);
+
+    void DeleteUser(int _userID);
     BuyOrderHistory AddBuyOrderHistory(BuyOrderHistory _borderhis);
 
     List<BuyOrderHistory> GetBuyOrderHistoryByCustomer(int _userID);
@@ -41,6 +49,8 @@ public interface IRepository
     AccountUser UpdateName(int _userID, string _name);
 
     AccountUser UpdateAge(int _userID, int _age);
+
+    AccountUser UpdatePassword(string _userName, string _newPassword);
 
     List<CryptoVariables> GetAllPrice();
     List<CryptoVariables> GetPredictedPrices();

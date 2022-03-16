@@ -153,7 +153,7 @@ namespace CryptoDL
 
         public Assets BuyCrypto(Assets _asset)
         {
-            string SQLQuery = @"insert into Assets values(@customerId, @cryptoName, @buyPrice, @buyDate, @stoploss, @takeprofit, @coinQuantity)";
+            string SQLQuery = @"insert into Assets values(@customerId, @cryptoName, @buyPrice, @buyDate, @stoploss, @takeprofit, @coinQuantity, @buyCount + 1)";
             using(SqlConnection con = new SqlConnection(_connectionStrings))
             {
                 con.Open();
@@ -166,6 +166,7 @@ namespace CryptoDL
                 command.Parameters.AddWithValue("@stoploss", _asset.stoploss);
                 command.Parameters.AddWithValue("@takeprofit", _asset.takeprofit);
                 command.Parameters.AddWithValue("@coinQuantity", _asset.coinQuantity);
+                command.Parameters.AddWithValue("@buyCount", _asset.buyCount);
 
                 command.ExecuteNonQuery();
             }
@@ -233,6 +234,8 @@ namespace CryptoDL
 
                 SqlCommand command = new SqlCommand(SQLQuery, con);
 
+                command.Parameters.AddWithValue("@userID", _userID);
+
                 SqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
@@ -242,9 +245,9 @@ namespace CryptoDL
                         cryptoName = reader.GetString(1),
                         buyPrice = reader.GetDecimal(2),
                         buyDate = reader.GetDateTime(3),
-                        stoploss = reader.GetDecimal(5),
-                        takeprofit = reader.GetDecimal(6),
-                        coinQuantity = reader.GetDecimal(7)  
+                        stoploss = reader.GetDecimal(4),
+                        takeprofit = reader.GetDecimal(5),
+                        coinQuantity = reader.GetDecimal(6)  
                     });
                 }
             }
@@ -563,6 +566,134 @@ namespace CryptoDL
                }
             
             return userList;
+        }
+
+        public Assets SetStopLoss(int _userID, decimal _stoploss, string _cryptoName)
+        {
+             Assets _asset = new Assets();
+             List<Assets> assetlist = new List<Assets>();
+            string SQLQuery = @"update Assets set stoploss = @stoploss where customerId = @customerId and cryptoName = @cryptoName";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+           {
+               con.Open();
+
+               SqlCommand command = new SqlCommand(SQLQuery, con);
+               command.Parameters.AddWithValue("@customerId", _userID);
+               command.Parameters.AddWithValue("@stoploss", _stoploss);
+               command.Parameters.AddWithValue("@cryptoName", _cryptoName);
+
+               command.ExecuteNonQuery();
+           } 
+
+           assetlist = GetAssetsbyCustomer(_userID);
+           foreach (Assets item in assetlist)
+           {
+               if(item.cryptoName==_cryptoName)
+               {
+                   _asset = item;
+               }
+           }
+           return _asset;
+        }
+
+        public Assets SetTakeProfit(int _userID, decimal _takeprofit, string _cryptoName)
+        {
+            Assets _asset = new Assets();
+             List<Assets> assetlist = new List<Assets>();
+            string SQLQuery = @"update Assets set takeprofit = @takeprofit where customerId = @customerId and cryptoName = @cryptoName";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+           {
+               con.Open();
+
+               SqlCommand command = new SqlCommand(SQLQuery, con);
+               command.Parameters.AddWithValue("@customerId", _userID);
+               command.Parameters.AddWithValue("@takeprofit", _takeprofit);
+               command.Parameters.AddWithValue("@cryptoName", _cryptoName);
+
+               command.ExecuteNonQuery();
+           } 
+
+           assetlist = GetAssetsbyCustomer(_userID);
+           foreach (Assets item in assetlist)
+           {
+               if(item.cryptoName==_cryptoName)
+               {
+                   _asset = item;
+               }
+           }
+           return _asset;
+        }
+
+        public Assets BuyExistingCrypto(int _userID, decimal _amount, string _cryptoName, DateTime _date, decimal _cryptoQuantity)
+        {
+            Assets _asset = new Assets();
+             List<Assets> assetlist = new List<Assets>();
+            string SQLQuery = @"update Assets set buyPrice = (buyPrice + @buyPrice)/buyCount, buyDate = @buyDate, coinQuantity = coinQuantity + @coinQuantity, buyCount = buyCount + 1 where customerId = @customerId and cryptoName = @cryptoName";
+
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+           {
+               con.Open();
+
+               SqlCommand command = new SqlCommand(SQLQuery, con);
+               command.Parameters.AddWithValue("@customerId", _userID);
+               command.Parameters.AddWithValue("@buyPrice", _amount);
+               command.Parameters.AddWithValue("@buyDate", _date);
+               command.Parameters.AddWithValue("@cryptoName", _cryptoName);
+               command.Parameters.AddWithValue("@coinQuantity", _cryptoQuantity);
+
+               command.ExecuteNonQuery();
+           } 
+
+           assetlist = GetAssetsbyCustomer(_userID);
+           foreach (Assets item in assetlist)
+           {
+               if(item.cryptoName==_cryptoName)
+               {
+                   _asset = item;
+               }
+           }
+           return _asset;
+        }
+
+        public void DeleteUser(int _userID)
+        {
+            string SQLQuery = "delete from AccountUser where id = @userID";
+
+             using(SqlConnection con = new SqlConnection(_connectionStrings))
+           {
+               con.Open();
+
+               SqlCommand command = new SqlCommand(SQLQuery, con);
+               command.Parameters.AddWithValue("@userID", _userID);
+
+               command.ExecuteNonQuery();
+           } 
+        }
+
+        public AccountUser UpdatePassword(string _userName, string _newPassword)
+        {
+            AccountUser _user = new AccountUser();
+            using(SqlConnection con = new SqlConnection(_connectionStrings))
+            {
+                con.Open();
+
+                SqlCommand command = new SqlCommand("ChangePassword", con);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@userName", _userName);
+                command.Parameters.AddWithValue("@newPassword", _newPassword);
+
+                command.ExecuteNonQuery();
+                 
+            }
+            //return user part
+            List<AccountUser> list = GetAllUsers();
+            _user.ID = list[list.Count - 1].ID;
+
+            _user = GetSpecificUser(_user.ID);
+            return _user;
         }
     }
 }

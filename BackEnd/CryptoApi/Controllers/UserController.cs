@@ -56,15 +56,41 @@ namespace CryptoApi.Controllers
 
         // GET: api/User/5
         [HttpPost("PlaceOrder")]
-        public IActionResult PlaceOrder([FromBody] Tuple<Assets, BuyOrderHistory> p_tuple, decimal p_amount, int p_userID)
+        public IActionResult PlaceOrder(int p_userID, decimal p_amount, string _cryptoName, decimal _cryptoprice)
         {
+            decimal _coinQuantity = Math.Round(p_amount/_cryptoprice, 4);
+            Assets _newAsset = new Assets()
+            {
+                customerId = p_userID,
+                cryptoName = _cryptoName,
+                buyPrice = p_amount,
+                buyDate = DateTime.Now,
+                stoploss = 0,
+                takeprofit = 0,
+                coinQuantity = _coinQuantity
+            };
+            BuyOrderHistory _newbhis = new BuyOrderHistory()
+            {
+                customerId = p_userID,
+                cryptoName = _cryptoName,
+                buyPrice = _cryptoprice,
+                buyDate = DateTime.Now,
+                quantity = _coinQuantity,
+                total = p_amount
+            };
+
+
+
             try
             {
                 Log.Information("User has placed order successfully"); 
-                _cryptoBL.PlaceOrder(p_tuple.Item1, p_amount, p_userID, p_tuple.Item2);
+                if ( _cryptoBL.PlaceOrder(_newAsset, _newbhis, _cryptoprice, p_amount, p_userID, _cryptoName) == null)
+                {
+                     return Conflict("Insufficient funds");
+                }
                 return Created("Order successfully placed!", "");
             }
-            catch (System.Exception ex)
+            catch (SqlException ex)
             {
                 Log.Warning("User had issue placing an order");
                 return Conflict(ex.Message);
@@ -72,12 +98,22 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPost("SellOrder")]
-        public IActionResult SellOrder(decimal p_amount, string p_CryptoName, int p_userID, SellOrderHistory p_SellOrder)
+        public IActionResult SellOrder(decimal p_amount, string p_CryptoName, int p_userID, decimal p_cryptoPrice)
         {
+            decimal _quantity = p_amount/p_cryptoPrice;
+            SellOrderHistory _newHistory = new SellOrderHistory()
+            {
+                customerId = p_userID,
+                cryptoName = p_CryptoName,
+                sellPrice = p_cryptoPrice,
+                sellDate = DateTime.Now,
+                quantity = _quantity,
+                total = p_amount
+            };
             try
             {
                 Log.Information("User has successfully used Sell Order function");
-                return Created("Sell order created", _cryptoBL.SellOrder(p_amount, p_CryptoName, p_userID, p_SellOrder));
+                return Created("Sell order created", _cryptoBL.SellOrder(p_amount, p_CryptoName, p_userID, _newHistory, p_cryptoPrice));
             }
             catch (System.Exception ex)
             {
@@ -169,7 +205,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPut("UpdateName")]
-        public IActionResult UpdateName([FromBody] int p_userID, string p_name)
+        public IActionResult UpdateName(int p_userID, string p_name)
         {
             try
             {
@@ -184,7 +220,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPut("UpdateUsername")]
-        public IActionResult UpdateUsername([FromBody] int p_userID, string p_userName)
+        public IActionResult UpdateUsername(int p_userID, string p_userName)
         {
             try
             {
@@ -200,7 +236,7 @@ namespace CryptoApi.Controllers
 
         [HttpPut("UpdateAge")]
 
-        public IActionResult UpdateAge([FromBody] int p_userID, int p_age)
+        public IActionResult UpdateAge(int p_userID, int p_age)
         {
             try
             {
@@ -213,11 +249,70 @@ namespace CryptoApi.Controllers
                 return Conflict(ex.Message);
             }
         }
+
+        [HttpPut("UpdatePassword")]
+        public IActionResult UpdatePassword(string p_userName, string p_password)
+        {
+            try
+            {
+                Log.Information("User successfull updated password");
+                return Ok(_cryptoBL.UpdatePassword(p_userName, p_password));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("User had issue updating password");
+                return Conflict(ex.Message);
+            }
+           
+        }
+
+        [HttpPut("UpdateProfit")]
+
+        public IActionResult UpdateTakeProfit(int p_userID, decimal p_amount, string p_cryptoName)
+        {
+            try
+            {
+                Log.Information("User has successfully updated take profit");
+                return Ok(_cryptoBL.UpdateTakeProfit(p_userID, p_amount, p_cryptoName));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("User had issue updating take profit");
+                return Conflict(ex.Message);
+            }
+        }
+
+        [HttpPut("UpdateStopLoss")]
+
+        public IActionResult UpdateStopLoss(int p_userID, decimal p_amount, string p_cryptoName)
+        {
+            try
+            {
+                Log.Information("User has successfully updated stop loss");
+                return Ok(_cryptoBL.UpdateStopLoss(p_userID, p_amount, p_cryptoName));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("User had issue updating stop loss");
+                return Conflict(ex.Message);
+            }
+        }
         
         // DELETE: api/User/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("DeleteUser")]
+        public IActionResult DeleteUser(int p_userID)
         {
+            try
+            {
+                Log.Information("Successfully deleted user");
+                _cryptoBL.DeleteUser(p_userID);
+                return Ok("You have successfully deleted user");
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("User had issue using delete function");
+                return Conflict(ex.Message);
+            }
         }
     }
 }

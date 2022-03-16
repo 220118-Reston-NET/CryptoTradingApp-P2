@@ -58,43 +58,6 @@ public class CryptoBLTest{
 
         Assert.Same(_testWallet, actualWallet);
     }
-
-    [Fact]
-    public void PlaceOrderValueTest(){
-        int _validCustomerID = 1;
-        string _validCryptoName = "Crypto";
-        decimal _validBuyPrice = 1.00m;
-        DateTime _validBuyDate = new DateTime(2022,3,8);
-        decimal _validQuantity = 1.00m;
-        decimal _validTotal = 1.00m;
-        decimal _validStopLoss = 1.00m;
-        decimal _validTakeProfit = 1.00m;
-        decimal _validCoinQuantity = 1.00m;
-        decimal _validCash = 1.00m;
-        BuyOrderHistory _testBuyOrder = new BuyOrderHistory(){
-            customerId = _validCustomerID,
-            cryptoName = _validCryptoName,
-            buyPrice = _validBuyPrice,
-            buyDate = _validBuyDate,
-            quantity = _validQuantity,
-            total = _validTotal,
-        };
-        Assets _testAssets = new Assets(){
-            customerId = _validCustomerID,
-            cryptoName = _validCryptoName,
-            buyPrice = _validBuyPrice,
-            buyDate = _validBuyDate,
-            stoploss = _validStopLoss,
-            takeprofit = _validTakeProfit,
-            coinQuantity = _validCoinQuantity,
-        };
-        Mock<IRepository> mockRepo = new Mock<IRepository>();
-        mockRepo.Setup(repo => repo.AddBuyOrderHistory(_testBuyOrder)).Returns(_testBuyOrder);
-        ICryptoClassBL cryptoBL = new CryptoClassBL(mockRepo.Object);
-        BuyOrderHistory _actualBuyOrder = cryptoBL.PlaceOrder(_testAssets, _validCash, _validCustomerID, _testBuyOrder);
-
-        Assert.Same(_testBuyOrder, _actualBuyOrder);
-    }
     [Fact]
     public void UserLoginValueTest(){
         string _validUserName = "Username";
@@ -170,7 +133,7 @@ public class CryptoBLTest{
         Mock<IRepository> mockRepo = new Mock<IRepository>();
         mockRepo.Setup(repo => repo.AddSellOrderHistory(_validSellOrder)).Returns(_validSellOrder);
         ICryptoClassBL cryptoBL = new CryptoClassBL(mockRepo.Object);
-        SellOrderHistory _actualSellOrder = cryptoBL.SellOrder(_validAmount, _validCryptoName, _validID, _validSellOrder);
+        SellOrderHistory _actualSellOrder = cryptoBL.SellOrder(_validAmount, _validCryptoName, _validID, _validSellOrder, _validAmount);
 
         Assert.Same(_validSellOrder, _actualSellOrder);
     }
@@ -294,5 +257,80 @@ public class CryptoBLTest{
         AccountUser _actualUser = cryptoBL.UpdateAge(_validCustomerID,_validNewAge);
 
         Assert.Same(_testUser, _actualUser);
+    }
+    [Fact]
+    public void CryptoFuturesValueTest(){
+        decimal _validPrice = 1.00m;
+        string _validCryptoName = "Crypto";
+        decimal _validAlpha = 1.00m;
+        decimal _validBeta = 1.00m;
+        decimal _valid500 = 1.00m;
+        decimal _validRand = 1.00m;
+        float _validCalc = 1.00f;
+        CryptoVariables _testCrypto = new CryptoVariables(){
+            currentPrice = _validPrice,
+            cryptoName = _validCryptoName,
+            alphaVal = _validAlpha,
+            betaVal = _validBeta,
+            sandp500Val = _valid500,
+            randVal = _validRand,
+            calculated = _validCalc,
+        };
+        List<CryptoVariables> _expectedList = new List<CryptoVariables>();
+        _expectedList.Add(_testCrypto);
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        mockRepo.Setup(repo => repo.GetPredictedPrices()).Returns(_expectedList);
+        ICryptoClassBL cryptoBL = new CryptoClassBL(mockRepo.Object);
+        List<CryptoVariables> _actualList = cryptoBL.CryptoFutures();
+
+        Assert.Same(_expectedList, _actualList);
+    }
+    [Fact]
+    public void UpdateTakeProfitValueTest(){
+        int _validID = 1;
+        decimal _validAmount = 1.00m;
+        string _validCryptoName = "Crypto";
+        Assets _testAsset = new Assets(){
+            customerId = _validID,
+            cryptoName = _validCryptoName,
+            takeprofit = _validAmount
+        };
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        mockRepo.Setup(repo => repo.SetTakeProfit(_validID, _validAmount, _validCryptoName)).Returns(_testAsset);
+        ICryptoClassBL cryptoBL = new CryptoClassBL(mockRepo.Object);
+        Assets _actualAsset = cryptoBL.UpdateTakeProfit(_validID, _validAmount, _validCryptoName);
+
+        Assert.Same(_testAsset, _actualAsset);
+    }
+    [Fact]
+    public void UpdateStopLossValueTest(){
+        int _validID = 1;
+        decimal _validAmount = 1.00m;
+        string _validCryptoName = "Crypto";
+        Assets _testAsset = new Assets(){
+            customerId = _validID,
+            cryptoName = _validCryptoName,
+            stoploss = _validAmount
+        };
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        mockRepo.Setup(repo => repo.SetStopLoss(_validID, _validAmount, _validCryptoName)).Returns(_testAsset);
+        ICryptoClassBL cryptoBL = new CryptoClassBL(mockRepo.Object);
+        Assets _actualAsset = cryptoBL.UpdateStopLoss(_validID, _validAmount, _validCryptoName);
+
+        Assert.Same(_testAsset, _actualAsset);
+    }    
+    [Fact]
+    public void DeleteUserValueTest(){
+        int _validID = 1;
+        AccountUser _testUser = new AccountUser(){
+            ID = _validID
+        };
+        Mock<IRepository> mockRepo = new Mock<IRepository>();
+        mockRepo.Setup(repo => repo.DeleteUser(_validID));
+        ICryptoClassBL cryptoBL = new CryptoClassBL(mockRepo.Object);
+        AccountUser _actualUser = cryptoBL.GetSpecificUser(_validID);
+        cryptoBL.DeleteUser(_testUser.ID);
+        
+        Assert.NotSame(_testUser, _actualUser);
     }
 }
