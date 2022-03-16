@@ -250,6 +250,22 @@ namespace CryptoApi.Controllers
             }
         }
 
+        [HttpPut("UpdatePassword")]
+        public IActionResult UpdatePassword(string p_userName, string p_password)
+        {
+            try
+            {
+                Log.Information("User successfull updated password");
+                return Ok(_cryptoBL.UpdatePassword(p_userName, p_password));
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning("User had issue updating password");
+                return Conflict(ex.Message);
+            }
+           
+        }
+
         [HttpPut("UpdateProfit")]
 
         public IActionResult UpdateTakeProfit(int p_userID, decimal p_amount, string p_cryptoName)
