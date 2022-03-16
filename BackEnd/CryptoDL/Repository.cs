@@ -656,5 +656,20 @@ namespace CryptoDL
            }
            return _asset;
         }
+
+        public void DeleteUser(int _userID)
+        {
+            string SQLQuery = "delete from AccountUser where id = @userID";
+
+             using(SqlConnection con = new SqlConnection(_connectionStrings))
+           {
+               con.Open();
+
+               SqlCommand command = new SqlCommand(SQLQuery, con);
+               command.Parameters.AddWithValue("@userID", _userID);
+
+               command.ExecuteNonQuery();
+           } 
+        }
     }
 }
