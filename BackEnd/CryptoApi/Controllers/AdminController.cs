@@ -112,7 +112,7 @@ namespace CryptoApi.Controllers
 
         // PUT: api/Admin/5
         [HttpPut("BanUser")]
-        public IActionResult BanUser([FromBody] int p_userID)
+        public IActionResult BanUser(int p_userID)
         {
             try
             {
