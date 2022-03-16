@@ -349,6 +349,7 @@ section {
     outline: none;
     cursor: pointer;
     text-decoration: none;
+    color: #af8812;
   }
   .faq .faq-list .icon-show, .faq .faq-list .icon-close {
     font-size: 24px;
@@ -360,21 +361,12 @@ section {
     margin-bottom: 0;
     padding: 10px 0 0 0;
   }
-  .faq .faq-list .icon-show {
-    display: none;
-  }
   .faq .faq-list a.collapsed {
-    color: #2987b3;
+    color: #cf9f15;
     transition: 0.3s;
   }
   .faq .faq-list a.collapsed:hover {
-    color: #47b2e4;
-  }
-  .faq .faq-list a.collapsed .icon-show {
-    display: inline-block;
-  }
-  .faq .faq-list a.collapsed .icon-close {
-    display: none;
+    color: #af8812;
   }
   @media (max-width: 1200px) {
     .faq .faq-list {

@@ -46,42 +46,101 @@
                         <div class="col-12 col-lg-10 col-xl-8 mx-auto">
                             <h2 class="h3 mb-4 page-title">Change Settings</h2>
                             <div class="my-4">
-                                <form>
+                                <form name="settings"
+                                (ngSubmit)="onSubmit()"
+                                [formGroup]="settings"
+                                >
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="firstname">Change Username</label>
-                                            <input type="text" id="firstname" class="form-control account" />
+                                            <label class="form-label" for="newUsername">New Username</label>
+                                            <input type="text"
+                                            class="form-control"
+                                            name="newUsername"
+                                            formControlName="newUsername"
+                                            [ngClass]="{ 'is-invalid': submitted && f['newUsername'].errors }"/>
                                         </div>
+                                        <div class="alert-danger" *ngIf="submitted && f['newUsername'].errors">
+                                            <div *ngIf="f['newUsername'].errors['minlength']">
+                                              Username must be at least 6 characters
+                                            </div>
+                                            <div *ngIf="f['newUsername'].errors['maxlength']">
+                                              Username must be at most 20 characters
+                                            </div>
+                                          </div>
                                     </div>
                                     <hr class="my-4" />
                                     <div class="row mb-4">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputPassword4">Old Password</label>
-                                                <input type="password" class="form-control account" id="inputPassword5" />
+                                                <label for="oldPassword">Old Password</label>
+                                                <input type="password"
+                                                class="form-control"
+                                                name="oldPassword"
+                                                formControlName="oldPassword"
+                                                [ngClass]="{ 'is-invalid': submitted && f['oldPassword'].errors }"
+                                                />
+                                                <div class="alert-danger" *ngIf="submitted && f['oldPassword'].errors">
+                                                    <div *ngIf="f['oldPassword'].errors['required']">Password is required</div>
+                                                    <div *ngIf="f['oldPassword'].errors['minlength']">
+                                                      Password must be at least 8 characters
+                                                    </div>
+                                                    <div *ngIf="f['oldPassword'].errors['maxlength']">
+                                                      Password must not exceed 40 characters
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputPassword5">New Password</label>
-                                                <input type="password" class="form-control account" id="inputPassword5" />
+                                                <input type="password"
+                                                class="form-control"
+                                                name="newPassword"
+                                                formControlName="newPassword"
+                                                [ngClass]="{ 'is-invalid': submitted && f['newPassword'].errors }"
+                                                />
+                                                <div class="alert-danger" *ngIf="submitted && f['newPassword'].errors">
+                                                    <div *ngIf="f['newPassword'].errors['required']">Password is required</div>
+                                                    <div *ngIf="f['newPassword'].errors['minlength']">
+                                                      Password must be at least 8 characters
+                                                    </div>
+                                                    <div *ngIf="f['newPassword'].errors['maxlength']">
+                                                      Password must not exceed 40 characters
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputPassword6">Confirm Password</label>
-                                                <input type="password" class="form-control account" id="inputPassword6" />
+                                                <input type="password"
+                                                class="form-control"
+                                                name="confirmPassword"
+                                                formControlName="confirmPassword"
+                                                [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+                                                />
+                                                <div class="alert-danger" *ngIf="submitted && f['confirmPassword'].errors">
+                                                    <div *ngIf="f['confirmPassword'].errors['matching']">
+                                                        The two passwords do not match
+                                                      </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <p class="mb-2">Password requirements</p>
                                             <p class="small text-muted mb-2">To create a new password, you have to meet all of the following requirements:</p>
                                             <ul class="small text-muted pl-4 mb-0">
-                                                <li>Minimum 8 character</li>
+                                                <li>Minimum 8 characters</li>
+                                                <li>Maximum 40 characters</li>
                                                 <li>At least one special character</li>
                                                 <li>At least one number</li>
-                                                <li>Can’t be the same as a previous password</li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary me-1">Save Changes</button>
-                                    <button type="submit" class="btn btn-primary delete">Delete Account</button>
+                                    <button class="btn btn-primary me-1" (click)="doChanges()">Save Changes</button>
+                                    <button class="btn btn-primary delete" (click)="doDelete()">Delete Account</button>
+                                    <div class="alert alert-danger" *ngIf="isChangesFailed">
+                                        Could not save requested changes. {{errorMessage}}
+                                    </div>
+                                    <div class="alert alert-success" *ngIf="isChangesSuccess">
+                                        {{successMessage}}
+                                    </div>
                                 </form>
                             </div>
                         </div>

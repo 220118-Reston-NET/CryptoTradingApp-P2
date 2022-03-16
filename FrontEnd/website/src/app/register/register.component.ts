@@ -50,13 +50,19 @@ export class RegisterComponent implements OnInit {
             Validators.maxLength(20)
           ]
         ],
-        age: ['', [Validators.required]],
+        age: ['',
+          [
+          Validators.required,
+          Validators.pattern("^[0-9]*$")
+          ]
+        ],
         password: [
           '',
           [
             Validators.required,
             Validators.minLength(6),
-            Validators.maxLength(40)
+            Validators.maxLength(40),
+            Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')
           ]
         ],
         confirmPassword: ['', Validators.required]
@@ -69,29 +75,32 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-
-    let user:AccountUser = {
-      id: 0,
-      username: this.signup.get("username")?.value,
-      name: this.signup.get("fullname")?.value,
-      age: this.signup.get("age")?.value,
-      dateCreated: new Date(),
-      isBanned: 0,
-      isAdmin: 0,
-      _password: this.signup.get("password")?.value
-    }
-
-    this.service.addUser(user).subscribe(result => {
-      if(result) {
-        sessionStorage.setItem("username", result.username);
-        this.router.navigate(["/account"]);
-        this.service.isLoggedIn = true;
+    if(this.signup.valid) {
+      let user:AccountUser = {
+        id: 0,
+        username: this.signup.get("username")?.value,
+        name: this.signup.get("fullname")?.value,
+        age: this.signup.get("age")?.value,
+        dateCreated: new Date(),
+        isBanned: 0,
+        isAdmin: 0,
+        _password: this.signup.get("password")?.value
       }
-    },
-    (err) => {
+
+      this.service.addUser(user).subscribe(result => {
+        if(result) {
+          sessionStorage.setItem("username", result.username);
+          this.router.navigate(["/account"]);
+          this.service.isLoggedIn = true;
+        }
+      },
+      (err) => {
+        this.isSignUpFailed = true;
+        this.errorMessage = err.message;
+      });
+    } else {
       this.isSignUpFailed = true;
-      this.errorMessage = err.message;
-    });
+    }
   }
 
   onReset(): void {
