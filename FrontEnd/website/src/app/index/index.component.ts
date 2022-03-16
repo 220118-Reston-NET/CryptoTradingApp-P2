@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { Title } from '@angular/platform-browser';
 
 interface Coin {
   id: string;
@@ -29,7 +30,7 @@ export class IndexComponent implements OnInit {
   filteredCoins: Coin[] = [];
   searchText = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private titleService: Title) {
 
   }
 
@@ -45,6 +46,7 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle("Cryptocurrencies | CryptTrade");
     this.subscription = timer(0, 10000).pipe(
       switchMap(() => this.http
       .get<Coin[]>(this.api))

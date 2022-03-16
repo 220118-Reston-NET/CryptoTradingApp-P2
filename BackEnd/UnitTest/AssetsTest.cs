@@ -118,4 +118,20 @@ public class AssetsTest
         Assert.Equal(validCoin, set.coinQuantity);
         
     }
+
+    [Fact]
+    public void buyCountShouldSetValidData()
+    {
+        //Arrange
+        Assets set = new Assets();
+        int validCount = 5;
+    
+        //Act
+        set.buyCount = validCount;
+    
+        //Assert
+        Assert.NotNull(set.buyCount);
+        Assert.Equal(validCount, set.buyCount);
+        
+    }
 }

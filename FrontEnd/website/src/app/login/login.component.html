@@ -21,7 +21,7 @@
                         name="username"
                         formControlName="username"
                         [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"/>
-                        <label class="form-label" for="username">Your Username</label>
+                        <label class="form-label" for="username">Username</label>
                         <div class="alert-danger" *ngIf="submitted && f['username'].errors">
                           <div *ngIf="f['username'].errors['required']">Username is required</div>
                           <div *ngIf="f['username'].errors['minlength']">
@@ -69,6 +69,9 @@
                     </div>
                   </div>
                 </form>
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex order-1 order-lg-2 justify-content-center">
+                <img src="../assets/images/login.png" class="img-fluid" alt="Signup image" style="width: 75%;">
               </div>
             </div>
           </div>
