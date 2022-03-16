@@ -8,8 +8,9 @@ print(data["bpi"]["USD"]["rate"])
 filename = "stockprices.json"
 
 ditctionary ={
+    "customerID" : -1,
     "cryptoName" : data["chartName"],
-    "currentPrice" : data["bpi"]["USD"]["rate"]
+    "alertPrice" : data["bpi"]["USD"]["rate"]
 }
 
 json_object = json.dumps(ditctionary, indent = 4)
