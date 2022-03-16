@@ -90,6 +90,9 @@
                         <div *ngIf="f['password'].errors['maxlength']">
                           Password must not exceed 40 characters
                         </div>
+                        <div *ngIf="f['password'].errors['pattern']">
+                          Password must have 1 capital letter and number.
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -114,7 +117,7 @@
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button class="btn btn-primary btn-lg">Register</button>
+                    <button class="btn btn-primary btn-lg gold">Register</button>
                   </div>
                   <div class="alert alert-danger" *ngIf="isSignUpFailed">
                     Signup failed !{{ errorMessage }}

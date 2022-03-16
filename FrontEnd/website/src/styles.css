@@ -152,6 +152,40 @@ section {
     font-size: 32px;
 }
 
+.dark-mode .delete {
+  background-color: rgb(229, 0, 0) !important;
+  border-color: rgb(229, 0, 0) !important;
+}
+.dark-mode .delete:hover {
+  background-color: rgb(163, 0, 0) !important;
+  border-color: rgb(163, 0, 0) !important;
+}
+.delete {
+  background-color: rgb(149, 0, 0) !important;
+  border-color: rgb(149, 0, 0) !important;
+}
+.delete:hover {
+  background-color: rgb(105, 0, 0) !important;
+  border-color: rgb(105, 0, 0) !important;
+}
+.gold {
+  background-color: #cf9f15;
+  border-color: #cf9f15;
+  transition: 0.3s;
+}
+.gold:hover {
+  color: #a88210;
+  transition: 0.3s;
+}
+.dark-mode .gold {
+  color: #ffc518;
+  transition: 0.3s;
+}
+.dark-mode .gold:hover {
+  color: #a88210;
+  transition: 0.3s;
+}
+
 #hero {
   width: 100%;
   height: 80vh;
