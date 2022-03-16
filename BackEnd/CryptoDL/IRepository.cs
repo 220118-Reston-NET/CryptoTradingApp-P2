@@ -27,11 +27,13 @@ public interface IRepository
 
     Assets SetTakeProfit(int _userID, decimal _takeprofit, string _cryptoName);
 
-    Assets BuyExistingCrypto(int _userID, decimal _amount, string _cryptoName, DateTime _date);
+    Assets BuyExistingCrypto(int _userID, decimal _amount, string _cryptoName, DateTime _date, decimal _cryptoQuantity);
 
     List<Assets> GetAssetsbyCustomer(int _userID);
 
     void DeleteAssetRow(int _userID, string _cryptoName);
+
+    void DeleteUser(int _userID);
     BuyOrderHistory AddBuyOrderHistory(BuyOrderHistory _borderhis);
 
     List<BuyOrderHistory> GetBuyOrderHistoryByCustomer(int _userID);

@@ -9,5 +9,6 @@ namespace Model
         public decimal stoploss { get; set; }
         public decimal takeprofit { get; set; }
         public decimal coinQuantity { get; set; }
+        public int buyCount { get; set; }
     }
 }
