@@ -146,5 +146,10 @@ namespace CryptoBL{
         public void DeleteUser(int p_userID){
             _repo.DeleteUser(p_userID);
         }
+
+        public AccountUser UpdatePassword(string p_userName, string p_password)
+        {
+            return _repo.UpdatePassword(p_userName, p_password);
+        }
     }
 }

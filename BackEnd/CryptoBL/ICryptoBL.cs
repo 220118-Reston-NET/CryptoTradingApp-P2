@@ -25,5 +25,6 @@ namespace CryptoBL{
         public Assets UpdateTakeProfit(int p_userID, decimal p_amount, string p_cryptoName);
         public Assets UpdateStopLoss(int p_userID, decimal p_amount, string p_cryptoName);
         public void DeleteUser(int p_userID);
+        public AccountUser UpdatePassword(string p_userName, string p_password);
     }
 }
