@@ -84,10 +84,13 @@ namespace CryptoApi.Controllers
             try
             {
                 Log.Information("User has placed order successfully"); 
-                _cryptoBL.PlaceOrder(_newAsset, _newbhis, _cryptoprice, p_amount, p_userID, _cryptoName);
+                if ( _cryptoBL.PlaceOrder(_newAsset, _newbhis, _cryptoprice, p_amount, p_userID, _cryptoName) == null)
+                {
+                     return Conflict("Insufficient funds");
+                }
                 return Created("Order successfully placed!", "");
             }
-            catch (System.Exception ex)
+            catch (SqlException ex)
             {
                 Log.Warning("User had issue placing an order");
                 return Conflict(ex.Message);
@@ -202,7 +205,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPut("UpdateName")]
-        public IActionResult UpdateName([FromBody] int p_userID, string p_name)
+        public IActionResult UpdateName(int p_userID, string p_name)
         {
             try
             {
@@ -217,7 +220,7 @@ namespace CryptoApi.Controllers
         }
 
         [HttpPut("UpdateUsername")]
-        public IActionResult UpdateUsername([FromBody] int p_userID, string p_userName)
+        public IActionResult UpdateUsername(int p_userID, string p_userName)
         {
             try
             {
@@ -233,7 +236,7 @@ namespace CryptoApi.Controllers
 
         [HttpPut("UpdateAge")]
 
-        public IActionResult UpdateAge([FromBody] int p_userID, int p_age)
+        public IActionResult UpdateAge(int p_userID, int p_age)
         {
             try
             {
