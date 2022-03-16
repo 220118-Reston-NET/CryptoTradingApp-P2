@@ -24,7 +24,7 @@ namespace CryptoBL{
 
         public Notification Notification(int p_userID)
         {
-            string _filename = "../stockprices.json";
+            string _filename = "A:/Project2/Remove Authentication/CryptoTradingApp-P2/BackEnd/stockprices.json";
             string jsonString = File.ReadAllText(_filename);
             Notification _setNoti = JsonSerializer.Deserialize<Notification>(jsonString);
             _setNoti.customerId = p_userID;
@@ -34,18 +34,14 @@ namespace CryptoBL{
             {
                 foreach (var item2 in _futures){
                     if (item.stoploss == item2.currentPrice){
-                        Notification _notification = new Notification(){
-                            cryptoName = item2.cryptoName,
-                            alertPrice = item2.currentPrice,
-                        };
-                        return _notification;   
+                        _setNoti.cryptoName = item2.cryptoName;
+                        _setNoti.alertPrice = item2.currentPrice;
+                        return _setNoti;   
                     }
                     else if (item.takeprofit == item2.currentPrice){
-                        Notification _notification = new Notification(){
-                            cryptoName = item2.cryptoName,
-                            alertPrice = item2.currentPrice,
-                        };
-                        return _notification; 
+                        _setNoti.cryptoName = item2.cryptoName;
+                        _setNoti.alertPrice = item2.currentPrice;
+                        return _setNoti;
                     }
                     else{
                         return _setNoti;

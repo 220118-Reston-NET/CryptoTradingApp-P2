@@ -58,7 +58,6 @@ public class CryptoBLTest{
 
         Assert.Same(_testWallet, actualWallet);
     }
-
     [Fact]
     public void UserLoginValueTest(){
         string _validUserName = "Username";
