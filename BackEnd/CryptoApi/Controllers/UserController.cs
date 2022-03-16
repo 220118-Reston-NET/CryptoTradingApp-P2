@@ -101,6 +101,7 @@ namespace CryptoApi.Controllers
         public IActionResult SellOrder(decimal p_amount, string p_CryptoName, int p_userID, decimal p_cryptoPrice)
         {
             decimal _quantity = 0;
+            decimal _sellprice = 0;
             List<Assets> _assetlist = _cryptoBL.ViewAssets(p_userID);
             Assets _asset = new Assets();
             foreach (Assets item in _assetlist)
@@ -112,11 +113,12 @@ namespace CryptoApi.Controllers
                }
            }
            _quantity = _asset.coinQuantity;
+           _sellprice = _quantity * p_cryptoPrice;
             SellOrderHistory _newHistory = new SellOrderHistory()
             {
                 customerId = p_userID,
                 cryptoName = p_CryptoName,
-                sellPrice = p_cryptoPrice,
+                sellPrice = _sellprice,
                 sellDate = DateTime.Now,
                 quantity = _quantity,
                 total = p_amount
