@@ -152,6 +152,40 @@ section {
     font-size: 32px;
 }
 
+.dark-mode .delete {
+  background-color: rgb(229, 0, 0) !important;
+  border-color: rgb(229, 0, 0) !important;
+}
+.dark-mode .delete:hover {
+  background-color: rgb(163, 0, 0) !important;
+  border-color: rgb(163, 0, 0) !important;
+}
+.delete {
+  background-color: rgb(149, 0, 0) !important;
+  border-color: rgb(149, 0, 0) !important;
+}
+.delete:hover {
+  background-color: rgb(105, 0, 0) !important;
+  border-color: rgb(105, 0, 0) !important;
+}
+.gold {
+  background-color: #cf9f15;
+  border-color: #cf9f15;
+  transition: 0.3s;
+}
+.gold:hover {
+  color: #a88210;
+  transition: 0.3s;
+}
+.dark-mode .gold {
+  color: #ffc518;
+  transition: 0.3s;
+}
+.dark-mode .gold:hover {
+  color: #a88210;
+  transition: 0.3s;
+}
+
 #hero {
   width: 100%;
   height: 80vh;
@@ -349,6 +383,7 @@ section {
     outline: none;
     cursor: pointer;
     text-decoration: none;
+    color: #af8812;
   }
   .faq .faq-list .icon-show, .faq .faq-list .icon-close {
     font-size: 24px;
@@ -360,21 +395,12 @@ section {
     margin-bottom: 0;
     padding: 10px 0 0 0;
   }
-  .faq .faq-list .icon-show {
-    display: none;
-  }
   .faq .faq-list a.collapsed {
-    color: #2987b3;
+    color: #cf9f15;
     transition: 0.3s;
   }
   .faq .faq-list a.collapsed:hover {
-    color: #47b2e4;
-  }
-  .faq .faq-list a.collapsed .icon-show {
-    display: inline-block;
-  }
-  .faq .faq-list a.collapsed .icon-close {
-    display: none;
+    color: #af8812;
   }
   @media (max-width: 1200px) {
     .faq .faq-list {

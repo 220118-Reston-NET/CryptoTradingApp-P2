@@ -10,5 +10,6 @@ namespace Model
         public decimal takeprofit { get; set; }
         public decimal coinQuantity { get; set; }
         public int buyCount { get; set; }
+        public decimal TotalValue { get; set; }
     }
 }
