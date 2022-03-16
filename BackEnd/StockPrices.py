@@ -5,7 +5,7 @@ response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json')
 data = response.json()
 print(data["bpi"]["USD"]["rate"])
 
-filename = "stockprices.json"
+filename = "A:\Project2\Remove Authentication\CryptoTradingApp-P2\BackEnd\stockprices.json"
 
 ditctionary ={
     "customerID" : -1,
