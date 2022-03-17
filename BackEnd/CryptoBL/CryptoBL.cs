@@ -74,10 +74,13 @@ namespace CryptoBL{
             List<Assets> _assets = _repo.GetAssetsbyCustomer(p_userID);
             foreach (var item in _assets)
             {
-                if(item.coinQuantity != 0){
+                if(item.coinQuantity > 0){
                     _repo.DeleteAssetRow(p_userID, p_CryptoName);
                     _repo.AddtoWallet(p_amount, p_userID);
                     return _repo.AddSellOrderHistory(p_SellOrder);
+                }else
+                {
+                    throw new SystemException("You dont own this crypto, cannot sell it.");
                 }
             }
             return null;
