@@ -93,3 +93,4 @@
 2022-03-15 16:44:36.261 -04:00 [INF] User has successfully viewed assets
 2022-03-15 17:44:24.153 -04:00 [INF] User has placed order successfully
 2022-03-15 17:44:47.115 -04:00 [INF] User has placed order successfully
+2022-03-16 15:14:58.073 -04:00 [INF] Admin has successfully added user
