@@ -113,30 +113,7 @@ public class CryptoBLTest{
 
         Assert.Same(_expectedUser, _actualUser);
     }
-    [Fact]
-    public void SellOrderValueTest(){
-        decimal _validAmount = 1.00m;
-        string _validCryptoName = "Crypto";
-        int _validID = 1;
-        decimal _validSellPrice = 1.00m;
-        DateTime _validSaleDate = new DateTime(2022, 3, 9);
-        decimal _validQuantity = 1.00m;
-        decimal _validTotal = 1.00m;
-        SellOrderHistory _validSellOrder = new SellOrderHistory(){
-            customerId = _validID,
-            cryptoName = _validCryptoName,
-            sellPrice = _validSellPrice,
-            sellDate = _validSaleDate,
-            quantity = _validQuantity,
-            total = _validTotal,
-        };
-        Mock<IRepository> mockRepo = new Mock<IRepository>();
-        mockRepo.Setup(repo => repo.AddSellOrderHistory(_validSellOrder)).Returns(_validSellOrder);
-        ICryptoClassBL cryptoBL = new CryptoClassBL(mockRepo.Object);
-        SellOrderHistory _actualSellOrder = cryptoBL.SellOrder(_validAmount, _validCryptoName, _validID, _validSellOrder, _validAmount);
-
-        Assert.Same(_validSellOrder, _actualSellOrder);
-    }
+    
     [Fact]
     public void GetSpecificUserValueTest(){
         int _validID = 1;
