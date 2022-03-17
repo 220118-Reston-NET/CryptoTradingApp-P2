@@ -15,6 +15,7 @@ import { AccountService } from '../services/account.service';
 export class AccountComponent implements OnInit {
 
   currentUser: any;
+  userToEdit: any;
   listOfUsers: any = [];
   buyOrders: BuyOrderHistory[] = [];
   sellOrders: SellOrderHistory[] = [];
@@ -26,11 +27,25 @@ export class AccountComponent implements OnInit {
     newPassword: new FormControl(''),
     confirmPassword: new FormControl('')
   });
+  admin: FormGroup = new FormGroup({
+    username: new FormControl('')
+  });
+
+  isBanningSuccess = false;
+  isBanningFailure = false;
+  adminErrorMessage = "";
+  isDeletingFailure = false;
+  isDeletingSuccess = false;
+  adminSuccessMessage = "";
+  isDeletingAccount = false;
   isChanging = false;
   isDeleting = false;
+  isBanning = false;
   submitted = false;
   isChangesFailed = false;
   isChangesSuccess = false;
+  isSearching = false;
+  adminSubmitted = false;
   errorMessage = "";
   successMessage = "";
 
@@ -90,6 +105,17 @@ export class AccountComponent implements OnInit {
         validators: [this.match('newPassword', 'confirmPassword')]
       }
     );
+    this.admin = this.formBuilder.group(
+      {
+        username: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(20)
+          ]
+        ]
+      });
   }
 
   doChanges(): void {
@@ -101,8 +127,93 @@ export class AccountComponent implements OnInit {
   }
 
   doDelete(): void {
+    this.submitted = false;
+    this.isChangesFailed = false;
+    this.isChangesSuccess = false;
     this.isChanging = false;
     this.isDeleting = true;
+  }
+
+  clearInput(): void {
+    this.settings.get("newUsername")?.value;
+    this.settings.get("oldPassword")?.setValue("");
+    this.settings.get("newPassword")?.setValue("");
+    this.settings.get("confirmPassword")?.setValue("");
+  }
+
+  doDeleteAdmin(): void {
+    this.isDeletingFailure = false;
+    this.isDeleting = false;
+    this.submitted = false;
+    this.isChangesFailed = false;
+    this.isChangesSuccess = false;
+    this.isBanning = false;
+    this.isSearching = false;
+    this.isDeletingAccount = true;
+    this.isDeletingSuccess = false;
+    this.isBanningSuccess = false;
+    this.isBanningFailure = false;
+  }
+
+  doBan(): void {
+    this.isDeletingFailure = false;
+    this.isDeleting = false;
+    this.submitted = false;
+    this.isChangesFailed = false;
+    this.isChangesSuccess = false;
+    this.isDeletingAccount = false;
+    this.isDeletingSuccess = false;
+    this.isBanning = true;
+    this.isBanningSuccess = false;
+    this.isBanningFailure = false;
+  }
+
+  doSearch(): void {
+    this.isDeletingFailure = false;
+    this.isDeleting = false;
+    this.submitted = false;
+    this.isChangesFailed = false;
+    this.isChangesSuccess = false;
+    this.isDeletingAccount = false;
+    this.isBanning = false;
+    this.isSearching = true;
+    this.isDeletingSuccess = false;
+    this.isBanningSuccess = false;
+    this.isBanningFailure = false;
+  }
+
+  onAdminSubmit(): void {
+    this.adminSubmitted = true;
+    if(this.admin.valid) {
+      const username = this.admin.get("username")?.value;
+      this.listOfUsers.forEach((user: any) => {
+        if(user.username == username) {
+          this.userToEdit = user;
+        }
+      });
+
+      if (this.isSearching) {
+
+      } else if (this.isBanning) {
+        this.service.banUser(this.userToEdit.id, this.currentUser).subscribe(result => {
+          this.isBanningSuccess = true;
+          this.adminSuccessMessage = "Successfully banned account "+ this.userToEdit.username;
+        },
+        (err) => {
+          this.isBanningFailure = true;
+          this.adminErrorMessage = "Could not ban account.";
+        });
+      } else if (this.isDeletingAccount) {
+        this.service.deleteAccount(this.userToEdit).subscribe(result => {
+          this.adminSuccessMessage = "Successfully deleted account "+ this.userToEdit.username;
+          this.isDeletingSuccess = true;
+        },
+        (err) => {
+          this.adminSuccessMessage = "Successfully deleted account "+ this.userToEdit.username;
+          this.isDeletingSuccess = true;
+        });
+      }
+    }
   }
 
   onSubmit(): void {
@@ -121,6 +232,7 @@ export class AccountComponent implements OnInit {
               this.errorMessage = "Incorrect login details...";
             } else {
               sessionStorage.setItem("username", result.username);
+              this.clearInput();
             }
           });
         } else {
@@ -134,6 +246,7 @@ export class AccountComponent implements OnInit {
                 this.successMessage = "Sucessfully changed username from "+ this.currentUser.username +" to "+ res.username +"!";
                 this.currentUser = res;
                 this.isChangesSuccess = true;
+                this.clearInput();
               },
               (err) => {
                 this.isChangesFailed = true;
@@ -152,6 +265,7 @@ export class AccountComponent implements OnInit {
               this.service.updatePassword(this.currentUser, newPassword).subscribe(res => {
                 this.isChangesSuccess = true;
                 this.successMessage = "Successfully changed password!";
+                this.clearInput();
               },
               (err) => {
                 this.isChangesFailed = true;
@@ -184,6 +298,14 @@ export class AccountComponent implements OnInit {
 
   get f(): { [key: string]: AbstractControl } {
     return this.settings.controls;
+  }
+
+  get a(): { [key: string]: AbstractControl } {
+    return this.admin.controls;
+  }
+
+  isAdmin() {
+    return this.currentUser.isAdmin == 1;
   }
 
   match(controlName: string, checkControlName: string): ValidatorFn {

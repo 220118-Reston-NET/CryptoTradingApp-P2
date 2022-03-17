@@ -84,4 +84,9 @@ export class AccountService {
     return this.http.put<AccountUser>("https://cryptotradingapp.azurewebsites.net/api/User/UpdatePassword?p_userName="+ user.username +"&p_password="+ newPassword, user);
   }
 
+  banUser(id: number, user: AccountUser)
+  {
+    return this.http.put<AccountUser>("https://cryptotradingapp.azurewebsites.net/api/Admin/BanUser?p_userID="+ id, user);
+  }
+
 }
