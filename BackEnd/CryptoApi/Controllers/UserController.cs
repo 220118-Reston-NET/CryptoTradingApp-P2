@@ -126,7 +126,7 @@ namespace CryptoApi.Controllers
             try
             {
                 Log.Information("User has successfully used Sell Order function");
-                return Created("Sell order created", _cryptoBL.SellOrder(p_amount, p_CryptoName, p_userID, _newHistory, p_cryptoPrice));
+                return Created("Sell order created", _cryptoBL.SellOrder(_sellprice, p_CryptoName, p_userID, _newHistory, p_cryptoPrice));
             }
             catch (System.Exception ex)
             {
