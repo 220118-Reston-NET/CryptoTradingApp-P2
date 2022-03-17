@@ -126,7 +126,10 @@ namespace CryptoApi.Controllers
             try
             {
                 Log.Information("User has successfully used Sell Order function");
-                return Created("Sell order created", _cryptoBL.SellOrder(_sellprice, p_CryptoName, p_userID, _newHistory, p_cryptoPrice));
+                if(_cryptoBL.SellOrder(_sellprice, p_CryptoName, p_userID, _newHistory, p_cryptoPrice)!=null)
+                return StatusCode(201, "Sell order created");
+                else
+                return Conflict("Dont have any crypto cannot sell.");
             }
             catch (System.Exception ex)
             {

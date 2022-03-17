@@ -94,3 +94,9 @@
 2022-03-15 17:44:24.153 -04:00 [INF] User has placed order successfully
 2022-03-15 17:44:47.115 -04:00 [INF] User has placed order successfully
 2022-03-16 15:14:58.073 -04:00 [INF] Admin has successfully added user
+2022-03-16 21:11:15.690 -07:00 [INF] User has successfully used Sell Order function
+2022-03-16 21:14:40.448 -07:00 [INF] User has successfully used Sell Order function
+2022-03-16 21:15:13.934 -07:00 [INF] User has successfully used Sell Order function
+2022-03-16 21:17:29.056 -07:00 [INF] User has successfully used Sell Order function
+2022-03-16 21:17:55.453 -07:00 [INF] User has successfully used Sell Order function
+2022-03-16 21:21:38.805 -07:00 [INF] User has successfully used Sell Order function
