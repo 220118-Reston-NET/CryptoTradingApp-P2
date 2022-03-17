@@ -82,7 +82,7 @@
                                                 <div class="alert-danger" *ngIf="submitted && f['oldPassword'].errors">
                                                     <div *ngIf="f['oldPassword'].errors['required']">Password is required</div>
                                                     <div *ngIf="f['oldPassword'].errors['minlength']">
-                                                      Password must be at least 8 characters
+                                                      Password must be at least 6 characters
                                                     </div>
                                                     <div *ngIf="f['oldPassword'].errors['maxlength']">
                                                       Password must not exceed 40 characters
@@ -100,7 +100,7 @@
                                                 <div class="alert-danger" *ngIf="submitted && f['newPassword'].errors">
                                                     <div *ngIf="f['newPassword'].errors['required']">Password is required</div>
                                                     <div *ngIf="f['newPassword'].errors['minlength']">
-                                                      Password must be at least 8 characters
+                                                      Password must be at least 6 characters
                                                     </div>
                                                     <div *ngIf="f['newPassword'].errors['maxlength']">
                                                       Password must not exceed 40 characters
@@ -126,17 +126,17 @@
                                             <p class="mb-2">Password requirements</p>
                                             <p class="small text-muted mb-2">To create a new password, you have to meet all of the following requirements:</p>
                                             <ul class="small text-muted pl-4 mb-0">
-                                                <li>Minimum 8 characters</li>
+                                                <li>Minimum 6 characters</li>
                                                 <li>Maximum 40 characters</li>
                                                 <li>At least one special character</li>
                                                 <li>At least one number</li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary me-1" (click)="doChanges()">Save Changes</button>
-                                    <button class="btn btn-primary delete" (click)="doDelete()">Delete Account</button>
+                                    <button class="btn btn-primary gold me-1" (click)="doChanges()">Save Changes</button>
+                                    <button class="btn btn-primary delete me-1" (click)="doDelete()">Delete Account</button>
                                     <div class="alert alert-danger" *ngIf="isChangesFailed">
-                                        Could not save requested changes. {{errorMessage}}
+                                        Could not execute requested changes. {{errorMessage}}
                                     </div>
                                     <div class="alert alert-success" *ngIf="isChangesSuccess">
                                         {{successMessage}}
@@ -153,7 +153,7 @@
 
 <!-- User position section -->
 <section class="ml-1" id="positions" *ngIf="currentUser; else loggedOut">
-    <div class="container h-100">
+    <div class="container h-100" *ngIf="!isAdmin()">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="card text-black w-100" style="border-radius: 25px;">
                 <div class="card-body p-md-5">
@@ -163,7 +163,7 @@
                           <tr>
                             <th scope="col">Cryptocurrency</th>
                             <th scope="col">Quantity</th>
-                            <th scope="col">Market Price</th>
+                            <th scope="col">Avg Price</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -180,9 +180,65 @@
     </div>
 </section>
 
+<!-- Administrator section -->
+<section class="ml-1" id="buyorderhistory" *ngIf="currentUser; else loggedOut">
+    <div class="container h-100" *ngIf="isAdmin()">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="card text-black w-100" style="border-radius: 25px;">
+                <div class="card-body p-md-5">
+                    <h2 class="h3 mb-4 page-title">Administrator Controls</h2>
+                    <form name="administrator"
+                    (ngSubmit)="onAdminSubmit()"
+                    [formGroup]="admin"
+                    >
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="form-label" for="username">Username</label>
+                                <input type="text"
+                                class="form-control"
+                                name="username"
+                                formControlName="username"
+                                [ngClass]="{ 'is-invalid': adminSubmitted && a['username'].errors }"/>
+                            </div>
+                            <div class="alert-danger" *ngIf="adminSubmitted && a['username'].errors">
+                                <div *ngIf="a['username'].errors['required']">
+                                    You must enter a username
+                                </div>
+                                <div *ngIf="a['username'].errors['minlength']">
+                                    Username must be at least 6 characters
+                                </div>
+                                <div *ngIf="a['username'].errors['maxlength']">
+                                    Username must be at most 20 characters
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <button class="btn btn-primary delete me-1" (click)="doBan()">Ban Account</button>
+                        <button class="btn btn-primary delete me-1"  (click)="doDeleteAdmin()">Delete Account</button>
+                        <button class="btn btn-primary gold me-1"  (click)="doSearch()">View Account</button>
+                        <div class="alert alert-danger" *ngIf="isDeletingFailure">
+                            Could not execute requested changes. {{adminErrorMessage}}
+                        </div>
+                        <div class="alert alert-success" *ngIf="isDeletingSuccess">
+                            {{adminSuccessMessage}}
+                        </div>
+                        <div class="alert alert-danger" *ngIf="isBanningFailure">
+                            Could not execute requested changes. {{adminErrorMessage}}
+                        </div>
+                        <div class="alert alert-success" *ngIf="isBanningSuccess">
+                            {{adminSuccessMessage}}
+                        </div>
+                    </form>
+                    <hr class="my-4" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Buy order history section -->
 <section class="ml-1" id="buyorderhistory" *ngIf="currentUser; else loggedOut">
-    <div class="container h-100">
+    <div class="container h-100" *ngIf="!isAdmin()">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="card text-black w-100" style="border-radius: 25px;">
                 <div class="card-body p-md-5">
@@ -217,7 +273,7 @@
 
 <!-- Sell order history section -->
 <section class="ml-1" id="sellorderhistory" *ngIf="currentUser; else loggedOut">
-    <div class="container h-100">
+    <div class="container h-100" *ngIf="!isAdmin()">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="card text-black w-100" style="border-radius: 25px;">
                 <div class="card-body p-md-5">
@@ -228,7 +284,6 @@
                             <th scope="col">Date</th>
                             <th scope="col">Cryptocurrency</th>
                             <th scope="col">USD Spent</th>
-                            <th scope="col">Market Price</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Transaction Type</th>
                           </tr>
@@ -237,10 +292,9 @@
                             <tr *ngFor="let coin of sellOrders">
                                 <td>{{coin.sellDate}}</td>
                                 <td>{{coin.cryptoName}}</td>
-                                <td>${{coin.total.toLocaleString()}}</td>
                                 <td>${{coin.sellPrice.toLocaleString()}}</td>
                                 <td>{{coin.quantity}}</td>
-                                <td>Buy</td>
+                                <td>Sell</td>
                               </tr>
                         </tbody>
                       </table>
