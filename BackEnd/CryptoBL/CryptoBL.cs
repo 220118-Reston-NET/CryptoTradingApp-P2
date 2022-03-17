@@ -71,9 +71,16 @@ namespace CryptoBL{
             }
         }
         public SellOrderHistory SellOrder(decimal p_amount, string p_CryptoName, int p_userID, SellOrderHistory p_SellOrder, decimal p_cryptoPrice){
-            _repo.DeleteAssetRow(p_userID, p_CryptoName);
-            _repo.AddtoWallet(p_amount, p_userID);
-            return _repo.AddSellOrderHistory(p_SellOrder);
+            List<Assets> _assets = _repo.GetAssetsbyCustomer(p_userID);
+            foreach (var item in _assets)
+            {
+                if(item.coinQuantity != 0){
+                    _repo.DeleteAssetRow(p_userID, p_CryptoName);
+                    _repo.AddtoWallet(p_amount, p_userID);
+                    return _repo.AddSellOrderHistory(p_SellOrder);
+                }
+            }
+            return null;
         }
 
         public AccountUser UserLogin(string p_userName, string p_password)
