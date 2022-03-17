@@ -22,21 +22,39 @@ export class NavigationComponent implements OnInit {
     this.darkModeService.toggle();
   }
 
+  update(): void {
+    if (sessionStorage.length == 1) {
+      this.service.isLoggedIn = true;
+      const username = sessionStorage.getItem("username");
+      this.service.getAllUsers().subscribe(result => {
+        this.listOfUsers = result;
+        this.listOfUsers.forEach((user: any) => {
+          if(user.username == username) {
+            this.currentUser = user;
+            this.service.getWallet(this.currentUser).subscribe(res => {
+              this.currentCash = res.cash;
+            });
+          }
+        });
+      });
+    }
+  }
+
   ngOnInit(): void {
     if (sessionStorage.length == 1) {
       this.service.isLoggedIn = true;
       const username = sessionStorage.getItem("username");
       this.service.getAllUsers().subscribe(result => {
-      this.listOfUsers = result;
-      this.listOfUsers.forEach((user: any) => {
-        if(user.username == username) {
-          this.currentUser = user;
-          this.service.getWallet(this.currentUser).subscribe(res => {
-            this.currentCash = res.cash;
-          });
-        }
+        this.listOfUsers = result;
+        this.listOfUsers.forEach((user: any) => {
+          if(user.username == username) {
+            this.currentUser = user;
+            this.service.getWallet(this.currentUser).subscribe(res => {
+              this.currentCash = res.cash;
+            });
+          }
+        });
       });
-    });
     }
   }
 
