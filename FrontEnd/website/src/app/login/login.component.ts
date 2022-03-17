@@ -47,7 +47,11 @@ export class LoginComponent implements OnInit {
     const password = this.login.get("password")?.value;
 
     this.service.loginUser(username, password).subscribe(result => {
-      if(result.id == 0) {
+      if(result.isBanned == 1) {
+        this.isLoginFailed = true;
+        this.errorMessage = "Account banned.";
+      }
+      else if(result.id == 0) {
         this.isLoginFailed = true;
         this.errorMessage = "Incorrect login details";
       } else {

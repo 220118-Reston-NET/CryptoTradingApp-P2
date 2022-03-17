@@ -169,20 +169,23 @@ section {
   border-color: rgb(105, 0, 0) !important;
 }
 .gold {
-  background-color: #cf9f15;
-  border-color: #cf9f15;
+  background-color: #cf9f15 !important;
+  border-color: #cf9f15 !important;
   transition: 0.3s;
 }
 .gold:hover {
-  color: #a88210;
+  background-color: #a88210 !important;
+  border-color: #a88210 !important;
   transition: 0.3s;
 }
 .dark-mode .gold {
-  color: #ffc518;
+  background-color: #ffc518 !important;
+  border-color: #ffc518 !important;
   transition: 0.3s;
 }
 .dark-mode .gold:hover {
-  color: #a88210;
+  background-color: #a88210 !important;
+  border-color: #a88210 !important;
   transition: 0.3s;
 }
 
